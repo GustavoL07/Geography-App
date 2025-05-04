@@ -1,0 +1,35 @@
+.toggle-btn {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(180, 180, 180);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 3px;
+  
+  box-shadow: var(--shadow-default);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.toggle-btn i {
+  color: #000000;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+.toggle-btn:active {
+  background-color: #bbb;
+  transform: scale(0.95);
+}
+
+.btn-wrapper{
+  width: 100%;
+}
