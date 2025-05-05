@@ -1,5 +1,5 @@
 import "./Sidebar.css";
-import Card from "../../Card/Card.jsx";
+import Card from "../Card/Card.jsx";
 import ToggleButton from "../ToggleButton/ToggleButton.jsx";
 import Search from "../Search/Search.jsx";
 

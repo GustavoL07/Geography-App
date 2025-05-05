@@ -1,8 +1,0 @@
-.main-content{
-  margin-left: var(--sidebar-open);
-  transition: all var(--sidebar-time) var(--sidebar-mode);
-}
-
-.main-content.closed{
-  margin-left: var(--sidebar-closed);
-}

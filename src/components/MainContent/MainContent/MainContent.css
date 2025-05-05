@@ -1,0 +1,9 @@
+.main-content{
+  width: 100%;
+  margin-left: calc(var(--sidebar-open) + var(--main-margin));
+  transition: all var(--sidebar-time) var(--sidebar-mode);
+}
+
+.main-content.closed{
+  margin-left: calc(var(--sidebar-closed) + var(--main-margin));
+}

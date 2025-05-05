@@ -6,26 +6,29 @@
 
   border: 1px solid #ccc;
   border-radius: var(--radius);
-  background-color: white;
+  background-color: var(--sidebar-bg-color);
   transition: all 0.3s ease-in-out;
 }
 .search-wrapper:focus-within {
   box-shadow: var(--shadow-default);
 }
-.search-wrapper.closed{
+.search-wrapper:focus-within .search-icon{
+  transform: rotateY(180deg);
+}
+.search-wrapper.closed {
   border: none;
 }
-.search-wrapper.closed .search-input{
+.search-wrapper.closed .search-input {
   display: none;
 }
 
 .search-icon {
   color: #999;
-  padding-right: 3px;
+  padding: 0 var(--radius);
 
-  transition: all 0.2s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
-.search-icon.closed{
+.search-icon.closed {
   color: #999;
   padding: 0;
   transform: scale(1.1);
@@ -36,4 +39,5 @@
   border: none;
   outline: none;
   font-size: 0.95rem;
+  background-color: transparent;
 }

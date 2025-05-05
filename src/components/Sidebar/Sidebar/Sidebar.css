@@ -8,6 +8,7 @@
 
   border-right: 1px solid var(--shadow-color);
   box-shadow: var(--shadow-base) var(--shadow-size) rgba(0, 0, 0, 0.3);
+  background-color: var(--sidebar-bg-color);
   transition: all var(--sidebar-time) var(--sidebar-mode);
 }
 
@@ -21,7 +22,7 @@
   z-index: 1;
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: rgb(255, 255, 255);
+  background-color: var(--sidebar-bg-color);
 
   display: flex;
   flex-direction: column;

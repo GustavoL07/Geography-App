@@ -8,15 +8,15 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.container.closed{
+.container.closed {
   margin: 10px 0;
   padding: 0;
   justify-content: space-around;
 }
-.container.closed .flag{
+.container.closed .flag {
   width: calc(var(--sidebar-closed) - 8px);
 }
-.container.closed .description{
+.container.closed .description {
   display: none;
   padding: 0;
   margin: 0;
@@ -25,20 +25,21 @@
 .container:hover {
   background-color: lightgray;
 }
-.container:active{
+.container:active {
   background-color: white;
   transform: scale(0.95);
 }
-.container:hover .flag{
+.container:hover .flag {
   transform: scale(1.1);
 }
 
 .flag {
   width: 40px;
   height: 30px;
+  padding: 1px;
   object-fit: cover;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-base) 5px rgba(0, 0, 0, 0.5);
   transition: all 0.4s ease;
 }
 
@@ -52,12 +53,12 @@
   font-size: 1rem;
   font-weight: 800;
   margin: 0;
-  color: #1a1a1a;
+  color: var(--text-col);
 }
 
 .description p:last-child {
   font-size: 0.8rem;
   font-weight: 650;
-  color: #555;
+  color: var(--gray);
   margin: 2px 0 0 0;
 }

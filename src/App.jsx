@@ -1,7 +1,7 @@
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar/Sidebar.jsx";
-import MainContent from "./components/MainContent/MainContent.jsx";
-import getData from "./utils/countries.js";
+import MainContent from "./components/MainContent/MainContent/MainContent.jsx";
+import getData from "./utils/getData.js";
 import { useEffect, useState } from "react";
 
 export default function App() {
@@ -20,6 +20,20 @@ export default function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "+") {
+        console.log("Selected Country: ", selectedCountry);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedCountry]);
+
   return (
     <>
       <Sidebar
@@ -28,7 +42,7 @@ export default function App() {
         countryList={countryList}
         setSelectedCountry={setSelectedCountry}
       />
-      <MainContent isSidebarOpen={isSidebarOpen} />
+      <MainContent selectedCountry={selectedCountry} isSidebarOpen={isSidebarOpen} />
     </>
   );
 }
