@@ -1,0 +1,12 @@
+.info-box {
+  background: var(--info-bg-color);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+}
+.info-box strong {
+  display: block;
+  color: var(--text-col);
+  margin-bottom: 4px;
+}
