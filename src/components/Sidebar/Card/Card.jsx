@@ -1,6 +1,6 @@
 import "./Card.css";
 
-export default function Card({ isOpen, country, setSelectedCountry }) {
+export default function Card({ isOpen, country, description, setSelectedCountry }) {
   if (!country) return null;
   
   return (
@@ -8,11 +8,7 @@ export default function Card({ isOpen, country, setSelectedCountry }) {
       <img className="flag" src={country.flag} alt="" />
       <div className="description">
         <p>{country.name.informal}</p>
-        {country.capital.lenght === 1 ? (
-          <p>{country.capital[0]}</p>
-        ) : (
-          <p>{country.capital.join(", ")}</p>
-        )}
+        <p>{description}</p>
       </div>
     </div>
   );

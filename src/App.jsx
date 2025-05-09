@@ -5,8 +5,11 @@ import getData from "./utils/getData.js";
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [countryList, setCountryList] = useState(null);
+  const [countryList, setCountryList] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+
+  const [searchValue, setSearchValue] = useState("");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -20,27 +23,25 @@ export default function App() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "+") {
-        console.log("Selected Country: ", selectedCountry);
-      }
-    };
+  useEffect(()=>{
+    const filtered = countryList.filter((country)=>{
+      return country.name.informal.toLowerCase().includes(searchValue.toLowerCase())
+    })
+    setFilteredCountries(filtered);
 
-    window.addEventListener("keydown", handleKeyDown);
+  }, [searchValue, countryList]);
 
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedCountry]);
-
+  
   return (
     <>
       <Sidebar
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        countryList={countryList}
+        countryList={filteredCountries}
         setSelectedCountry={setSelectedCountry}
+
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
       <MainContent selectedCountry={selectedCountry} isSidebarOpen={isSidebarOpen} />
     </>

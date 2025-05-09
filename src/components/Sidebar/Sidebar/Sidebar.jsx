@@ -3,12 +3,19 @@ import Card from "../Card/Card.jsx";
 import ToggleButton from "../ToggleButton/ToggleButton.jsx";
 import Search from "../Search/Search.jsx";
 
-export default function Sidebar({ isOpen, toggleSidebar, countryList, setSelectedCountry }) {
+export default function Sidebar({
+  isOpen,
+  toggleSidebar,
+  countryList,
+  setSelectedCountry,
+  searchValue,
+  setSearchValue,
+}) {
   return (
     <aside className={`sidebar ${isOpen ? "" : "closed"}`}>
       <div className="sidebar-top">
         <ToggleButton toggleSidebar={toggleSidebar} />
-        <Search isOpen={isOpen} />
+        <Search searchValue={searchValue} setSearchValue={setSearchValue} isOpen={isOpen} />
       </div>
 
       {countryList ? (
@@ -17,7 +24,12 @@ export default function Sidebar({ isOpen, toggleSidebar, countryList, setSelecte
             {countryList.map((country, index) => {
               return (
                 <li key={index}>
-                  <Card isOpen={isOpen} country={country} setSelectedCountry={setSelectedCountry} />
+                  <Card
+                    isOpen={isOpen}
+                    country={country}
+                    description={country.getFormattedCapital()}
+                    setSelectedCountry={setSelectedCountry}
+                  />
                 </li>
               );
             })}

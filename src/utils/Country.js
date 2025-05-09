@@ -1,19 +1,20 @@
 export default class Country {
-  static NONE = "None";
-  static UNKNOWN = "Unknown";
+  static #none = "None";
+  static #unknown = "Unknown";
 
   constructor(data, borderNameMap) {
+
     this.name = {
-      formal: data.name.official || Country.UNKNOWN,
-      informal: data.name.common || Country.UNKNOWN,
-      symbol: data.cca2 || Country.NONE,
+      formal: data.name.official || Country.#unknown,
+      informal: data.name.common || Country.#unknown,
+      symbol: data.cca2 || Country.#none,
     };
 
-    this.capital = data.capital || [Country.UNKNOWN];
-    this.continent = data.continents || [Country.UNKNOWN];
+    this.capital = data.capital || [Country.#unknown];
+    this.continent = data.continents || [Country.#unknown];
     this.flag = data.flags.svg || null;
     this.money = Country.getCurrencyInfo(data);
-    this.language = Object.values(data.languages || {}) || [Country.NONE];
+    this.language = Object.values(data.languages || {}) || [Country.#none];
 
     const borderSymbols = data.borders || [];
     const borderNames = borderSymbols.map((code) => borderNameMap.get(code) || code);
@@ -26,7 +27,7 @@ export default class Country {
       position: {
         latitude: data.latlng[0] || 0,
         longitude: data.latlng[1] || 0,
-        region: data.subregion || Country.UNKNOWN,
+        region: data.subregion || Country.#unknown,
       },
       borders: {
         symbols: borderSymbols,
@@ -38,14 +39,14 @@ export default class Country {
   static getCurrencyInfo(data) {
     const currencyCode = Object.keys(data.currencies || {})[0];
     const currency = data.currencies[currencyCode] || {
-      name: Country.UNKNOWN,
-      symbol: Country.NONE,
+      name: Country.#unknown,
+      symbol: Country.#none,
     };
 
     return {
-      code: currencyCode || Country.NONE,
-      name: currency.name || Country.UNKNOWN,
-      symbol: currency.symbol || Country.NONE,
+      code: currencyCode || Country.#none,
+      name: currency.name || Country.#unknown,
+      symbol: currency.symbol || Country.#none,
     };
   }
 
@@ -100,7 +101,7 @@ export default class Country {
   }
 
   getFormattedBorder(value = "names") {
-    return this.getBordersQuantity() > 0 ? this.geography.borders[value].join(", ") : Country.NONE;
+    return this.getBordersQuantity() > 0 ? this.geography.borders[value].join(", ") : Country.#none;
   }
   
 }
