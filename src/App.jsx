@@ -2,12 +2,14 @@ import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar/Sidebar.jsx";
 import MainContent from "./components/MainContent/MainContent/MainContent.jsx";
 import getData from "./utils/getData.js";
+import Country from "./utils/Country.js";
 import { useEffect, useState } from "react";
 
 export default function App() {
   const [countryList, setCountryList] = useState([]);
-  const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [sortValue, setSortValue] = useState("");
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -23,15 +25,18 @@ export default function App() {
     fetchData();
   }, []);
 
-  useEffect(()=>{
-    const filtered = countryList.filter((country)=>{
-      return country.name.informal.toLowerCase().includes(searchValue.toLowerCase())
-    })
+  useEffect(() => {
+    let filtered = countryList.filter((country) => {
+      return country.name.informal.toLowerCase().includes(searchValue.toLowerCase());
+    });
+
+    if (sortValue) {
+      filtered = Country.sortCountries(filtered, sortValue);
+    }
+
     setFilteredCountries(filtered);
+  }, [searchValue, sortValue, countryList]);
 
-  }, [searchValue, countryList]);
-
-  
   return (
     <>
       <Sidebar
@@ -39,9 +44,10 @@ export default function App() {
         toggleSidebar={toggleSidebar}
         countryList={filteredCountries}
         setSelectedCountry={setSelectedCountry}
-
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        sortValue={sortValue}
+        setSortValue={setSortValue}
       />
       <MainContent selectedCountry={selectedCountry} isSidebarOpen={isSidebarOpen} />
     </>

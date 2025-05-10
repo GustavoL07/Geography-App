@@ -11,13 +11,15 @@ export default function Sidebar({
   setSelectedCountry,
   searchValue,
   setSearchValue,
+  sortValue,
+  setSortValue
 }) {
   return (
     <aside className={`sidebar ${isOpen ? "" : "closed"}`}>
       <div className="sidebar-top">
         <ToggleButton toggleSidebar={toggleSidebar} />
         <Search searchValue={searchValue} setSearchValue={setSearchValue} isOpen={isOpen} />
-        <Sort isOpen={isOpen} />
+        <Sort isOpen={isOpen} sortValue={sortValue} setSortValueOnChange={setSortValue}/>
       </div>
 
       {countryList ? (

@@ -1,9 +1,95 @@
 export default class Country {
   static #none = "None";
   static #unknown = "Unknown";
+  static SORT_OPTIONS = [
+    {
+      key: "nameAZ",
+      text: "Name ",
+      compareFunction: (a, b) => {
+        return a.name.informal.localeCompare(b.name.informal);
+      },
+    },
+    {
+      key: "nameZA",
+      text: "Name ↑",
+      compareFunction: (a, b) => {
+        return b.name.informal.localeCompare(a.name.informal);
+      },
+    },
+
+    {
+      key: "capitalAZ",
+      text: "Capitals ↓",
+      compareFunction: (a, b) => {
+        const aCapital = a.getFormattedCapital();
+        const bCapital = b.getFormattedCapital();
+        return aCapital.localeCompare(bCapital);
+      },
+    },
+    {
+      key: "capitalZA",
+      text: "Capitals ↑",
+      compareFunction: (a, b) => {
+        const aCapital = a.getFormattedCapital();
+        const bCapital = b.getFormattedCapital();
+        return bCapital.localeCompare(aCapital);
+      },
+    },
+
+    {
+      key: "populationAscending",
+      text: "Population ↓",
+      compareFunction: (a, b) => {
+        return a.geography.population - b.geography.population;
+      },
+    },
+    {
+      key: "populationDescending",
+      text: "Population ↑",
+      compareFunction: (a, b) => {
+        return b.geography.population - a.geography.population;
+      },
+    },
+
+    {
+      key: "populationDensityAscending",
+      text: "Pop Density ↓",
+      compareFunction: (a, b) => {
+        return a.geography.populationDensity - b.geography.populationDensity;
+      },
+    },
+    {
+      key: "populationDensityDescending",
+      text: "Pop Density ↑",
+      compareFunction: (a, b) => {
+        return b.geography.populationDensity - a.geography.populationDensity;
+      },
+    },
+
+    {
+      key: "areaAscending",
+      text: "Area ↓",
+      compareFunction: (a, b) => {
+        return a.geography.area - b.geography.area;
+      },
+    },
+    {
+      key: "areaDescending",
+      text: "Area ↑",
+      compareFunction: (a, b) => {
+        return b.geography.area - a.geography.area;
+      },
+    },
+  ];
+
+  static sortCountries(countryList, sortKey) {
+    const sortOption = Country.SORT_OPTIONS.find((opt) => opt.key === sortKey);
+    if (!sortOption) return countryList;
+
+    return [...countryList].sort(sortOption.compareFunction);
+  }
 
   constructor(data, borderNameMap) {
-
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
@@ -103,5 +189,4 @@ export default class Country {
   getFormattedBorder(value = "names") {
     return this.getBordersQuantity() > 0 ? this.geography.borders[value].join(", ") : Country.#none;
   }
-  
 }

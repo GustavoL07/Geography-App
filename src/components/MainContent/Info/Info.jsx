@@ -10,7 +10,7 @@ export default function Info({ country }) {
       <section className="info-grid">
         <InfoBox
           text={country.getCapitalsQuantity() === 1 ? "Capital" : "Capitals"}
-          value={country.continent}
+          value={country.getFormattedCapital()}
         />
         <InfoBox text={"Continent: "} value={country.continent} />
         <InfoBox text={"Subregion: "} value={country.geography.position.region} />
