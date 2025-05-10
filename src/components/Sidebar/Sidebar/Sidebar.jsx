@@ -2,6 +2,7 @@ import "./Sidebar.css";
 import Card from "../Card/Card.jsx";
 import ToggleButton from "../ToggleButton/ToggleButton.jsx";
 import Search from "../Search/Search.jsx";
+import Sort from "../Sort/Sort.jsx";
 
 export default function Sidebar({
   isOpen,
@@ -16,6 +17,7 @@ export default function Sidebar({
       <div className="sidebar-top">
         <ToggleButton toggleSidebar={toggleSidebar} />
         <Search searchValue={searchValue} setSearchValue={setSearchValue} isOpen={isOpen} />
+        <Sort isOpen={isOpen} />
       </div>
 
       {countryList ? (
