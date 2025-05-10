@@ -1,11 +1,14 @@
+import { useState } from "react";
 import "./ToggleButton.css";
 
 export default function ToggleButton({ toggleSidebar }) {
+  const [btnOn, setBtnOn] = useState(false);
   return (
-    <div className={`btn-wrapper`}>
-      <button className="toggle-btn" onClick={toggleSidebar}>
-        <i className="fa-solid fa-bars"></i>
-      </button>
-    </div>
+    <button className={`toggle-btn ${btnOn ? "" : "off"}`} onClick={()=> {
+      toggleSidebar();
+      setBtnOn(!btnOn)
+    }}>
+      <i className="fa-solid fa-bars"></i>
+    </button>
   );
 }
