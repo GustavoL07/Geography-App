@@ -23,7 +23,6 @@ export default function Sidebar({
       </div>
 
       {countryList ? (
-        <div>
           <ul>
             {countryList.map((country, index) => {
               return (
@@ -38,7 +37,6 @@ export default function Sidebar({
               );
             })}
           </ul>
-        </div>
       ) : (
         <p>Loading...</p>
       )}

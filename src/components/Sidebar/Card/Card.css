@@ -21,7 +21,9 @@
   padding: 0;
   margin: 0;
 }
-
+.container.closed:hover{
+  background-color: transparent;
+}
 .container:hover {
   background-color: lightgray;
 }
