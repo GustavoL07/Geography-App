@@ -3,23 +3,23 @@ export default class Country {
   static #unknown = "Unknown";
   static SORT_OPTIONS = [
     {
-      key: "nameAZ",
-      text: "Name ",
+      key: "Name (A to Z)",
+      text: "Name",
       compareFunction: (a, b) => {
         return a.name.informal.localeCompare(b.name.informal);
       },
     },
     {
-      key: "nameZA",
-      text: "Name ↑",
+      key: "Name (Z to A)",
+      text: "Name",
       compareFunction: (a, b) => {
         return b.name.informal.localeCompare(a.name.informal);
       },
     },
 
     {
-      key: "capitalAZ",
-      text: "Capitals ↓",
+      key: "Capitals (A to Z)",
+      text: "Capital",
       compareFunction: (a, b) => {
         const aCapital = a.getFormattedCapital();
         const bCapital = b.getFormattedCapital();
@@ -27,8 +27,8 @@ export default class Country {
       },
     },
     {
-      key: "capitalZA",
-      text: "Capitals ↑",
+      key: "Capitals (Z to A)",
+      text: "Capital",
       compareFunction: (a, b) => {
         const aCapital = a.getFormattedCapital();
         const bCapital = b.getFormattedCapital();
@@ -37,45 +37,45 @@ export default class Country {
     },
 
     {
-      key: "populationAscending",
-      text: "Population ↓",
+      key: "Population (Ascending)",
+      text: "Population",
       compareFunction: (a, b) => {
         return a.geography.population - b.geography.population;
       },
     },
     {
-      key: "populationDescending",
-      text: "Population ↑",
+      key: "Population (Descending)",
+      text: "Population",
       compareFunction: (a, b) => {
         return b.geography.population - a.geography.population;
       },
     },
 
     {
-      key: "populationDensityAscending",
-      text: "Pop Density ↓",
+      key: "Pop. Density (Asc)",
+      text: "Pop Density",
       compareFunction: (a, b) => {
         return a.geography.populationDensity - b.geography.populationDensity;
       },
     },
     {
-      key: "populationDensityDescending",
-      text: "Pop Density ↑",
+      key: "Pop. Density (Des)",
+      text: "Pop Density",
       compareFunction: (a, b) => {
         return b.geography.populationDensity - a.geography.populationDensity;
       },
     },
 
     {
-      key: "areaAscending",
-      text: "Area ↓",
+      key: "Area (Asc)",
+      text: "Area",
       compareFunction: (a, b) => {
         return a.geography.area - b.geography.area;
       },
     },
     {
-      key: "areaDescending",
-      text: "Area ↑",
+      key: "Area (Des)",
+      text: "Area",
       compareFunction: (a, b) => {
         return b.geography.area - a.geography.area;
       },

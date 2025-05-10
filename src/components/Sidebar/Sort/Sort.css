@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   width: calc(100% - var(--radius) * 6);
+  overflow-x: visible;
 
   padding: var(--radius);
 
@@ -10,40 +11,102 @@
   background-color: var(--sidebar-bg-color);
   transition: box-shadow 0.5s ease-in-out;
 }
-.select-wrapper:focus-within {
-  box-shadow: var(--shadow-default);
+.select-wrapper.options-open{
   border-color: var(--active-color);
+  box-shadow: var(--shadow-default);
 }
-.select-wrapper:focus-within .sort-icon {
+.select-wrapper.options-open .sort-icon{
   color: var(--active-color);
   transform: rotate(-180deg);
 }
-
-.select-wrapper.closed {
+.select-wrapper.closed{
   border: none;
   width: 100%;
   justify-content: center;
 }
-.select-wrapper.closed .sort-input{
+.select-wrapper.closed .select-container{
+  display: flex;
+  justify-content: center;
+}
+.select-wrapper.closed .select-container p{
   display: none;
 }
-
-.sort-input {
-  width: 100%;
-
-  border: none;
-  outline: none;
-  font-size: 0.95rem;
-  background-color: transparent;
-
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.select-wrapper.closed i{
+  cursor: auto;
 }
 
-.sort-icon {
-  color: #999;
-  padding: 0 var(--radius);
+.symbols{
+  display: flex;
+  padding: var(--radius);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.symbols i{
+  color: black;
+  transform: scale(1.2);
+}
 
-  transition: all 0.5s ease-in-out;
+.sort-wrapper{
+  position: relative;
+  left: -90%;
+  top: 10px;
+}
+
+.select-container{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+.select-container p{
+  padding-left: var(--radius);
+  color: #767676;
+}
+
+.sort-icon{
+  padding: 0 var(--radius);
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.sort-container {
+  position: fixed;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: var(--radius);
+
+  background-color: white;
+  border: 1px solid var(--shadow-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-base) var(--shadow-size) rgba(0, 0, 0, 0.4);
+}
+
+.sort-option{
+  padding: 5px;
+  text-align: center;
+  border-radius: var(--radius);
+  color: var(--icons-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.sort-option i{
+  padding: 0 2px
+}
+
+.sort-option:hover {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.sort-option.active {
+  background-color: rgb(205, 242, 255);
+  color: black;
+  font-weight: bold;
+}
+.sort-option.active i{
+  color: black;
 }

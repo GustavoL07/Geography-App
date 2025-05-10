@@ -12,11 +12,16 @@
   --gray: rgb(140, 140, 140);
   --text-col: black;
   --active-color: #00a0ff;
+  --icons-color: #767676;
 
   --shadow-base: 0 0;
   --shadow-size: 5px;
   --shadow-color: rgba(0, 0, 0, 0.2);
   --shadow-default: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+i{
+  color: var(--icons-color);
 }
 
 ::-webkit-scrollbar {
