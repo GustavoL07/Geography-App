@@ -8,6 +8,18 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
+.container.selected{
+  background-color: lightgray;
+}
+.container.selected .flag{
+  transform: scale(1.1);
+}
+.container.closed.selected{
+  background-color: transparent;
+}
+.container.closed.selected .flag{
+  transform: scale(1);
+}
 .container.closed {
   margin: 10px 0;
   padding: 0;

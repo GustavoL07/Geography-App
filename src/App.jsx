@@ -43,6 +43,7 @@ export default function App() {
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
         countryList={filteredCountries}
+        selectedCountry={selectedCountry}
         setSelectedCountry={setSelectedCountry}
         searchValue={searchValue}
         setSearchValue={setSearchValue}

@@ -8,6 +8,7 @@ export default function Sidebar({
   isOpen,
   toggleSidebar,
   countryList,
+  selectedCountry,
   setSelectedCountry,
   searchValue,
   setSearchValue,
@@ -31,6 +32,7 @@ export default function Sidebar({
                   isOpen={isOpen}
                   country={country}
                   description={sortValue}
+                  selectedCountry={selectedCountry}
                   setSelectedCountry={setSelectedCountry}
                 />
               </li>

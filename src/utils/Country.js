@@ -119,7 +119,6 @@ export default class Country {
       informal: data.name.common || Country.#unknown,
       symbol: convertSymbolTo3(data.cca2) || Country.#none,
     };
-    
 
     this.capital = data.capital || [Country.#unknown];
     this.continent = data.continents || [Country.#unknown];
@@ -147,7 +146,6 @@ export default class Country {
     };
 
     console.log(this.name.symbol);
-    
   }
 
   getAttribute(key) {

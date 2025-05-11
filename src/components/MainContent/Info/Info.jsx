@@ -37,7 +37,11 @@ export default function Info({ country }) {
         <InfoBox text={"Latitude: "} value={country.getFormattedPosition("latitude")} />
         <InfoBox text={"Longitude: "} value={country.getFormattedPosition("longitude")} />
         <InfoBox
-          text={country.getBordersQuantity() > 0 ? `Borders (${country.getBordersQuantity()}) :` : "Borders:"}
+          text={
+            country.getBordersQuantity() > 0
+              ? `Borders (${country.getBordersQuantity()}) :`
+              : "Borders:"
+          }
           value={country.getFormattedBorder()}
         />
       </section>
