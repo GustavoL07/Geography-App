@@ -8,7 +8,7 @@ export default function Card({ isOpen, country, description, setSelectedCountry 
       className={`container ${!isOpen ? "closed" : ""}`}
       onClick={() => setSelectedCountry(country)}
     >
-      <img className="flag" src={country.flag} alt="" />
+      <img className="flag" src={country.flag} alt={`${country.name.informal}'s flag`} />
       <div className="description">
         <p>{country.name.informal}</p>
         <p>{attribute}</p>

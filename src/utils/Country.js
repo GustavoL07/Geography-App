@@ -1,3 +1,5 @@
+import convertSymbolTo3 from "./countrySymbols.js";
+
 export default class Country {
   static #none = "None";
   static #unknown = "Unknown";
@@ -115,8 +117,9 @@ export default class Country {
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
-      symbol: data.cca2 || Country.#none,
+      symbol: convertSymbolTo3(data.cca2) || Country.#none,
     };
+    
 
     this.capital = data.capital || [Country.#unknown];
     this.continent = data.continents || [Country.#unknown];
@@ -142,6 +145,9 @@ export default class Country {
         names: borderNames,
       },
     };
+
+    console.log(this.name.symbol);
+    
   }
 
   getAttribute(key) {
