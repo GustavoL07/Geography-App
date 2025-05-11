@@ -144,8 +144,6 @@ export default class Country {
         names: borderNames,
       },
     };
-
-    console.log(this.name.symbol);
   }
 
   getAttribute(key) {
