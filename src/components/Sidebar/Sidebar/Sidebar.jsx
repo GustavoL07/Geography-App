@@ -12,31 +12,31 @@ export default function Sidebar({
   searchValue,
   setSearchValue,
   sortValue,
-  setSortValue
+  setSortValue,
 }) {
   return (
     <aside className={`sidebar ${isOpen ? "" : "closed"}`}>
       <div className="sidebar-top">
         <ToggleButton toggleSidebar={toggleSidebar} />
         <Search searchValue={searchValue} setSearchValue={setSearchValue} isOpen={isOpen} />
-        <Sort isOpen={isOpen} sortValue={sortValue} setSortValueOnChange={setSortValue}/>
+        <Sort isOpen={isOpen} sortValue={sortValue} setSortValueOnChange={setSortValue} />
       </div>
 
       {countryList ? (
-          <ul>
-            {countryList.map((country, index) => {
-              return (
-                <li key={index}>
-                  <Card
-                    isOpen={isOpen}
-                    country={country}
-                    description={sortValue}
-                    setSelectedCountry={setSelectedCountry}
-                  />
-                </li>
-              );
-            })}
-          </ul>
+        <ul>
+          {countryList.map((country, index) => {
+            return (
+              <li key={index}>
+                <Card
+                  isOpen={isOpen}
+                  country={country}
+                  description={sortValue}
+                  setSelectedCountry={setSelectedCountry}
+                />
+              </li>
+            );
+          })}
+        </ul>
       ) : (
         <p>Loading...</p>
       )}

@@ -18,17 +18,28 @@ export default function Info({ country }) {
         <InfoBox text={"Area: "} value={country.getFormattedArea()} />
         <InfoBox text={"Population Density: "} value={country.getFormattedPopulationDensity()} />
         <InfoBox
-          text={country.getLanguagesQuantity() === 1 ? "Language:" : `Languages (${country.getLanguagesQuantity()}):`}
+          text={
+            country.getLanguagesQuantity() === 1
+              ? "Language:"
+              : `Languages (${country.getLanguagesQuantity()}):`
+          }
           value={country.getFormattedLanguage()}
         />
         <InfoBox text={"Currency: "} value={country.getFormattedCurrency()} />
         <InfoBox
-          text={country.getTimezonesQuantity() === 1 ? "Timezone:" : `Timezones (${country.getTimezonesQuantity()}):`}
+          text={
+            country.getTimezonesQuantity() === 1
+              ? "Timezone:"
+              : `Timezones (${country.getTimezonesQuantity()}):`
+          }
           value={country.getFormattedTimezone()}
         />
         <InfoBox text={"Latitude: "} value={country.getFormattedPosition("latitude")} />
         <InfoBox text={"Longitude: "} value={country.getFormattedPosition("longitude")} />
-        <InfoBox text={`Borders (${country.getBordersQuantity()}):`} value={country.getFormattedBorder()} />
+        <InfoBox
+          text={`Borders (${country.getBordersQuantity()}):`}
+          value={country.getFormattedBorder()}
+        />
       </section>
     </div>
   );
