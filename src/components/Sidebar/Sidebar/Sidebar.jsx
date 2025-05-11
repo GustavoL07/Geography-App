@@ -30,7 +30,7 @@ export default function Sidebar({
                   <Card
                     isOpen={isOpen}
                     country={country}
-                    description={country.getFormattedCapital()}
+                    description={sortValue}
                     setSelectedCountry={setSelectedCountry}
                   />
                 </li>

@@ -25,6 +25,7 @@ export default class Country {
         const bCapital = b.getFormattedCapital();
         return aCapital.localeCompare(bCapital);
       },
+      getDescription: (country) => country.getFormattedCapital(),
     },
     {
       key: "Capitals (Z to A)",
@@ -34,36 +35,24 @@ export default class Country {
         const bCapital = b.getFormattedCapital();
         return bCapital.localeCompare(aCapital);
       },
+      getDescription: (country) => country.getFormattedCapital(),
     },
 
     {
-      key: "Population (Ascending)",
+      key: "Population (Asc)",
       text: "Population",
       compareFunction: (a, b) => {
         return a.geography.population - b.geography.population;
       },
+      getDescription: (country) => country.getFormattedPopulation(),
     },
     {
-      key: "Population (Descending)",
+      key: "Population (Des)",
       text: "Population",
       compareFunction: (a, b) => {
         return b.geography.population - a.geography.population;
       },
-    },
-
-    {
-      key: "Pop. Density (Asc)",
-      text: "Pop Density",
-      compareFunction: (a, b) => {
-        return a.geography.populationDensity - b.geography.populationDensity;
-      },
-    },
-    {
-      key: "Pop. Density (Des)",
-      text: "Pop Density",
-      compareFunction: (a, b) => {
-        return b.geography.populationDensity - a.geography.populationDensity;
-      },
+      getDescription: (country) => country.getFormattedPopulation(),
     },
 
     {
@@ -72,6 +61,7 @@ export default class Country {
       compareFunction: (a, b) => {
         return a.geography.area - b.geography.area;
       },
+      getDescription: (country) => country.getFormattedArea(),
     },
     {
       key: "Area (Des)",
@@ -79,6 +69,24 @@ export default class Country {
       compareFunction: (a, b) => {
         return b.geography.area - a.geography.area;
       },
+      getDescription: (country) => country.getFormattedArea(),
+    },
+
+    {
+      key: "Pop. Density (Asc)",
+      text: "Pop Density",
+      compareFunction: (a, b) => {
+        return a.geography.populationDensity - b.geography.populationDensity;
+      },
+      getDescription: (country) => country.getFormattedPopulationDensity(),
+    },
+    {
+      key: "Pop. Density (Des)",
+      text: "Pop Density",
+      compareFunction: (a, b) => {
+        return b.geography.populationDensity - a.geography.populationDensity;
+      },
+      getDescription: (country) => country.getFormattedPopulationDensity(),
     },
   ];
 
@@ -87,6 +95,20 @@ export default class Country {
     if (!sortOption) return countryList;
 
     return [...countryList].sort(sortOption.compareFunction);
+  }
+
+  static getCurrencyInfo(data) {
+    const currencyCode = Object.keys(data.currencies || {})[0];
+    const currency = data.currencies[currencyCode] || {
+      name: Country.#unknown,
+      symbol: Country.#none,
+    };
+
+    return {
+      code: currencyCode || Country.#none,
+      name: currency.name || Country.#unknown,
+      symbol: currency.symbol || Country.#none,
+    };
   }
 
   constructor(data, borderNameMap) {
@@ -122,18 +144,9 @@ export default class Country {
     };
   }
 
-  static getCurrencyInfo(data) {
-    const currencyCode = Object.keys(data.currencies || {})[0];
-    const currency = data.currencies[currencyCode] || {
-      name: Country.#unknown,
-      symbol: Country.#none,
-    };
-
-    return {
-      code: currencyCode || Country.#none,
-      name: currency.name || Country.#unknown,
-      symbol: currency.symbol || Country.#none,
-    };
+  getAttribute(key) {
+    const obj = Country.SORT_OPTIONS.find((obj) => key === obj.key);
+    return obj?.getDescription?.(this) || this.getFormattedCapital();
   }
 
   getCapitalsQuantity() {
@@ -152,8 +165,14 @@ export default class Country {
     return this.geography.timezone.length;
   }
 
+  getContinentsQuantity() {
+    return this.continent.length;
+  }
+
   getFormattedCapital() {
-    return this.getCapitalsQuantity() === 1 ? this.capital[0] : this.capital.join(", ");
+    return this.getCapitalsQuantity() === 1
+      ? this.capital[0]
+      : this.capital.sort((a, b) => a.localeCompare(b)).join(", ");
   }
 
   getFormattedPopulation() {
@@ -169,7 +188,9 @@ export default class Country {
   }
 
   getFormattedLanguage() {
-    return this.getLanguagesQuantity() === 1 ? this.language[0] : this.language.join(", ");
+    const languages = this.getLanguagesQuantity() > 0 ? this.language : [];
+    const sortedLanguages = languages.sort((a, b) => a.localeCompare(b));
+    return sortedLanguages.length > 0 ? sortedLanguages.join(", ") : Country.#none;
   }
 
   getFormattedPosition(value = "latitude") {
@@ -187,6 +208,12 @@ export default class Country {
   }
 
   getFormattedBorder(value = "names") {
-    return this.getBordersQuantity() > 0 ? this.geography.borders[value].join(", ") : Country.#none;
+    const borders = this.getBordersQuantity() > 0 ? this.geography.borders[value] : [];
+    const orderedBorders = borders.sort((a, b) => a.localeCompare(b));
+    return orderedBorders.length > 0 ? orderedBorders.join(", ") : Country.#none;
+  }
+
+  getFormattedContinent() {
+    return this.getContinentsQuantity() === 1 ? this.continent[0] : this.continent.join(", ");
   }
 }

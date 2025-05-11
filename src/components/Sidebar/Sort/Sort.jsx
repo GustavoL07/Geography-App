@@ -44,7 +44,7 @@ export default function Sort({ isOpen, sortValue, setSortValueOnChange }) {
           }
         }}
       >
-        <i class="fa-solid fa-sort sort-icon"></i>
+        <i className="fa-solid fa-sort sort-icon"></i>
         <p>{sortText}</p>
       </div>
 
