@@ -26,8 +26,16 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const lowerSearch = searchValue.toLowerCase();
     let filtered = countryList.filter((country) => {
-      return country.name.informal.toLowerCase().includes(searchValue.toLowerCase());
+      const name = country.name.informal.toLowerCase();
+      const capital = country.getFormattedCapital().toLowerCase();
+      const continent = country.getFormattedContinent().toLowerCase();
+      return (
+        name.includes(lowerSearch) ||
+        capital.includes(lowerSearch) ||
+        continent.includes(lowerSearch)
+      );
     });
 
     if (sortValue) {
