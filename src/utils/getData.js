@@ -13,6 +13,6 @@ export default async function getData() {
     return processed;
   } catch (error) {
     console.log("Something went wrong: " + error);
-    return null;
+    return [];
   }
 }

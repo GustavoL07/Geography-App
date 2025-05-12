@@ -11,46 +11,55 @@ export default function Map({ selectedCountry }) {
   const zoom = 3;
   const mapOptions = {
     minZoom: 2,
-    maxZoom: 5,
+    maxZoom: 5.5,
     inertia: true,
     zoomControl: true,
     boxZoom: true,
     dragging: true,
     scrollWheelZoom: true,
-    doubleClickZoom: false,
+    doubleClickZoom: true,
     keyboard: false,
     tap: true,
     touchZoom: true,
     maxBounds: [
-      [-90, -180],
-      [90, 180],
+      [-90, -225],
+      [90, 225],
     ],
-    maxBoundsViscosity: 2,
+    maxBoundsViscosity: 1,
   };
 
   useEffect(() => {
     const { latitude, longitude } = selectedCountry.geography.position;
 
-    // Create map once
     if (!mapInstanceRef.current) {
       mapInstanceRef.current = L.map(mapContainerRef.current, mapOptions).setView(
         [latitude, longitude],
         zoom
       );
 
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
         attribution: "&copy; OpenStreetMap &copy; CartoDB",
       }).addTo(mapInstanceRef.current);
     }
 
     if (mapInstanceRef.current) {
-      mapInstanceRef.current.setView([latitude, longitude], zoom);
+      mapInstanceRef.current.panTo([latitude, longitude]);
 
       if (markerRef.current) {
         markerRef.current.remove();
       }
 
-      markerRef.current = L.marker([latitude, longitude]).addTo(mapInstanceRef.current);
+      markerRef.current = L.marker([latitude, longitude])
+        .addTo(mapInstanceRef.current)
+        .bindPopup(
+          `<b>${selectedCountry.name.informal}</b><br>${selectedCountry.getFormattedContinent()}`
+        );
+
+      setTimeout(() => {
+        mapInstanceRef.current.invalidateSize();
+        markerRef.current.openPopup();
+        mapInstanceRef.current.setZoom(zoom);
+      }, 450);
     }
   }, [selectedCountry]);
 
