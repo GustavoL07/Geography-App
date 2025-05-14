@@ -1,6 +1,8 @@
+import { useCountryContext } from "../../Contexts/CountryContext";
 import "./Search.css";
 
-export default function Search({ isOpen, searchValue, setSearchValue }) {
+export default function Search({ isOpen }) {
+  const {searchValue, setSearchValue} = useCountryContext();
   return (
     <div className={`search-wrapper ${!isOpen ? "closed" : ""}`}>
       <i className={`fas fa-search search-icon ${!isOpen ? "closed" : ""}`}></i>

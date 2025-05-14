@@ -1,8 +1,10 @@
+import { useCountryContext } from "../../Contexts/CountryContext.jsx";
 import "./Info.css";
 import InfoBox from "./InfoBox/InfoBox.jsx";
 import CountryOverview from "./Overview/CountryOverview.jsx";
 
-export default function Info({ country }) {
+export default function Info({ }) {
+  const country = useCountryContext().selectedCountry;
   return (
     <div className="info-container">
       <CountryOverview country={country} />

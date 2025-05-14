@@ -1,13 +1,16 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
 import Country from "../../../utils/Country.js";
+import { useCountryContext } from "../../Contexts/CountryContext.jsx";
 
 const icons = {
   AZ: <i class="fa-solid fa-arrow-down-short-wide"></i>,
   ZA: <i class="fa-solid fa-arrow-down-wide-short"></i>,
 };
 
-export default function Sort({ isOpen, sortValue, setSortValueOnChange }) {
+export default function Sort({ isOpen }) {
+  const { sortValue, setSortValue } = useCountryContext();
+
   const [openSort, setOpenSort] = useState(false);
   const [sortText, setSortText] = useState("Sort...");
   const wrapperRef = useRef(null);
@@ -26,7 +29,7 @@ export default function Sort({ isOpen, sortValue, setSortValueOnChange }) {
   }, []);
 
   const handleOptionClicks = (sortValue, sortText) => {
-    setSortValueOnChange(sortValue);
+    setSortValue(sortValue);
     setOpenSort(false);
     setSortText(sortText);
   };

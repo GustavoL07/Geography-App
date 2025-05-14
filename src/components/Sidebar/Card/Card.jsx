@@ -1,13 +1,13 @@
+import { useCountryContext } from "../../Contexts/CountryContext";
 import "./Card.css";
 
 export default function Card({
   isOpen,
   country,
-  description,
-  selectedCountry,
-  setSelectedCountry,
+  description
 }) {
   if (!country) return null;
+  const {selectedCountry, setSelectedCountry} = useCountryContext();
   const attribute = country.getAttribute(description);
 
   return (

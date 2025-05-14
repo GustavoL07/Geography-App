@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
+import { useCountryContext } from "../Contexts/CountryContext";
 
-export default function Map({ selectedCountry }) {
+export default function Map({}) {
+  const {selectedCountry} = useCountryContext();
+
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
