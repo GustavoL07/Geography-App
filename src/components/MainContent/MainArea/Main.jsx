@@ -1,14 +1,14 @@
-import "./MainContent.css";
+import "./Main.css";
 import Map from "../../Maps/Map.jsx";
-import CountryInfo from "../Info/Info.jsx";
+import FullCountryInfo from "../Info/Full Info/FullCountryInfo.jsx";
 import { useCountryContext } from "../../Contexts/CountryContext.jsx";
 
-export default function MainContent({ isSidebarOpen }) {
-  const {selectedCountry} = useCountryContext();
+export default function Main({ isSidebarOpen }) {
+  const { selectedCountry } = useCountryContext();
   if (!selectedCountry) return null;
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
-      <CountryInfo country={selectedCountry} />
+      <FullCountryInfo />
       <Map selectedCountry={selectedCountry} />
     </main>
   );

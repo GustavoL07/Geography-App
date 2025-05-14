@@ -1,6 +1,6 @@
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar/Sidebar.jsx";
-import MainContent from "./components/MainContent/MainContent/MainContent.jsx";
+import Main from "./components/MainContent/MainArea/Main.jsx";
 import { CountryProvider } from "./components/Contexts/CountryContext.jsx";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ export default function App() {
           isOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
         />
-        <MainContent isSidebarOpen={isSidebarOpen} />
+        <Main isSidebarOpen={isSidebarOpen} />
       </CountryProvider>
     </>
   );

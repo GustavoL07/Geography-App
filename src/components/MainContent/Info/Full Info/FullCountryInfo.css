@@ -13,6 +13,4 @@
   gap: var(--radius);
   text-align: left;
   grid-template-columns: repeat(3, 1fr);
-
 }
-
