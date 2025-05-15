@@ -1,5 +1,5 @@
-import { useCountryContext } from "../../../Contexts/CountryContext.jsx";
 import "./FullCountryInfo.css";
+import { useCountryContext } from "../../../Contexts/CountryContext.jsx";
 import InfoBox from "../InfoBox/InfoBox.jsx";
 import CountryOverview from "../Overview/CountryOverview.jsx";
 

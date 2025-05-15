@@ -5,21 +5,27 @@
 }
 
 .overview-flag {
-  width: 200px;
-  height: 150px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  max-height: 150px;
+  aspect-ratio: 4 / 3;
   border-radius: var(--radius);
   box-shadow: var(--shadow-base) 10px rgba(0, 0, 0, 0.5);
   padding: 2px;
+
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
-.overview-container h1 {
+.overview-title {
   text-align: center;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--text-color);
 }
-.overview-container h2 {
+.overview-subtitle {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--gray);
 }

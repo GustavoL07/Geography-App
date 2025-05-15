@@ -1,11 +1,12 @@
 .info-box {
   background: var(--info-bg-color);
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-weight: 600;
+
 }
 .info-box strong {
   display: block;
+  font-weight: 800;
   color: var(--text-col);
-  margin-bottom: 4px;
 }

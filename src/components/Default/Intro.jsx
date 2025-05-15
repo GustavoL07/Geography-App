@@ -8,7 +8,7 @@ export default function Intro({}) {
       <p className="app-title">Geography App</p>
       <img
         className="app-image"
-        src="public/earth-globe.png"
+        src="/earth-globe.png"
         alt="Earth Globe"
         onClick={() => setSelectedCountry(countryList[Math.floor(Math.random() * countryList.length)])}
       />
