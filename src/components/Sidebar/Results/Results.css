@@ -1,0 +1,18 @@
+.results-container{
+  display: flex;
+  align-items: center;
+  width: calc(100% - var(--radius)*6);
+
+  padding: var(--radius);
+
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  background-color: var(--sidebar-bg-color);
+}
+
+.results-container p{
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--icons-color);
+}
