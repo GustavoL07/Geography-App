@@ -10,7 +10,7 @@
   max-width: 85%;
 
   --grid-max-col-count: 3;
-  --grid-min-col-size: 200px;
+  --grid-min-col-size: 150px;
   --grid-gap: var(--radius);
 
   /* calculations, do not touch */

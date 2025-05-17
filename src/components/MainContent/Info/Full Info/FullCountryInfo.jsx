@@ -44,7 +44,7 @@ export default function FullCountryInfo({}) {
         <InfoBox
           text={
             selectedCountry.getBordersQuantity() > 0
-              ? `Borders (${selectedCountry.getBordersQuantity()}) :`
+              ? `Borders (${selectedCountry.getBordersQuantity()}):`
               : "Borders:"
           }
           value={selectedCountry.getFormattedBorder()}

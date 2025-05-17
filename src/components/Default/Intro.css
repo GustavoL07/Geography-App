@@ -5,22 +5,20 @@
 }
 
 .app-title{
-  font-size: 3rem;
+  font-size: clamp(0.5rem, 8vw, 4rem);
   font-weight: 750;
 }
 
 .app-image{
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  max-height: 200px;
+  width: clamp(3rem, 20vw, 16rem);
+  height: clamp(3rem, 20vw, 16rem);
   aspect-ratio: 1 / 1;
-  margin: 2rem;
-  padding: 1.5rem;
+  margin: 1rem;
+  padding: 5px;
 
   border-radius: var(--radius);
   box-shadow: var(--shadow-default);
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
   cursor: pointer;
 }
 .app-image:hover{
@@ -29,5 +27,7 @@
 }
 
 .app-desc{
+  font-size: clamp(0.5rem, 3vw, 1.5rem);
   font-weight: 600;
+  padding-bottom: 0.25rem;
 }

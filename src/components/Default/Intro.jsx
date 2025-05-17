@@ -10,16 +10,20 @@ export default function Intro({}) {
         className="app-image"
         src="/earth-globe.png"
         alt="Earth Globe"
-        onClick={() => setSelectedCountry(countryList[Math.floor(Math.random() * countryList.length)])}
+        onClick={() =>
+          setSelectedCountry(countryList[Math.floor(Math.random() * countryList.length)])
+        }
       />
-      <p className="app-desc">
-        Open the sidebar and search for any country you would like to know more about!
-      </p>
-      <p className="app-desc">
-        Discover detailed information about countries, including population, area, languages, and
-        more!
-      </p>
-      <p className="app-desc">Make sure to also check out the maps and the other features!</p>
+      <section>
+        <p className="app-desc">
+          Open the sidebar and search for any country you would like to know more about!
+        </p>
+        <p className="app-desc">
+          Discover detailed information about countries, including population, area, languages, and
+          more!
+        </p>
+        <p className="app-desc">Make sure to also check out the maps and the other features!</p>
+      </section>
     </div>
   );
 }
