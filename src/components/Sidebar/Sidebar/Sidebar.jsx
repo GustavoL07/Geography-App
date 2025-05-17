@@ -1,6 +1,7 @@
 import "./Sidebar.css";
 import Card from "../Card/Card.jsx";
 import ToggleButton from "../ToggleButton/ToggleButton.jsx";
+import SettingsButton from "../SettingsButton/SettingsButton.jsx";
 import Search from "../Search/Search.jsx";
 import Sort from "../Sort/Sort.jsx";
 import Results from "../Results/Results.jsx";
@@ -12,7 +13,10 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
   return (
     <aside className={`sidebar ${isOpen ? "" : "closed"}`}>
       <div className="sidebar-top">
-        <ToggleButton toggleSidebar={toggleSidebar} />
+        <div className={`btns-wrapper ${isOpen ? "" : "off"}`}>
+          <ToggleButton toggleSidebar={toggleSidebar} />
+          <SettingsButton isVisible={isOpen}/>
+        </div>
         <Search isOpen={isOpen} />
         <Sort isOpen={isOpen} />
         {searchValue && <Results value={filteredCountries.length} />}

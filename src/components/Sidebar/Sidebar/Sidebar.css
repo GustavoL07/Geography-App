@@ -30,6 +30,21 @@
   gap: 5px;
 }
 
+.btns-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - var(--radius)*4.5);
+
+  padding: var(--radius);
+}
+.btns-wrapper.off{
+  border: none;
+  width: 100%;
+  justify-content: center;
+  padding: var(--radius) 0 0 0;
+}
+
 /*SIDEBAR SCROLLBAR*/
 .sidebar {
   overflow-y: auto;
