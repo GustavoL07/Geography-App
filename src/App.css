@@ -1,8 +1,8 @@
 :root{
   --sidebar-open: 240px;
   --sidebar-closed: calc(var(--sidebar-open) / 6);
-  --sidebar-time: 0.8s;
-  --sidebar-mode: ease;
+  --sidebar-time: 1s;
+  --sidebar-mode: ease-in-out;
   --sidebar-bg-color: rgb(250, 250, 250);
 
   --info-bg-color: rgb(227, 227, 227);
