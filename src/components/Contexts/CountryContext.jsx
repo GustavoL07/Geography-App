@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import getData from "../../utils/getData";
-import Country from "../../utils/Country";
+import useSearchFilter from "../Hooks/useSearchFilter";
 
 const CountryContext = createContext();
 
@@ -9,6 +9,7 @@ export function CountryProvider({ children }) {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("");
+  const [filterBy, setFilterBy] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,27 +19,9 @@ export function CountryProvider({ children }) {
 
     fetchData();
   }, []);
-
-  const filteredCountries = useMemo(() => {
-    const lowerSearch = searchValue.toLowerCase();
-
-    let filtered = countryList.filter((country) => {
-      const name = country.name.informal.toLowerCase();
-      const capital = country.getFormattedCapital().toLowerCase();
-      const continent = country.getFormattedContinent().toLowerCase();
-      return (
-        name.includes(lowerSearch) ||
-        capital.includes(lowerSearch) ||
-        continent.includes(lowerSearch)
-      );
-    });
-
-    if (sortValue) {
-      filtered = Country.sortCountries(filtered, sortValue);
-    }
-
-    return filtered;
-  }, [searchValue, sortValue, countryList]);
+  
+  
+  const filteredCountries = useSearchFilter(countryList, searchValue, sortValue, filterBy);
 
   return (
     <CountryContext.Provider
@@ -51,6 +34,8 @@ export function CountryProvider({ children }) {
         setSearchValue,
         sortValue,
         setSortValue,
+        filterBy,
+        setFilterBy
       }}
     >
       {children}
