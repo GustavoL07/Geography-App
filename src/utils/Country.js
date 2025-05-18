@@ -113,14 +113,12 @@ export default class Country {
     };
   }
 
-  constructor(data, borderNameMap, metrics ={}) {
+  constructor(data, borderNameMap, metrics = {}) {
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
       symbol: convertSymbolTo3(data.cca2) || Country.#none,
     };
-
-    this.metrics = metrics;
 
     this.capital = data.capital || [Country.#unknown];
     this.continent = data.continents || [Country.#unknown];
@@ -144,6 +142,60 @@ export default class Country {
       borders: {
         symbols: borderSymbols,
         names: borderNames,
+      },
+    };
+
+    this.indicators = {
+      technology: {
+        internetUsage: metrics.internetUsage,
+        electricityAccess: metrics.electricityAccess,
+        basicWaterService: metrics.basicWaterService,
+        basicSanitationService: metrics.basicSanitationService,
+      },
+
+      education: {
+        youthLiteracyRate: metrics.youthLiteracyRate,
+        secondaryNetEnrollmentRate: metrics.secondaryNetEnrollmentRate,
+        tertiaryEnrollmentRate: metrics.tertiaryEnrollmentRate,
+        genderParityPrimaryEducation: metrics.genderParityPrimaryEducation,
+      },
+
+      health: {
+        infantMortality: metrics.infantMortality,
+        lifeExpectancy: metrics.lifeExpectancy,
+        healthyLifeExpectancy: metrics.healthyLifeExpectancy,
+        healthExpenditurePercentGDP: metrics.healthExpenditurePercentGDP,
+        physiciansPerThousand: metrics.physiciansPerThousand,
+        mortalityRate: metrics.mortalityRate,
+      },
+
+      population: {
+        birthRate: metrics.birthRate,
+        populationGrowthRate: metrics.populationGrowthRate,
+        urbanPopulationPercent: metrics.urbanPopulationPercent,
+        urbanPopulation: metrics.urbanPopulation,
+        ruralPopulationPercent: metrics.ruralPopulationPercent,
+      },
+
+      economy: {
+        gdp: metrics.gdp,
+        gdpPerCapita: metrics.gdpPerCapita,
+        inflationRate: metrics.inflationRate,
+        governmentDebtPercentGDP: metrics.governmentDebtPercentGDP,
+        exportsPercentGDP: metrics.exportsPercentGDP,
+        importsPercentGDP: metrics.importsPercentGDP,
+        unemploymentRate: metrics.unemploymentRate,
+      },
+
+      society: {
+        giniIndex: metrics.giniIndex,
+        homicideRate: metrics.homicideRate,
+      },
+
+      environment: {
+        co2EmissionsPerCapita: metrics.co2EmissionsPerCapita,
+        agriculturalLandPercent: metrics.agriculturalLandPercent,
+        forestAreaPercent: metrics.forestAreaPercent,
       },
     };
   }

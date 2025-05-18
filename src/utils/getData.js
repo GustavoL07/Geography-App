@@ -1,24 +1,24 @@
-import Country from "./Country.js";
-import createBorderNameMap from "./borderNameMap.js";
-import getCountryMetrics from "./Fetch/getCountryMetrics.js";
+import Country from "./Country";
+import convertSymbolTo3 from "./countrySymbols";
+import getCountryData from "./Fetch/getCountryData";
+import getCountryMetrics from "./Fetch/getCountryMetrics";
+
 
 export default async function getData() {
   try {
-    const response = await fetch("https://restcountries.com/v3.1/all");
-    const data = await response.json();
-    const filtered = data.filter((country) => country.unMember);
-    const borderNameMap = createBorderNameMap(filtered);
+    const countryData = await getCountryData();
+    const countryMetrics = await getCountryMetrics();
 
-    const metricsMap = await getCountryMetrics();
+    const countryList = countryData.list.map((country) => {
+      const countrySymbol = convertSymbolTo3(country.cca2);
+      const metric = countryMetrics.has(countrySymbol) ? countryMetrics.get(countrySymbol) : {}
 
-    const processed = filtered.map((rawCountryData) => {
-      const metrics = metricsMap.get(rawCountryData.cca3) || {};
-      return new Country(rawCountryData, borderNameMap, metrics);
+      return new Country(country, countryData.symbolToNameMap, metric);
     })
 
-    return processed;
+    return countryList;
   } catch (error) {
-    console.log("Something went wrong: " + error);
+    console.log(error);
     return [];
   }
 }
