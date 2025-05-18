@@ -163,7 +163,6 @@ export default class Country {
       health: {
         infantMortality: metrics.infantMortality,
         lifeExpectancy: metrics.lifeExpectancy,
-        healthyLifeExpectancy: metrics.healthyLifeExpectancy,
         healthExpenditurePercentGDP: metrics.healthExpenditurePercentGDP,
         physiciansPerThousand: metrics.physiciansPerThousand,
         mortalityRate: metrics.mortalityRate,
@@ -173,8 +172,10 @@ export default class Country {
         birthRate: metrics.birthRate,
         populationGrowthRate: metrics.populationGrowthRate,
         urbanPopulationPercent: metrics.urbanPopulationPercent,
-        urbanPopulation: metrics.urbanPopulation,
         ruralPopulationPercent: metrics.ruralPopulationPercent,
+        malePopulationPercent: metrics.malePopulationPercent,
+        femalePopulationPercent: metrics.femalePopulationPercent,
+        elderlyPopulationPercent: metrics.elderlyPopulationPercent,
       },
 
       economy: {
@@ -193,7 +194,6 @@ export default class Country {
       },
 
       environment: {
-        co2EmissionsPerCapita: metrics.co2EmissionsPerCapita,
         agriculturalLandPercent: metrics.agriculturalLandPercent,
         forestAreaPercent: metrics.forestAreaPercent,
       },

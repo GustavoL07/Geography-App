@@ -5,7 +5,6 @@ import CountryOverview from "../Overview/CountryOverview.jsx";
 
 export default function FullCountryInfo({}) {
   const { selectedCountry } = useCountryContext();
-  console.log(selectedCountry);
   
   return (
     <div className="info-container">

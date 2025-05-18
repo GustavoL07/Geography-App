@@ -1,27 +1,34 @@
 const INDICATORS = [
+  /*TECHNOLOGY*/
   { id: "IT.NET.USER.ZS", key: "internetUsage" }, // Uso da internet (% população)
   { id: "EG.ELC.ACCS.ZS", key: "electricityAccess" }, // Acesso à eletricidade (% população)
   { id: "SH.H2O.BASW.ZS", key: "basicWaterService" }, // Acesso a serviço básico de água
   { id: "SH.STA.BASS.ZS", key: "basicSanitationService" }, // Acesso a serviço básico de saneamento
 
+  /*EDUCATION*/
   { id: "SE.ADT.1524.LT.ZS", key: "youthLiteracyRate" }, // Taxa de alfabetização de jovens (15–24)
   { id: "SE.SEC.NENR", key: "secondaryNetEnrollmentRate" }, // Matrícula líquida no ensino secundário
   { id: "SE.TER.ENRR", key: "tertiaryEnrollmentRate" }, // Taxa de matrícula no ensino superior
   { id: "SE.ENR.PRSC.FM.ZS", key: "genderParityPrimaryEducation" }, // Paridade de gênero no ensino primário
 
+  /*HEALTH*/
   { id: "SP.DYN.IMRT.IN", key: "infantMortality" }, // Mortalidade infantil (por mil)
   { id: "SP.DYN.LE00.IN", key: "lifeExpectancy" }, // Expectativa de vida ao nascer
-  { id: "SH.HAP.HLYS", key: "healthyLifeExpectancy" }, // Expectativa de vida saudável
   { id: "SH.XPD.CHEX.GD.ZS", key: "healthExpenditurePercentGDP" }, // Gastos com saúde (% do PIB)
   { id: "SH.MED.PHYS.ZS", key: "physiciansPerThousand" }, // Médicos por 1000 habitantes
   { id: "SH.DYN.MORT", key: "mortalityRate" }, // Taxa de mortalidade (geral)
 
+  /*POPULATION*/
+  { id: "SP.POP.TOTL", key: "totalPopulation" }, // População total
   { id: "SP.DYN.CBRT.IN", key: "birthRate" }, // Taxa de natalidade (por mil)
   { id: "SP.POP.GROW", key: "populationGrowthRate" }, // Taxa de crescimento populacional
   { id: "SP.URB.TOTL.IN.ZS", key: "urbanPopulationPercent" }, // % da população em áreas urbanas
-  { id: "SP.URB.TOTL", key: "urbanPopulation" }, // População urbana absoluta
   { id: "SP.RUR.TOTL.ZS", key: "ruralPopulationPercent" }, // % da população em áreas rurais
+  { id: "SP.POP.TOTL.MA.ZS", key: "malePopulationPercent" }, // Homens
+  { id: "SP.POP.TOTL.FE.ZS", key: "femalePopulationPercent" }, // Mulheres
+  { id: "SP.POP.65UP.TO.ZS", key: "elderlyPopulationPercent" }, // 65+ anos
 
+  /*ECONOMY*/
   { id: "NY.GDP.MKTP.CD", key: "gdp" }, // PIB (US$ atual)
   { id: "NY.GDP.PCAP.CD", key: "gdpPerCapita" }, // PIB per capita (US$ atual)
   { id: "FP.CPI.TOTL.ZG", key: "inflationRate" }, // Taxa de inflação (preços ao consumidor)
@@ -30,10 +37,11 @@ const INDICATORS = [
   { id: "NE.IMP.GNFS.ZS", key: "importsPercentGDP" }, // Importações (% do PIB)
   { id: "SL.UEM.TOTL.ZS", key: "unemploymentRate" }, // Taxa de desemprego (% da força de trabalho)
 
+  /*SOCIETY*/
   { id: "SI.POV.GINI", key: "giniIndex" }, // Índice de Gini (desigualdade)
   { id: "VC.IHR.PSRC.P5", key: "homicideRate" }, // Taxa de homicídios (por 100 mil)
 
-  { id: "EN.ATM.CO2E.PC", key: "co2EmissionsPerCapita" }, // Emissões de CO₂ per capita (toneladas)
+  /*ENVIROMENT*/
   { id: "AG.LND.AGRI.ZS", key: "agriculturalLandPercent" }, // Uso de terra agrícola (% do total)
   { id: "AG.LND.FRST.ZS", key: "forestAreaPercent" }, // Área florestal (% do território)
 ];
@@ -47,48 +55,34 @@ https://api.worldbank.org/v2/country/all/indicator/SE.ADT.1524.LT.ZS?format=json
 export default async function getCountryMetrics() {
   const metricsMap = new Map();
 
-  const fetches = INDICATORS.map(async ({ id, key }) => {
-    const res = await fetch(`${BASE_URL}${id}?format=json&per_page=10000`);
-    const data = await res.json();
-    const entries = data[1] || [];
+  try {
+    const fetches = INDICATORS.map(async ({ id, key }) => {
+      const res = await fetch(`${BASE_URL}${id}?format=json&per_page=20000`);
+      const data = await res.json();
+      const entries = data[1] || [];
 
-    for (const entry of entries) {
-      const iso = entry.countryiso3code;
-      const value = entry.value;
-      const date = parseInt(entry.date);
+      for (const entry of entries) {
+        const iso = entry.countryiso3code;
+        const value = entry.value;
+        const date = parseInt(entry.date);
 
-      if (!iso || value == null) continue;
+        if (!iso || value == null) continue;
 
-      // Se o país ainda não está no mapa, cria
-      if (!metricsMap.has(iso)) {
-        metricsMap.set(iso, {});
+        if (!metricsMap.has(iso)) {
+          metricsMap.set(iso, {});
+        }
+
+        const countryMetrics = metricsMap.get(iso);
+
+        if (!(key in countryMetrics) || (countryMetrics[key][1] ?? 0) < date) {
+          countryMetrics[key] = [value, date];
+        }
       }
-
-      const countryMetrics = metricsMap.get(iso);
-
-      // Só sobrescreve se:
-      // - o valor ainda não existe
-      // - ou se esse dado for mais novo do que o anterior
-      if (
-        !(key in countryMetrics) ||
-        (countryMetrics[`${key}_year`] ?? 0) < date
-      ) {
-        countryMetrics[key] = value;
-        countryMetrics[`${key}_year`] = date; // você pode usar isso para mostrar o ano de cada métrica, se quiser
-      }
-    }
-  });
-
-  await Promise.all(fetches);
-
-  // Remove os *_year campos se você quiser manter o objeto limpo:
-  for (const [iso, metrics] of metricsMap.entries()) {
-    for (const prop in metrics) {
-      if (prop.endsWith("_year")) {
-        delete metrics[prop];
-      }
-    }
+    });
+    await Promise.all(fetches);
+    return metricsMap;
+  } catch (error) {
+    console.log(error);
+    return new Map();
   }
-
-  return metricsMap;
 }
