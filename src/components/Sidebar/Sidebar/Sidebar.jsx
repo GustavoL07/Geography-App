@@ -1,9 +1,9 @@
 import "./Sidebar.css";
 import Card from "../Card/Card.jsx";
-import ToggleButton from "../ToggleButton/ToggleButton.jsx";
-import SettingsButton from "../SettingsButton/SettingsButton.jsx";
-import Search from "../Search/Search.jsx";
-import Sort from "../Sort/Sort.jsx";
+import ToggleButton from "../Inputs/Buttons/ToggleButton/ToggleButton.jsx";
+import SettingsButton from "../Inputs/Buttons/SettingsButton/SettingsButton.jsx";
+import Search from "../Inputs/Search/Search.jsx";
+import Sort from "../Inputs/Sort/Sort.jsx";
 import Results from "../Results/Results.jsx";
 
 import { useCountryContext } from "../../Contexts/CountryContext.jsx";
@@ -15,7 +15,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       <div className="sidebar-top">
         <div className={`btns-wrapper ${isOpen ? "" : "off"}`}>
           <ToggleButton toggleSidebar={toggleSidebar} />
-          <SettingsButton isVisible={isOpen}/>
+          <SettingsButton isVisible={isOpen} />
         </div>
         <Search isOpen={isOpen} />
         <Sort isOpen={isOpen} />

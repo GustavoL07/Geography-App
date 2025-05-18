@@ -1,5 +1,5 @@
 import "./SettingsButton.css";
-import Dialog from "../../CustomDialog/Dialog";
+import Dialog from "../../../../CustomDialog/Dialog";
 import { useState } from "react";
 
 export default function SettingsButton({ isVisible }) {
@@ -18,7 +18,9 @@ export default function SettingsButton({ isVisible }) {
       <button onClick={openSettings} className={`settings-btn ${isVisible ? "" : "off"}`}>
         <i className="fa-solid fa-gear"></i>
       </button>
-      <Dialog title={"Settings"} isOpen={dialogToggle} onClose={closeSettings}>AAA</Dialog>
+      <Dialog title={"Settings"} isOpen={dialogToggle} onClose={closeSettings}>
+        AAA
+      </Dialog>
     </>
   );
 }

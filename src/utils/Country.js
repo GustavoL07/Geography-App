@@ -146,8 +146,8 @@ export default class Country {
     };
   }
 
-  getAttribute(key) {
-    const obj = Country.SORT_OPTIONS.find((obj) => key === obj.key);
+  getAttribute(sortOptionsKey) {
+    const obj = Country.SORT_OPTIONS.find((obj) => sortOptionsKey === obj.sortOptionsKey);
     return obj?.getDescription?.(this) || this.getFormattedCapital();
   }
 

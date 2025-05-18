@@ -1,7 +1,7 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import Country from "../../../utils/Country.js";
-import { useCountryContext } from "../../Contexts/CountryContext.jsx";
+import Country from "../../../../utils/Country.js";
+import { useCountryContext } from "../../../Contexts/CountryContext.jsx";
 
 const icons = {
   AZ: <i class="fa-solid fa-arrow-down-short-wide"></i>,
