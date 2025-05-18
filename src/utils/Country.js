@@ -113,12 +113,14 @@ export default class Country {
     };
   }
 
-  constructor(data, borderNameMap) {
+  constructor(data, borderNameMap, metrics ={}) {
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
       symbol: convertSymbolTo3(data.cca2) || Country.#none,
     };
+
+    this.metrics = metrics;
 
     this.capital = data.capital || [Country.#unknown];
     this.continent = data.continents || [Country.#unknown];

@@ -1,5 +1,6 @@
 import Country from "./Country.js";
 import createBorderNameMap from "./borderNameMap.js";
+import getCountryMetrics from "./Fetch/getCountryMetrics.js";
 
 export default async function getData() {
   try {
@@ -8,7 +9,12 @@ export default async function getData() {
     const filtered = data.filter((country) => country.unMember);
     const borderNameMap = createBorderNameMap(filtered);
 
-    const processed = filtered.map((rawCountryData) => new Country(rawCountryData, borderNameMap));
+    const metricsMap = await getCountryMetrics();
+
+    const processed = filtered.map((rawCountryData) => {
+      const metrics = metricsMap.get(rawCountryData.cca3) || {};
+      return new Country(rawCountryData, borderNameMap, metrics);
+    })
 
     return processed;
   } catch (error) {
