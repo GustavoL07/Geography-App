@@ -5,7 +5,7 @@ import SettingsButton from "../Inputs/Buttons/SettingsButton/SettingsButton.jsx"
 import Search from "../Inputs/Search/Search.jsx";
 import Sort from "../Inputs/Sort/Sort.jsx";
 import Results from "../Results/Results.jsx";
-
+import StartButton from "../Inputs/Buttons/DefaultPageButton/StartButton.jsx";
 import { useCountryContext } from "../../Contexts/CountryContext.jsx";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
@@ -17,11 +17,13 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           <ToggleButton toggleSidebar={toggleSidebar} />
           <SettingsButton isVisible={isOpen} />
         </div>
+        {!isOpen && <StartButton />}
         <Search isOpen={isOpen} />
         <Sort isOpen={isOpen} />
-        {searchValue && <Results value={filteredCountries.length} />}
+        {searchValue && isOpen && (<Results value={filteredCountries.length} />)}
       </div>
 
+      
       {filteredCountries ? (
         <ul>
           {filteredCountries.map((country, index) => {
@@ -35,6 +37,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       ) : (
         <p>Loading...</p>
       )}
+
     </aside>
   );
 }
