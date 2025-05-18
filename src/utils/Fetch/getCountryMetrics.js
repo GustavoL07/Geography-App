@@ -41,31 +41,54 @@ const INDICATORS = [
 const BASE_URL = "https://api.worldbank.org/v2/country/all/indicator/";
 
 /*
-https://api.worldbank.org/v2/country/all/indicator/SE.ADT.1524.LT.ZS?format=json&date=2022&per_page=10000
+https://api.worldbank.org/v2/country/all/indicator/SE.ADT.1524.LT.ZS?format=json&per_page=10000
 */
 
-export default async function getCountryMetrics(year = "2022") {
+export default async function getCountryMetrics() {
   const metricsMap = new Map();
 
   const fetches = INDICATORS.map(async ({ id, key }) => {
-    const res = await fetch(`${BASE_URL}${id}?format=json&date=${year}&per_page=10000`);
+    const res = await fetch(`${BASE_URL}${id}?format=json&per_page=10000`);
     const data = await res.json();
     const entries = data[1] || [];
 
     for (const entry of entries) {
       const iso = entry.countryiso3code;
       const value = entry.value;
+      const date = parseInt(entry.date);
 
       if (!iso || value == null) continue;
 
+      // Se o país ainda não está no mapa, cria
       if (!metricsMap.has(iso)) {
         metricsMap.set(iso, {});
       }
 
-      metricsMap.get(iso)[key] = value;
+      const countryMetrics = metricsMap.get(iso);
+
+      // Só sobrescreve se:
+      // - o valor ainda não existe
+      // - ou se esse dado for mais novo do que o anterior
+      if (
+        !(key in countryMetrics) ||
+        (countryMetrics[`${key}_year`] ?? 0) < date
+      ) {
+        countryMetrics[key] = value;
+        countryMetrics[`${key}_year`] = date; // você pode usar isso para mostrar o ano de cada métrica, se quiser
+      }
     }
   });
 
   await Promise.all(fetches);
+
+  // Remove os *_year campos se você quiser manter o objeto limpo:
+  for (const [iso, metrics] of metricsMap.entries()) {
+    for (const prop in metrics) {
+      if (prop.endsWith("_year")) {
+        delete metrics[prop];
+      }
+    }
+  }
+
   return metricsMap;
 }
