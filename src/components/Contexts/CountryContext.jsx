@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import getData from "../../utils/getData";
 import Country from "../../utils/Country";
 
@@ -6,7 +6,6 @@ const CountryContext = createContext();
 
 export function CountryProvider({ children }) {
   const [countryList, setCountryList] = useState([]);
-  const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState("");
@@ -20,8 +19,9 @@ export function CountryProvider({ children }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
+  const filteredCountries = useMemo(() => {
     const lowerSearch = searchValue.toLowerCase();
+
     let filtered = countryList.filter((country) => {
       const name = country.name.informal.toLowerCase();
       const capital = country.getFormattedCapital().toLowerCase();
@@ -37,7 +37,7 @@ export function CountryProvider({ children }) {
       filtered = Country.sortCountries(filtered, sortValue);
     }
 
-    setFilteredCountries(filtered);
+    return filtered;
   }, [searchValue, sortValue, countryList]);
 
   return (

@@ -20,10 +20,9 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
         {!isOpen && <StartButton />}
         <Search isOpen={isOpen} />
         <Sort isOpen={isOpen} />
-        {searchValue && isOpen && (<Results value={filteredCountries.length} />)}
+        {searchValue && isOpen && <Results value={filteredCountries.length} />}
       </div>
 
-      
       {filteredCountries ? (
         <ul>
           {filteredCountries.map((country, index) => {
@@ -37,7 +36,6 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
       ) : (
         <p>Loading...</p>
       )}
-
     </aside>
   );
 }

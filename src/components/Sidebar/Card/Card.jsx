@@ -1,23 +1,33 @@
+import { memo, useMemo } from "react";
 import { useCountryContext } from "../../Contexts/CountryContext";
 import "./Card.css";
 
-export default function Card({
-  isOpen,
-  country,
-  description
-}) {
+function Card({ isOpen, country, description }) {
+  const { selectedCountry, setSelectedCountry } = useCountryContext();
+
+  const attribute = useMemo(() => {
+    return country?.getAttribute(description);
+  }, [country, description]);
+
   if (!country) return null;
-  const {selectedCountry, setSelectedCountry} = useCountryContext();
-  const attribute = country.getAttribute(description);
+
+  const isSelected = country === selectedCountry;
+
+  const handleClick = () => {
+    setSelectedCountry(country);
+  };
 
   return (
     <div
-      className={`container ${!isOpen ? "closed" : ""} ${
-        country === selectedCountry ? "selected" : ""
-      }`}
-      onClick={() => setSelectedCountry(country)}
+      className={`container ${!isOpen ? "closed" : ""} ${isSelected ? "selected" : ""}`}
+      onClick={handleClick}
     >
-      <img className="flag" src={country.flag} alt={`${country.name.informal}'s flag`} />
+      <img
+        className="flag"
+        src={country.flag}
+        alt={`${country.name.informal}'s flag`}
+        loading="lazy"
+      />
       <div className="description">
         <p>{country.name.informal}</p>
         <p>{attribute}</p>
@@ -25,3 +35,5 @@ export default function Card({
     </div>
   );
 }
+
+export default memo(Card);
