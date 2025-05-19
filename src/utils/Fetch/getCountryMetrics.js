@@ -35,6 +35,8 @@ const INDICATORS = [
   { id: "GC.DOD.TOTL.GD.ZS", key: "governmentDebtPercentGDP" }, // Dívida pública (% do PIB)
   { id: "NE.EXP.GNFS.ZS", key: "exportsPercentGDP" }, // Exportações (% do PIB)
   { id: "NE.IMP.GNFS.ZS", key: "importsPercentGDP" }, // Importações (% do PIB)
+  { id: "SP.POP.1564.TO", key: "workingAgePopulation" }, // População absoluta entre 15 e 64 anos
+  { id: "SL.TLF.TOTL.IN", key: "totalLaborForce" }, // Força de trabalho total (% da população em idade ativa)
   { id: "SL.UEM.TOTL.ZS", key: "unemploymentRate" }, // Taxa de desemprego (% da força de trabalho)
 
   /*SOCIETY*/

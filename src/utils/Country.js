@@ -169,6 +169,7 @@ export default class Country {
       },
 
       population: {
+        totalPopulation: metrics.totalPopulation,
         birthRate: metrics.birthRate,
         populationGrowthRate: metrics.populationGrowthRate,
         urbanPopulationPercent: metrics.urbanPopulationPercent,
@@ -185,6 +186,8 @@ export default class Country {
         governmentDebtPercentGDP: metrics.governmentDebtPercentGDP,
         exportsPercentGDP: metrics.exportsPercentGDP,
         importsPercentGDP: metrics.importsPercentGDP,
+        workingAgePopulation: metrics.workingAgePopulation,
+        totalLaborForce: metrics.totalLaborForce,
         unemploymentRate: metrics.unemploymentRate,
       },
 
@@ -271,5 +274,61 @@ export default class Country {
 
   getFormattedContinent() {
     return this.getContinentsQuantity() === 1 ? this.continent[0] : this.continent.join(", ");
+  }
+
+  static formatters = {
+    internetUsage: (v) => `${v.toFixed(1)}%`,
+    electricityAccess: (v) => `${v.toFixed(1)}%`,
+    basicWaterService: (v) => `${v.toFixed(1)}%`,
+    basicSanitationService: (v) => `${v.toFixed(1)}%`,
+
+    youthLiteracyRate: (v) => `${v.toFixed(1)}%`,
+    secondaryNetEnrollmentRate: (v) => `${v.toFixed(1)}%`,
+    tertiaryEnrollmentRate: (v) => `${v.toFixed(1)}%`,
+    genderParityPrimaryEducation: (v) => `${v.toFixed(2)}`, // índice, sem %
+
+    infantMortality: (v) => `${v.toFixed(1)} per 1,000 live births`,
+    lifeExpectancy: (v) => `${v.toFixed(1)} years`,
+    healthExpenditurePercentGDP: (v) => `${v.toFixed(1)}% of GDP`,
+    physiciansPerThousand: (v) => `${v.toFixed(2)} per 1,000 people`,
+    mortalityRate: (v) => `${v.toFixed(1)} per 1,000 people`,
+
+    totalPopulation: (v) => v.toLocaleString(),
+    birthRate: (v) => `${v.toFixed(1)} per 1,000 people`,
+    populationGrowthRate: (v) => `${v.toFixed(2)}%`,
+    urbanPopulationPercent: (v) => `${v.toFixed(1)}%`,
+    ruralPopulationPercent: (v) => `${v.toFixed(1)}%`,
+    malePopulationPercent: (v) => `${v.toFixed(1)}%`,
+    femalePopulationPercent: (v) => `${v.toFixed(1)}%`,
+    elderlyPopulationPercent: (v) => `${v.toFixed(1)}%`,
+
+    gdp: (v) => `$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
+    gdpPerCapita: (v) => `$${v.toLocaleString(undefined, { maximumFractionDigits: 0 })}`,
+    inflationRate: (v) => `${v.toFixed(2)}%`,
+    governmentDebtPercentGDP: (v) => `${v.toFixed(1)}% of GDP`,
+    exportsPercentGDP: (v) => `${v.toFixed(1)}% of GDP`,
+    importsPercentGDP: (v) => `${v.toFixed(1)}% of GDP`,
+    workingAgePopulation: (v) => v.toLocaleString(),
+    totalLaborForce: (v) => v.toLocaleString(),
+    unemploymentRate: (v) => `${v.toFixed(1)}%`,
+
+    giniIndex: (v) => v.toFixed(2),
+    homicideRate: (v) => `${v.toFixed(2)} per 100,000 people`,
+
+    agriculturalLandPercent: (v) => `${v.toFixed(1)}%`,
+    forestAreaPercent: (v) => `${v.toFixed(1)}%`,
+  };
+
+  getFormattedIndicator(key) {
+    const formaterFunction = Country.formatters[key];
+
+    for (const category in this.indicators) {
+      const indicatorsInCategory = this.indicators[category];
+
+      if (key in indicatorsInCategory) {
+        const [value] = indicatorsInCategory[key];
+        return formaterFunction(value);
+      }
+    }
   }
 }
