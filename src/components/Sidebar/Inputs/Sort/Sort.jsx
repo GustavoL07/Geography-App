@@ -1,6 +1,6 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import Country from "../../../../utils/Country.js";
+import Country from "../../../../utils/Country/Country.js";
 import { useCountryContext } from "../../../Contexts/CountryContext.jsx";
 
 const icons = {

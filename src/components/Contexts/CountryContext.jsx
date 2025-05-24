@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, useEffect, useMemo } from "react";
-import getData from "../../utils/getData";
+import { createContext, useContext, useState, useEffect } from "react";
+import getData from "../../utils/Fetch/getData";
 import useSearchFilter from "../Hooks/useSearchFilter";
 
 const CountryContext = createContext();
@@ -19,8 +19,7 @@ export function CountryProvider({ children }) {
 
     fetchData();
   }, []);
-  
-  
+
   const filteredCountries = useSearchFilter(countryList, searchValue, sortValue, filterBy);
 
   return (
@@ -35,7 +34,7 @@ export function CountryProvider({ children }) {
         sortValue,
         setSortValue,
         filterBy,
-        setFilterBy
+        setFilterBy,
       }}
     >
       {children}

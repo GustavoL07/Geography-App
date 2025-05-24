@@ -1,12 +1,7 @@
 import { useMemo } from "react";
-import Country from "../../utils/Country";
+import Country from "../../utils/Country/Country";
 
-export default function useSearchFilter(
-  countryList,
-  searchValue,
-  sortValue,
-  filterBy = [],
-) {
+export default function useSearchFilter(countryList, searchValue, sortValue, filterBy = []) {
   return useMemo(() => {
     const lowerSearch = (searchValue || "").toLowerCase();
     let filtered = countryList.filter((country) => {

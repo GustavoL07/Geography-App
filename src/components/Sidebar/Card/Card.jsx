@@ -1,19 +1,14 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import { useCountryContext } from "../../Contexts/CountryContext";
 import "./Card.css";
 
-function Card({ isOpen, country, description }) {
-  const { selectedCountry, setSelectedCountry } = useCountryContext();
-
-  const attribute = useMemo(() => {
-    return country?.getAttribute(description);
-  }, [country, description]);
-
+export default function Card({ isOpen, country, description }) {
   if (!country) return null;
+  const { selectedCountry, setSelectedCountry } = useCountryContext();
 
   const isSelected = country === selectedCountry;
 
-  const handleClick = () => {
+  const handleClick = () => {    
     setSelectedCountry(country);
   };
 
@@ -30,10 +25,8 @@ function Card({ isOpen, country, description }) {
       />
       <div className="description">
         <p>{country.name.informal}</p>
-        <p>{attribute}</p>
+        <p>{country.name.informal}</p>
       </div>
     </div>
   );
 }
-
-export default memo(Card);

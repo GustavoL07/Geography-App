@@ -7,19 +7,12 @@ const INDICATORS = [
 
   /*EDUCATION*/
   { id: "SE.ADT.1524.LT.ZS", key: "youthLiteracyRate" }, // Taxa de alfabetização de jovens (15–24)
-  { id: "SE.SEC.NENR", key: "secondaryNetEnrollmentRate" }, // Matrícula líquida no ensino secundário
-  { id: "SE.TER.ENRR", key: "tertiaryEnrollmentRate" }, // Taxa de matrícula no ensino superior
-  { id: "SE.ENR.PRSC.FM.ZS", key: "genderParityPrimaryEducation" }, // Paridade de gênero no ensino primário
 
   /*HEALTH*/
   { id: "SP.DYN.IMRT.IN", key: "infantMortality" }, // Mortalidade infantil (por mil)
   { id: "SP.DYN.LE00.IN", key: "lifeExpectancy" }, // Expectativa de vida ao nascer
-  { id: "SH.XPD.CHEX.GD.ZS", key: "healthExpenditurePercentGDP" }, // Gastos com saúde (% do PIB)
-  { id: "SH.MED.PHYS.ZS", key: "physiciansPerThousand" }, // Médicos por 1000 habitantes
-  { id: "SH.DYN.MORT", key: "mortalityRate" }, // Taxa de mortalidade (geral)
 
   /*POPULATION*/
-  { id: "SP.POP.TOTL", key: "totalPopulation" }, // População total
   { id: "SP.DYN.CBRT.IN", key: "birthRate" }, // Taxa de natalidade (por mil)
   { id: "SP.POP.GROW", key: "populationGrowthRate" }, // Taxa de crescimento populacional
   { id: "SP.URB.TOTL.IN.ZS", key: "urbanPopulationPercent" }, // % da população em áreas urbanas
@@ -32,9 +25,8 @@ const INDICATORS = [
   { id: "NY.GDP.MKTP.CD", key: "gdp" }, // PIB (US$ atual)
   { id: "NY.GDP.PCAP.CD", key: "gdpPerCapita" }, // PIB per capita (US$ atual)
   { id: "FP.CPI.TOTL.ZG", key: "inflationRate" }, // Taxa de inflação (preços ao consumidor)
-  { id: "GC.DOD.TOTL.GD.ZS", key: "governmentDebtPercentGDP" }, // Dívida pública (% do PIB)
-  { id: "NE.EXP.GNFS.ZS", key: "exportsPercentGDP" }, // Exportações (% do PIB)
-  { id: "NE.IMP.GNFS.ZS", key: "importsPercentGDP" }, // Importações (% do PIB)
+  { id: "NE.EXP.GNFS.CD", key: "exportsPercentGDP" }, // Exportações 
+  { id: "NE.IMP.GNFS.CD", key: "importsPercentGDP" }, // Importações 
   { id: "SP.POP.1564.TO", key: "workingAgePopulation" }, // População absoluta entre 15 e 64 anos
   { id: "SL.TLF.TOTL.IN", key: "totalLaborForce" }, // Força de trabalho total (% da população em idade ativa)
   { id: "SL.UEM.TOTL.ZS", key: "unemploymentRate" }, // Taxa de desemprego (% da força de trabalho)

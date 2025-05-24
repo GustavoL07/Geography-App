@@ -1,8 +1,6 @@
-import { useCountryContext } from "../Contexts/CountryContext";
 import "./Intro.css";
 
 export default function Intro({}) {
-  const { setSelectedCountry, countryList } = useCountryContext();
   return (
     <div className="intro">
       <p className="app-title">Geography App</p>
@@ -12,9 +10,6 @@ export default function Intro({}) {
         className="app-image"
         src="/earth-globe.png"
         alt="Earth Globe"
-        onClick={() =>
-          setSelectedCountry(countryList[Math.floor(Math.random() * countryList.length)])
-        }
       />
       <section>
         <p className="app-desc">

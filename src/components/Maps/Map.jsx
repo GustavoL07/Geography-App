@@ -55,7 +55,7 @@ export default function Map({}) {
       markerRef.current = L.marker([latitude, longitude])
         .addTo(mapInstanceRef.current)
         .bindPopup(
-          `<b>${selectedCountry.name.informal}</b><br>${selectedCountry.getFormattedContinent()}`
+          `<b>${selectedCountry.name.informal}</b><br>${selectedCountry.getFormatted("continent")}`
         );
 
       setTimeout(() => {

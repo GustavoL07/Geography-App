@@ -1,4 +1,4 @@
-import createSymbolToNameMap from "../SymbolToName.js";
+import createSymbolToNameMap from "../Country/symbolToNameMap.js";
 
 export default async function getCountryData() {
   const URL = "https://restcountries.com/v3.1/all";
