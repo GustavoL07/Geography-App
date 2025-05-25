@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import Country from "../../utils/Country/Country";
+import { getSorted } from "../../utils/Organizing/sorter";
 
 export default function useSearchFilter(countryList, searchValue, sortValue, filterBy = []) {
   return useMemo(() => {
@@ -20,7 +21,7 @@ export default function useSearchFilter(countryList, searchValue, sortValue, fil
     });
 
     if (sortValue) {
-      filtered = Country.sortCountries(filtered, sortValue);
+      filtered = getSorted(filtered, sortValue);
     }
 
     return filtered;

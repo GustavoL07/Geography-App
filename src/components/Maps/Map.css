@@ -6,6 +6,7 @@
 }
 
 .map{
+  z-index: -1;
   width: 85%;
   height: 90%;
   border-radius: calc(var(--radius) * 1.5);

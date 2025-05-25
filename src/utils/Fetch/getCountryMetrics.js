@@ -5,8 +5,7 @@ const INDICATORS = [
   { id: "SH.H2O.BASW.ZS", key: "basicWaterService" }, // Acesso a serviço básico de água
   { id: "SH.STA.BASS.ZS", key: "basicSanitationService" }, // Acesso a serviço básico de saneamento
 
-  /*EDUCATION*/
-  { id: "SE.ADT.1524.LT.ZS", key: "youthLiteracyRate" }, // Taxa de alfabetização de jovens (15–24)
+  { id: "SE.ADT.1524.LT.ZS", key: "literacyRate" }, // Taxa de alfabetização de jovens (15–24)
 
   /*HEALTH*/
   { id: "SP.DYN.IMRT.IN", key: "infantMortality" }, // Mortalidade infantil (por mil)
@@ -14,19 +13,19 @@ const INDICATORS = [
 
   /*POPULATION*/
   { id: "SP.DYN.CBRT.IN", key: "birthRate" }, // Taxa de natalidade (por mil)
-  { id: "SP.POP.GROW", key: "populationGrowthRate" }, // Taxa de crescimento populacional
-  { id: "SP.URB.TOTL.IN.ZS", key: "urbanPopulationPercent" }, // % da população em áreas urbanas
-  { id: "SP.RUR.TOTL.ZS", key: "ruralPopulationPercent" }, // % da população em áreas rurais
-  { id: "SP.POP.TOTL.MA.ZS", key: "malePopulationPercent" }, // Homens
-  { id: "SP.POP.TOTL.FE.ZS", key: "femalePopulationPercent" }, // Mulheres
-  { id: "SP.POP.65UP.TO.ZS", key: "elderlyPopulationPercent" }, // 65+ anos
+  { id: "SP.POP.GROW", key: "growthRate" }, // Taxa de crescimento populacional
+  { id: "SP.URB.TOTL.IN.ZS", key: "urbanPercent" }, // % da população em áreas urbanas
+  { id: "SP.RUR.TOTL.ZS", key: "ruralPercent" }, // % da população em áreas rurais
+  { id: "SP.POP.TOTL.MA.ZS", key: "malePercent" }, // Homens
+  { id: "SP.POP.TOTL.FE.ZS", key: "femalePercent" }, // Mulheres
+  { id: "SP.POP.65UP.TO.ZS", key: "elderlyPercent" }, // 65+ anos
 
   /*ECONOMY*/
   { id: "NY.GDP.MKTP.CD", key: "gdp" }, // PIB (US$ atual)
   { id: "NY.GDP.PCAP.CD", key: "gdpPerCapita" }, // PIB per capita (US$ atual)
   { id: "FP.CPI.TOTL.ZG", key: "inflationRate" }, // Taxa de inflação (preços ao consumidor)
-  { id: "NE.EXP.GNFS.CD", key: "exportsPercentGDP" }, // Exportações 
-  { id: "NE.IMP.GNFS.CD", key: "importsPercentGDP" }, // Importações 
+  { id: "NE.EXP.GNFS.CD", key: "exports" }, // Exportações 
+  { id: "NE.IMP.GNFS.CD", key: "imports" }, // Importações 
   { id: "SP.POP.1564.TO", key: "workingAgePopulation" }, // População absoluta entre 15 e 64 anos
   { id: "SL.TLF.TOTL.IN", key: "totalLaborForce" }, // Força de trabalho total (% da população em idade ativa)
   { id: "SL.UEM.TOTL.ZS", key: "unemploymentRate" }, // Taxa de desemprego (% da força de trabalho)

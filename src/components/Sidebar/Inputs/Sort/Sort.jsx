@@ -1,7 +1,7 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import Country from "../../../../utils/Country/Country.js";
 import { useCountryContext } from "../../../Contexts/CountryContext.jsx";
+import { SORTER } from "../../../../utils/Organizing/sorter.js";
 
 const icons = {
   AZ: <i class="fa-solid fa-arrow-down-short-wide"></i>,
@@ -13,6 +13,7 @@ export default function Sort({ isOpen }) {
 
   const [openSort, setOpenSort] = useState(false);
   const [sortText, setSortText] = useState("Sort...");
+  const [selectedSortOption, setSelectedSortOption] = useState(null)
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -28,10 +29,11 @@ export default function Sort({ isOpen }) {
     };
   }, []);
 
-  const handleOptionClicks = (sortValue, sortText) => {
+  const handleOptionClicks = (sortValue, sortText, selectedSortOption) => {
     setSortValue(sortValue);
     setOpenSort(false);
     setSortText(sortText);
+    setSelectedSortOption(selectedSortOption);
   };
 
   return (
@@ -42,9 +44,7 @@ export default function Sort({ isOpen }) {
       <div
         className="select-container"
         onClick={() => {
-          if (isOpen) {
-            setOpenSort(!openSort);
-          }
+          if (isOpen) setOpenSort(!openSort);
         }}
       >
         <i className="fa-solid fa-sort sort-icon"></i>
@@ -54,22 +54,15 @@ export default function Sort({ isOpen }) {
       <div className="sort-wrapper">
         {openSort && isOpen && (
           <div className="sort-container">
-            <div className="symbols" onClick={() => handleOptionClicks(null, "Sort...")}>
-              {icons["AZ"]}
+            <div className="indicators">
+              <div className="symbols">{icons["AZ"]}</div>
+              <div className="symbols">{icons["ZA"]}</div>
             </div>
-            <div className="symbols" onClick={() => handleOptionClicks(null, "Sort...")}>
-              {icons["ZA"]}
+            <div className="sort-modes">
+              {SORTER.map((obj, index) => (
+                <div key={index} className={`sort-option ${index === selectedSortOption ? "active" : ""}`} onClick={() => handleOptionClicks(obj.key, obj.text, index)}>{obj.text}</div>
+              ))}
             </div>
-
-            {Country.SORT_OPTIONS.map((opt) => (
-              <div
-                key={opt.key}
-                className={`sort-option ${sortValue === opt.key ? "active" : ""}`}
-                onClick={() => handleOptionClicks(opt.key, opt.key)}
-              >
-                {opt.text}
-              </div>
-            ))}
           </div>
         )}
       </div>

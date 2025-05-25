@@ -134,7 +134,10 @@ export default class Country {
       timezone: data.timezones || [],
       area: data.area || 0,
       population: data.population || 0,
-      populationDensity: data.area && data.population ? Math.round(data.population / data.area) : 0,
+      populationDensity:
+        data.area && data.population
+          ? parseFloat(Math.round(data.population / data.area).toFixed(2))
+          : 0,
       position: {
         latitude: data.latlng[0] || 0,
         longitude: data.latlng[1] || 0,
@@ -149,50 +152,41 @@ export default class Country {
     const defaultValue = [null, null];
     this.indicators = {
       technology: {
-      internetUsage: metrics.internetUsage || defaultValue,
-      electricityAccess: metrics.electricityAccess || defaultValue,
-      basicWaterService: metrics.basicWaterService || defaultValue,
-      basicSanitationService: metrics.basicSanitationService || defaultValue,
-      },
-
-      education: {
-      youthLiteracyRate: metrics.youthLiteracyRate || defaultValue,
-      },
-
-      health: {
-      infantMortality: metrics.infantMortality || defaultValue,
-      lifeExpectancy: metrics.lifeExpectancy || defaultValue,
+        internetUsage: metrics.internetUsage || defaultValue,
+        electricityAccess: metrics.electricityAccess || defaultValue,
+        basicWaterService: metrics.basicWaterService || defaultValue,
+        basicSanitationService: metrics.basicSanitationService || defaultValue,
       },
 
       population: {
-      birthRate: metrics.birthRate || defaultValue,
-      populationGrowthRate: metrics.populationGrowthRate || defaultValue,
-      urbanPopulationPercent: metrics.urbanPopulationPercent || defaultValue,
-      ruralPopulationPercent: metrics.ruralPopulationPercent || defaultValue,
-      malePopulationPercent: metrics.malePopulationPercent || defaultValue,
-      femalePopulationPercent: metrics.femalePopulationPercent || defaultValue,
-      elderlyPopulationPercent: metrics.elderlyPopulationPercent || defaultValue,
+        birthRate: metrics.birthRate || defaultValue,
+        growthRate: metrics.growthRate || defaultValue,
+        urbanPercent: metrics.urbanPercent || defaultValue,
+        ruralPercent: metrics.ruralPercent || defaultValue,
+        malePercent: metrics.malePercent || defaultValue,
+        femalePercent: metrics.femalePercent || defaultValue,
+        elderlyPercent: metrics.elderlyPercent || defaultValue,
+        infantMortality: metrics.infantMortality || defaultValue,
+        lifeExpectancy: metrics.lifeExpectancy || defaultValue,
+        literacyRate: metrics.literacyRate || defaultValue,
+        homicideRate: metrics.homicideRate || defaultValue,
       },
 
       economy: {
-      gdp: metrics.gdp || defaultValue,
-      gdpPerCapita: metrics.gdpPerCapita || defaultValue,
-      inflationRate: metrics.inflationRate || defaultValue,
-      exportsPercentGDP: metrics.exportsPercentGDP || defaultValue,
-      importsPercentGDP: metrics.importsPercentGDP || defaultValue,
-      workingAgePopulation: metrics.workingAgePopulation || defaultValue,
-      totalLaborForce: metrics.totalLaborForce || defaultValue,
-      unemploymentRate: metrics.unemploymentRate || defaultValue,
-      },
-
-      society: {
-      giniIndex: metrics.giniIndex || defaultValue,
-      homicideRate: metrics.homicideRate || defaultValue,
+        gdp: metrics.gdp || defaultValue,
+        gdpPerCapita: metrics.gdpPerCapita || defaultValue,
+        inflationRate: metrics.inflationRate || defaultValue,
+        exports: metrics.exports || defaultValue,
+        imports: metrics.imports || defaultValue,
+        workingAgePopulation: metrics.workingAgePopulation || defaultValue,
+        totalLaborForce: metrics.totalLaborForce || defaultValue,
+        unemploymentRate: metrics.unemploymentRate || defaultValue,
+        giniIndex: metrics.giniIndex || defaultValue,
       },
 
       environment: {
-      agriculturalLandPercent: metrics.agriculturalLandPercent || defaultValue,
-      forestAreaPercent: metrics.forestAreaPercent || defaultValue,
+        agriculturalLandPercent: metrics.agriculturalLandPercent || defaultValue,
+        forestAreaPercent: metrics.forestAreaPercent || defaultValue,
       },
     };
   }
