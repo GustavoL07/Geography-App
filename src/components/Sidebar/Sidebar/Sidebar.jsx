@@ -28,7 +28,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           {filteredCountries.map((country, index) => {
             return (
               <li key={index}>
-                <Card isOpen={isOpen} country={country} description={sortValue} />
+                <Card isOpen={isOpen} country={country} />
               </li>
             );
           })}

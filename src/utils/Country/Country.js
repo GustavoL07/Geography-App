@@ -134,10 +134,7 @@ export default class Country {
       timezone: data.timezones || [],
       area: data.area || 0,
       population: data.population || 0,
-      populationDensity:
-        data.area && data.population
-          ? parseFloat(Math.round(data.population / data.area).toFixed(2))
-          : 0,
+      populationDensity: data.area && data.population ? data.population / data.area : 0,
       position: {
         latitude: data.latlng[0] || 0,
         longitude: data.latlng[1] || 0,

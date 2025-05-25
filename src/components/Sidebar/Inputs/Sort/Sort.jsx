@@ -9,11 +9,11 @@ const icons = {
 };
 
 export default function Sort({ isOpen }) {
-  const { sortValue, setSortValue } = useCountryContext();
+  const { setSortValue } = useCountryContext();
 
   const [openSort, setOpenSort] = useState(false);
   const [sortText, setSortText] = useState("Sort...");
-  const [selectedSortOption, setSelectedSortOption] = useState(null)
+  const [selectedSortOption, setSelectedSortOption] = useState(null);
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -54,13 +54,24 @@ export default function Sort({ isOpen }) {
       <div className="sort-wrapper">
         {openSort && isOpen && (
           <div className="sort-container">
-            <div className="indicators">
+            <div
+              className="indicators"
+              onClick={() => {
+                handleOptionClicks("", "Sort...", null);
+              }}
+            >
               <div className="symbols">{icons["AZ"]}</div>
               <div className="symbols">{icons["ZA"]}</div>
             </div>
             <div className="sort-modes">
               {SORTER.map((obj, index) => (
-                <div key={index} className={`sort-option ${index === selectedSortOption ? "active" : ""}`} onClick={() => handleOptionClicks(obj.key, obj.text, index)}>{obj.text}</div>
+                <div
+                  key={index}
+                  className={`sort-option ${index === selectedSortOption ? "active" : ""}`}
+                  onClick={() => handleOptionClicks(obj.key, obj.text, index)}
+                >
+                  {obj.text}
+                </div>
               ))}
             </div>
           </div>

@@ -57,7 +57,10 @@ const FORMATTERS = {
     population: (country) => `${country.geography.population.toLocaleString()}`,
     area: (country) => `${country.geography.area.toLocaleString()} km²`,
     populationDensity: (country) =>
-      `${country.geography.populationDensity.toLocaleString()} people/km²`,
+      `${country.geography.populationDensity.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })} people/km²`,
     language: (country) => {
       const languages = country.getLanguagesQuantity() > 0 ? country.language : [];
       const sortedLanguages = languages.sort((a, b) => a.localeCompare(b));
@@ -119,6 +122,8 @@ const FORMATTERS = {
 };
 
 export function formatCountryValue(country, key) {
+  if (!key) return "";
+
   const formatterType = getFormatType(key);
   const formatFunction = FORMATTERS[formatterType][key];
 
@@ -126,9 +131,9 @@ export function formatCountryValue(country, key) {
     return formatFunction(country);
   } else if (formatterType === "metrics") {
     const type = getCountryIndicatorType(country, key);
-    
+
     const value = country.indicators[type][key][0];
-    return value !== null ? formatFunction(value) : "Unknown"
+    return value !== null ? formatFunction(value) : "Unknown";
   }
 }
 

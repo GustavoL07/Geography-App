@@ -47,8 +47,6 @@
   transform: scale(1.2);
 }
 
-
-
 .select-container{
   display: flex;
   align-items: center;
@@ -72,7 +70,8 @@
 }
 
 .sort-container {
-  position: fixed;
+  z-index: 9999;
+  position: fixed;  
   width: auto;
   max-height: 50vh;
   overflow: scroll;
@@ -99,6 +98,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr;
+  gap: 2px;
   overflow: hidden;
 }
 
