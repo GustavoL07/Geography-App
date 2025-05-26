@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "./ToggleButton.css";
 
-export default function ToggleButton({ toggleSidebar }) {
+interface Props {
+  toggleSidebar: () => void
+}
+
+export default function ToggleButton({ toggleSidebar }: Props) {
   const [btnOn, setBtnOn] = useState(false);
   return (
     <button className={`toggle-btn ${btnOn ? "" : "off"}`} onClick={()=> {

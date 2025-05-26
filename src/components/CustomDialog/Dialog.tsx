@@ -1,8 +1,14 @@
 import "./Dialog.css";
 import { useEffect, useRef } from "react";
 
-export default function Dialog({ title, isOpen, onClose, children }) {
-  const dialogRef = useRef(null);
+interface Props {
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+  children: any;
+}
+export default function Dialog({ title, isOpen, onClose, children }: Props) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (!dialogRef.current) return;

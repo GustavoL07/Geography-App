@@ -1,7 +1,10 @@
 import { useCountryContext } from "../../../Contexts/CountryContext";
 import "./Search.css";
 
-export default function Search({ isOpen }) {
+interface Props {
+  isOpen: boolean;
+}
+export default function Search({ isOpen }: Props) {
   const { searchValue, setSearchValue } = useCountryContext();
   return (
     <div className={`search-wrapper ${!isOpen ? "closed" : ""}`}>

@@ -2,7 +2,10 @@ import "./SettingsButton.css";
 import Dialog from "../../../../CustomDialog/Dialog";
 import { useState } from "react";
 
-export default function SettingsButton({ isVisible }) {
+interface Props {
+  isVisible: boolean
+}
+export default function SettingsButton({ isVisible }: Props) {
   const [dialogToggle, setDialogToggle] = useState(false);
 
   function openSettings() {

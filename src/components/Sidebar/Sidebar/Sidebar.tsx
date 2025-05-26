@@ -1,15 +1,19 @@
 import "./Sidebar.css";
-import Card from "../Card/Card.jsx";
-import ToggleButton from "../Inputs/Buttons/ToggleButton/ToggleButton.jsx";
-import SettingsButton from "../Inputs/Buttons/SettingsButton/SettingsButton.jsx";
-import Search from "../Inputs/Search/Search.jsx";
-import Sort from "../Inputs/Sort/Sort.jsx";
-import Results from "../Results/Results.jsx";
-import StartButton from "../Inputs/Buttons/DefaultPageButton/StartButton.jsx";
-import { useCountryContext } from "../../Contexts/CountryContext.jsx";
+import Card from "../Card/Card.js";
+import ToggleButton from "../Inputs/Buttons/ToggleButton/ToggleButton.js";
+import SettingsButton from "../Inputs/Buttons/SettingsButton/SettingsButton.js";
+import Search from "../Inputs/Search/Search.js";
+import Sort from "../Inputs/Sort/Sort.js";
+import Results from "../Results/Results.js";
+import StartButton from "../Inputs/Buttons/DefaultPageButton/StartButton.js";
+import { useCountryContext } from "../../Contexts/CountryContext.js";
 
-export default function Sidebar({ isOpen, toggleSidebar }) {
-  const { searchValue, filteredCountries, sortValue } = useCountryContext();
+interface Sidebar {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+}
+export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
+  const { searchValue, filteredCountries } = useCountryContext();
   return (
     <aside className={`sidebar ${isOpen ? "" : "closed"}`}>
       <div className="sidebar-top">

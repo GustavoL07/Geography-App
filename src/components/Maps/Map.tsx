@@ -5,14 +5,15 @@ import "./Map.css";
 import { useCountryContext } from "../Contexts/CountryContext";
 
 export default function Map({}) {
-  const {selectedCountry} = useCountryContext();
+  const { selectedCountry } = useCountryContext();
+  if (!selectedCountry) return null;
 
-  const mapContainerRef = useRef(null);
-  const mapInstanceRef = useRef(null);
-  const markerRef = useRef(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map>(null);
+  const markerRef = useRef<L.Marker>(null);
 
   const zoom = 3;
-  const mapOptions = {
+  const mapOptions: L.MapOptions = {
     minZoom: 2,
     maxZoom: 5.5,
     inertia: true,
@@ -22,7 +23,6 @@ export default function Map({}) {
     scrollWheelZoom: true,
     doubleClickZoom: true,
     keyboard: false,
-    tap: true,
     touchZoom: true,
     maxBounds: [
       [-90, -225],
@@ -34,7 +34,7 @@ export default function Map({}) {
   useEffect(() => {
     const { latitude, longitude } = selectedCountry.geography.position;
 
-    if (!mapInstanceRef.current) {
+    if (!mapInstanceRef.current && mapContainerRef.current) {
       mapInstanceRef.current = L.map(mapContainerRef.current, mapOptions).setView(
         [latitude, longitude],
         zoom
@@ -59,9 +59,14 @@ export default function Map({}) {
         );
 
       setTimeout(() => {
-        mapInstanceRef.current.invalidateSize();
-        markerRef.current.openPopup();
-        mapInstanceRef.current.setZoom(zoom);
+
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.invalidateSize();
+          mapInstanceRef.current.setZoom(zoom);
+        }
+        if (markerRef.current) {
+          markerRef.current.openPopup();
+        }
       }, 450);
     }
   }, [selectedCountry]);

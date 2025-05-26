@@ -1,5 +1,11 @@
+import Country from "../../../../utils/Country/Country";
 import "./CountryOverview.css";
-export default function CountryOverview({ country }) {
+
+interface Props {
+  country: Country;
+}
+
+export default function CountryOverview({ country }: Props) {
   return (
     <div className="overview-wrapper">
       <img className="overview-flag" src={country.flag} alt={`${country.name.informal}'s flag`} />

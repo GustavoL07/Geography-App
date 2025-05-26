@@ -1,8 +1,8 @@
 import { useMemo } from "react";
+import { getSorted, SortKeys } from "../../utils/Organizing/sorter";
 import Country from "../../utils/Country/Country";
-import { getSorted } from "../../utils/Organizing/sorter";
 
-export default function useSearchFilter(countryList, searchValue, sortValue, filterBy = []) {
+export default function useSearchFilter(countryList: Country[], searchValue: string, sortValue: SortKeys, filterBy: string[] = []) {
   return useMemo(() => {
     const lowerSearch = (searchValue || "").toLowerCase();
     let filtered = countryList.filter((country) => {
@@ -11,10 +11,10 @@ export default function useSearchFilter(countryList, searchValue, sortValue, fil
       checked.push(country.name.informal.toLowerCase().includes(lowerSearch));
 
       if (filterBy.includes("capital")) {
-        checked.push(country.getFormattedCapital().toLowerCase().includes(lowerSearch));
+        checked.push(country.getFormatted("capital").toLowerCase().includes(lowerSearch));
       }
       if (filterBy.includes("continent")) {
-        checked.push(country.getFormattedContinent().toLowerCase().includes(lowerSearch));
+        checked.push(country.getFormatted("continent").toLowerCase().includes(lowerSearch));
       }
 
       return checked.some(Boolean);

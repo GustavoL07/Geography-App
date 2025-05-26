@@ -1,18 +1,26 @@
+import Country from "../../../utils/Country/Country";
 import { getFormatOption } from "../../../utils/Organizing/sorter";
 import { useCountryContext } from "../../Contexts/CountryContext";
 import "./Card.css";
 
-export default function Card({ isOpen, country }) {
+interface Card {
+  isOpen: boolean,
+  country: Country
+}
+
+export default function Card({ isOpen, country }: Card) {
   if (!country) return null;
   const { selectedCountry, setSelectedCountry, sortValue } = useCountryContext();
-
   const isSelected = country === selectedCountry;
 
-  const handleClick = () => {    
+  const handleClick = () => {
     setSelectedCountry(country);
   };
 
-  const description = country.getFormatted(getFormatOption(sortValue)) || country.getFormatted("capital") ;
+  function getDescription() {
+    const formatOption = getFormatOption(sortValue);
+    return country.getFormatted(formatOption);
+  }
 
   return (
     <div
@@ -27,7 +35,7 @@ export default function Card({ isOpen, country }) {
       />
       <div className="description">
         <p>{country.name.informal}</p>
-        <p>{description}</p>
+        <p>{getDescription()}</p>
       </div>
     </div>
   );

@@ -1,23 +1,26 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import { useCountryContext } from "../../../Contexts/CountryContext.jsx";
-import { SORTER } from "../../../../utils/Organizing/sorter.js";
+import { useCountryContext } from "../../../Contexts/CountryContext.js";
+import { SORTER, SortKeys } from "../../../../utils/Organizing/sorter.js";
 
 const icons = {
-  AZ: <i class="fa-solid fa-arrow-down-short-wide"></i>,
-  ZA: <i class="fa-solid fa-arrow-down-wide-short"></i>,
+  AZ: <i className="fa-solid fa-arrow-down-short-wide"></i>,
+  ZA: <i className="fa-solid fa-arrow-down-wide-short"></i>,
 };
 
-export default function Sort({ isOpen }) {
+interface Props {
+  isOpen: boolean;
+}
+export default function Sort({ isOpen }: Props) {
   const { setSortValue } = useCountryContext();
 
   const [openSort, setOpenSort] = useState(false);
   const [sortText, setSortText] = useState("Sort...");
-  const [selectedSortOption, setSelectedSortOption] = useState(null);
-  const wrapperRef = useRef(null);
+  const [selectedSortOption, setSelectedSortOption] = useState<number | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: any) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setOpenSort(false);
       }
@@ -29,12 +32,12 @@ export default function Sort({ isOpen }) {
     };
   }, []);
 
-  const handleOptionClicks = (sortValue, sortText, selectedSortOption) => {
+  function handleOptionClicks(sortValue: SortKeys, sortText: string, selectedSortOption: number | null) {
     setSortValue(sortValue);
     setOpenSort(false);
     setSortText(sortText);
     setSelectedSortOption(selectedSortOption);
-  };
+  }
 
   return (
     <div

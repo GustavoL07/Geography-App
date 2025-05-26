@@ -6,7 +6,7 @@ export default async function getCountryData() {
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    const filtered = data.filter((country) => country.unMember); /* Only UN members */
+    const filtered = data.filter((country: any) => country.unMember); /* Only UN members */
     const symbolToNameMap = createSymbolToNameMap(filtered);
 
     return {
