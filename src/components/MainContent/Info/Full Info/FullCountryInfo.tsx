@@ -14,6 +14,8 @@ export default function FullCountryInfo({}) {
 
       <section className="info-grid">
         {formatOptions.map((obj, index) => {
+          if (obj.key === "name") return null;
+
           return (
             <InfoBox
               key={index}

@@ -16,7 +16,7 @@ export default async function getCountryData() {
   } catch (error) {
     console.log(error);
     return {
-      countryList: [],
+      list: [],
       symbolToNameMap: new Map(),
     };
   }

@@ -1,75 +1,23 @@
 import { FormatKey, formatCountryValue } from "../Organizing/formatter";
 import threeDigit from "./symbol";
-
-interface CountryData {
-  name: {
-    official: string;
-    common: string;
-  };
-  cca2: string;
-  capital: string[];
-  continents: string[];
-  flags: { svg: string };
-  languages: { [key: string]: string };
-  borders: string[];
-  timezones: string[];
-  area: number;
-  population: number;
-  latlng: [number, number];
-  subregion: string;
-}
-
-interface MetricsGroup {
-  [key: string]: [number, number] | undefined;
-}
+import getCurrencyInfo from "./currency";
+import { CountryGeography, CountryIndicators, CountryMoney, CountryName, MetricsGroup } from "./Country.types";
+import getBorders from "./borders";
 
 export default class Country {
   static #none = "None";
   static #unknown = "Unknown";
 
-  static getCurrencyInfo(data: any) {
-    const currencyCode = Object.keys(data.currencies || {})[0];
-    const currency = data.currencies[currencyCode] || {
-      name: Country.#unknown,
-      symbol: Country.#none,
-    };
-
-    return {
-      code: currencyCode || Country.#none,
-      name: currency.name || Country.#unknown,
-      symbol: currency.symbol || Country.#none,
-    };
-  }
-
-  name: { formal: string; informal: string; symbol: string };
+  name: CountryName;
   capital: string[];
   continent: string[];
   flag: string;
-  money: { code: string; name: string; symbol: string };
+  money: CountryMoney;
   language: string[];
-  geography: {
-    timezone: string[];
-    area: number;
-    population: number;
-    populationDensity: number;
-    position: {
-      latitude: number;
-      longitude: number;
-      region: string;
-    };
-    borders: {
-      symbols: string[] | [];
-      names: string[];
-    };
-  };
-  indicators: {
-    technology: MetricsGroup;
-    population: MetricsGroup;
-    economy: MetricsGroup;
-    environment: MetricsGroup;
-  };
+  geography: CountryGeography;
+  indicators: CountryIndicators;
 
-  constructor(data: CountryData, borderNameMap: Map<string, string>, metrics: MetricsGroup) {
+  constructor(data: any, borderNameMap: Map<string, string>, metrics: any) {
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
@@ -79,11 +27,8 @@ export default class Country {
     this.capital = data.capital || [Country.#unknown];
     this.continent = data.continents || [Country.#unknown];
     this.flag = data.flags.svg || "";
-    this.money = Country.getCurrencyInfo(data);
+    this.money = getCurrencyInfo(data);
     this.language = Object.values(data.languages || {}) || [Country.#none];
-
-    const borderSymbols = data.borders || [];
-    const borderNames = borderSymbols.map((code) => borderNameMap.get(code) || code);
 
     this.geography = {
       timezone: data.timezones || [],
@@ -95,10 +40,7 @@ export default class Country {
         longitude: data.latlng[1] || 0,
         region: data.subregion || Country.#unknown,
       },
-      borders: {
-        symbols: borderSymbols,
-        names: borderNames,
-      },
+      borders: { ...getBorders(data, borderNameMap) },
     };
 
     this.indicators = {
@@ -133,6 +75,7 @@ export default class Country {
         totalLaborForce: metrics.totalLaborForce,
         unemploymentRate: metrics.unemploymentRate,
         giniIndex: metrics.giniIndex,
+        HDI: metrics.HDI,
       },
 
       environment: {

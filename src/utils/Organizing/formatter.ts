@@ -2,57 +2,7 @@ import Country from "../Country/Country";
 
 const numericalPrecision = 2;
 const unknown = "Unknown";
-
-export type FormatKey = (typeof formatOptions)[number]["key"];
-export const formatOptions = [
-  { text: "Name", key: "name" },
-  { text: "Capital", key: "capital" },
-  { text: "Continent", key: "continent" },
-  { text: "Area", key: "area" },
-  { text: "Population", key: "population" },
-  { text: "Population Density", key: "populationDensity" },
-  { text: "Language", key: "language" },
-  { text: "Latitude", key: "latitude" },
-  { text: "Longitude", key: "longitude" },
-  { text: "Currency", key: "currency" },
-  { text: "Timezone", key: "timezone" },
-  { text: "Borders", key: "borderNames" },
-
-  { text: "Internet Usage", key: "internetUsage" },
-  { text: "Electricity Access", key: "electricityAccess" },
-  { text: "Basic Water Service", key: "basicWaterService" },
-  { text: "Basic Sanitation Service", key: "basicSanitationService" },
-
-  { text: "Literacy Rate", key: "literacyRate" },
-
-  { text: "Life Expectancy", key: "lifeExpectancy" },
-  { text: "Infant Mortality", key: "infantMortality" },
-
-  { text: "Birth Rate", key: "birthRate" },
-  { text: "Population Growth Rate", key: "growthRate" },
-  { text: "Urban Population", key: "urbanPercent" },
-  { text: "Rural Population", key: "ruralPercent" },
-  { text: "Male Population", key: "malePercent" },
-  { text: "Female Population", key: "femalePercent" },
-  { text: "Elderly Population", key: "elderlyPercent" },
-
-  { text: "GDP", key: "gdp" },
-  { text: "GDP Per Capita", key: "gdpPerCapita" },
-  { text: "Inflation Rate", key: "inflationRate" },
-  { text: "Exports", key: "exports" },
-  { text: "Imports", key: "imports" },
-  { text: "Working Age Population", key: "workingAgePopulation" },
-  { text: "Total Labor Force", key: "totalLaborForce" },
-  { text: "Unemployment Rate", key: "unemploymentRate" },
-
-  { text: "Gini Index", key: "giniIndex" },
-  { text: "Homicide Rate", key: "homicideRate" },
-
-  { text: "Agricultural Land", key: "agriculturalLandPercent" },
-  { text: "Forest Area", key: "forestAreaPercent" },
-] as const;
-
-const FORMATTERS = {
+const formatters = {
   name: (country: Country) => {
     return `${country.name.informal}`;
   },
@@ -205,6 +155,10 @@ const FORMATTERS = {
     const value = country.indicators.economy.giniIndex;
     return value != null ? value[0].toFixed(2) : unknown;
   },
+  hdi: (country: Country) => {
+    const value = country.indicators.economy.HDI;
+    return value != null ? `${value[0].toFixed(3)}` : unknown;
+  },
 
   agriculturalLandPercent: (country: Country) => {
     const value = country.indicators.environment.agriculturalLandPercent;
@@ -216,7 +170,57 @@ const FORMATTERS = {
   },
 };
 
+export type FormatKey = (typeof formatOptions)[number]["key"];
+export const formatOptions = [
+  { text: "Name", key: "name" },
+  { text: "Capital", key: "capital" },
+  { text: "Continent", key: "continent" },
+  { text: "Area", key: "area" },
+  { text: "Population", key: "population" },
+  { text: "Population Density", key: "populationDensity" },
+  { text: "Language", key: "language" },
+  { text: "Latitude", key: "latitude" },
+  { text: "Longitude", key: "longitude" },
+  { text: "Currency", key: "currency" },
+  { text: "Timezone", key: "timezone" },
+  { text: "Borders", key: "borderNames" },
+
+  { text: "Internet Usage", key: "internetUsage" },
+  { text: "Electricity Access", key: "electricityAccess" },
+  { text: "Basic Water Service", key: "basicWaterService" },
+  { text: "Basic Sanitation Service", key: "basicSanitationService" },
+
+  { text: "Literacy Rate", key: "literacyRate" },
+
+  { text: "Life Expectancy", key: "lifeExpectancy" },
+  { text: "Infant Mortality", key: "infantMortality" },
+
+  { text: "Birth Rate", key: "birthRate" },
+  { text: "Population Growth Rate", key: "growthRate" },
+  { text: "Urban Population", key: "urbanPercent" },
+  { text: "Rural Population", key: "ruralPercent" },
+  { text: "Male Population", key: "malePercent" },
+  { text: "Female Population", key: "femalePercent" },
+  { text: "Elderly Population", key: "elderlyPercent" },
+
+  { text: "GDP", key: "gdp" },
+  { text: "GDP Per Capita", key: "gdpPerCapita" },
+  { text: "Inflation Rate", key: "inflationRate" },
+  { text: "Exports", key: "exports" },
+  { text: "Imports", key: "imports" },
+  { text: "Working Age Population", key: "workingAgePopulation" },
+  { text: "Total Labor Force", key: "totalLaborForce" },
+  { text: "Unemployment Rate", key: "unemploymentRate" },
+  { text: "HDI", key: "hdi" },
+
+  { text: "Gini Index", key: "giniIndex" },
+  { text: "Homicide Rate", key: "homicideRate" },
+
+  { text: "Agricultural Land", key: "agriculturalLandPercent" },
+  { text: "Forest Area", key: "forestAreaPercent" },
+] as const;
+
 export function formatCountryValue(country: Country, key: FormatKey): string {
-  const formatFunction = FORMATTERS[key];
+  const formatFunction = formatters[key];
   return formatFunction(country);
 }

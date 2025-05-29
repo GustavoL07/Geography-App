@@ -1,9 +1,9 @@
-import Country from "../Country/Country";
-import convertSymbolTo3 from "../Country/symbol";
-import getCountryData from "./getCountryData";
-import getCountryMetrics from "./getCountryMetrics";
+import Country from "../Country/Country.js";
+import convertSymbolTo3 from "../Country/symbol.js";
+import getCountryData from "./getCountryData.js";
+import getCountryMetrics from "./getCountryMetrics.js";
 
-export default async function getData(){
+export default async function getData() {
   try {
     const countryData = await getCountryData();
     const countryMetrics = await getCountryMetrics();

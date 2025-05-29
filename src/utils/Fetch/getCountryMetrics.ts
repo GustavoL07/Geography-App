@@ -1,3 +1,5 @@
+import addHDIToMap from "./getHDI";
+
 const INDICATORS = [
   /*TECHNOLOGY*/
   { id: "IT.NET.USER.ZS", key: "internetUsage" }, // Uso da internet (% população)
@@ -24,8 +26,8 @@ const INDICATORS = [
   { id: "NY.GDP.MKTP.CD", key: "gdp" }, // PIB (US$ atual)
   { id: "NY.GDP.PCAP.CD", key: "gdpPerCapita" }, // PIB per capita (US$ atual)
   { id: "FP.CPI.TOTL.ZG", key: "inflationRate" }, // Taxa de inflação (preços ao consumidor)
-  { id: "NE.EXP.GNFS.CD", key: "exports" }, // Exportações 
-  { id: "NE.IMP.GNFS.CD", key: "imports" }, // Importações 
+  { id: "NE.EXP.GNFS.CD", key: "exports" }, // Exportações
+  { id: "NE.IMP.GNFS.CD", key: "imports" }, // Importações
   { id: "SP.POP.1564.TO", key: "workingAgePopulation" }, // População absoluta entre 15 e 64 anos
   { id: "SL.TLF.TOTL.IN", key: "totalLaborForce" }, // Força de trabalho total (% da população em idade ativa)
   { id: "SL.UEM.TOTL.ZS", key: "unemploymentRate" }, // Taxa de desemprego (% da força de trabalho)
@@ -72,7 +74,11 @@ export default async function getCountryMetrics() {
         }
       }
     });
+
     await Promise.all(fetches);
+
+    addHDIToMap(metricsMap);
+
     return metricsMap;
   } catch (error) {
     console.log(error);

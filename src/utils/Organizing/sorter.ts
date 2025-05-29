@@ -1,7 +1,7 @@
 import Country from "../Country/Country";
 import { FormatKey } from "./formatter";
 
-export type SortKeys = (typeof SORTER)[number]["key"] | undefined | "";
+export type SortKeys = (typeof SORTER)[number]["key"] | "" | undefined;
 export const SORTER = [
   {
     key: "name-asc",
@@ -432,6 +432,19 @@ export const SORTER = [
     text: "Gini Index",
     formatOption: "giniIndex",
     function: sortFunction((country: Country) => country.indicators.economy.giniIndex?.[0], "desc"),
+  },
+
+  {
+    key: "HDI-asc",
+    text: "HDI",
+    formatOption: "hdi",
+    function: sortFunction((country: Country) => country.indicators.economy.HDI?.[0]),
+  },
+  {
+    key: "HDI-desc",
+    text: "HDI",
+    formatOption: "hdi",
+    function: sortFunction((country: Country) => country.indicators.economy.HDI?.[0], "desc"),
   },
 
   {
