@@ -342,7 +342,7 @@ export const SORTER = [
     key: "inflationRate-desc",
     text: "Inflation Rate",
     formatOption: "inflationRate",
-    function: sortFunction((country: Country) => country.indicators.economy.exports?.[0], "desc"),
+    function: sortFunction((country: Country) => country.indicators.economy.inflationRate?.[0], "desc"),
   },
 
   {
