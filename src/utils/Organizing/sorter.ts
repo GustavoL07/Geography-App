@@ -513,9 +513,9 @@ function sortFunction(path: any, order = "asc") {
     const aValue = path(a);
     const bValue = path(b);
 
-    if (aValue === null && bValue === null) return 0;
-    if (aValue === null) return 1;
-    if (bValue === null) return -1;
+    if (aValue === undefined && bValue === undefined) return 0;
+    if (aValue === undefined) return 1;
+    if (bValue === undefined) return -1;
 
     return order === "asc" ? aValue - bValue : bValue - aValue;
   };
