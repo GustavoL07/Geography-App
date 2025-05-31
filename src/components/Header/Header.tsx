@@ -22,7 +22,13 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
       <img src="public/earth-globe.png" alt="" />
       <p>{title}</p>
       <div className="opt-btns">
-        <Button icon={mapIcon} />
+        <Button
+          icon={mapIcon}
+          onClick={() => {
+            setDisplayMode("worldMap");
+            setSelectedCountry(null);
+          }}
+        />
 
         <Button
           icon={introIcon}

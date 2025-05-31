@@ -5,7 +5,7 @@ interface Props {
   title: string;
   isOpen: boolean;
   onClose: () => void;
-  children: any;
+  children?: any;
 }
 export default function Dialog({ title, isOpen, onClose, children }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);

@@ -4,7 +4,7 @@ import useSearchFilter from "../Hooks/useSearchFilter";
 import Country from "../../utils/Country/Country";
 import { SortKeys } from "../../utils/Organizing/sorter";
 
-type DisplayKey = "intro" | "full" | "map";
+type DisplayKey = "intro" | "full" | "worldMap";
 
 type CountryContextType = {
   countryList: Country[];

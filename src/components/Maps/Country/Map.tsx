@@ -2,13 +2,13 @@ import "./Map.css";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useCountryContext } from "../Contexts/CountryContext";
+import { useCountryContext } from "../../Contexts/CountryContext";
 import FlyToCountry from "./FlyMap";
 import L from "leaflet";
 
 export default function Map() {
   const { selectedCountry } = useCountryContext();
-  const markerRef = useRef<L.Marker>(null)
+  const markerRef = useRef<L.Marker>(null);
 
   if (!selectedCountry) return null;
 
@@ -16,11 +16,11 @@ export default function Map() {
 
   useEffect(() => {
     setTimeout(() => {
-      if (markerRef.current){
-      markerRef.current.openPopup();
-    }
+      if (markerRef.current) {
+        markerRef.current.openPopup();
+      }
     }, 1500);
-  }, [selectedCountry])
+  }, [selectedCountry]);
 
   return (
     <div className="map-container">
@@ -42,7 +42,7 @@ export default function Map() {
         />
 
         <Marker position={[latitude, longitude]} ref={markerRef}>
-          <Popup >
+          <Popup>
             <b>{selectedCountry.name.informal}</b>
             <br />
             {selectedCountry.getFormatted("continent")}

@@ -1,6 +1,6 @@
 import "./Main.css";
 import FullCountry from "../Info/Full Info/FullCountryInfo.js";
-import Map from "../../Maps/Map.js";
+import WorldMap from "../../Maps/World/WorldMap";
 import Intro from "../../Intro/Intro.js";
 import Header from "../../Header/Header.js";
 import { useCountryContext } from "../../Contexts/CountryContext.js";
@@ -22,8 +22,8 @@ export default function Main({ isSidebarOpen }: Props) {
             case "intro":
               return <Intro />;
 
-            case "map":
-              return <Map />;
+            case "worldMap":
+              return <WorldMap />;
 
             case "full":
               return (
