@@ -1,15 +1,15 @@
-.intro{
+.intro {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.app-title{
+.app-title {
   font-size: clamp(0.5rem, 8vw, 4rem);
   font-weight: 750;
 }
 
-.app-image{
+.app-image {
   width: clamp(3rem, 20vw, 16rem);
   height: clamp(3rem, 20vw, 16rem);
   aspect-ratio: 1 / 1;
@@ -17,8 +17,12 @@
   padding: 5px;
 }
 
-.app-desc{
+.intro section {
+  padding: 0 calc(var(--radius) * 5);
+}
+
+.app-desc {
   font-size: clamp(0.5rem, 3vw, 1.5rem);
   font-weight: 600;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.4rem;
 }

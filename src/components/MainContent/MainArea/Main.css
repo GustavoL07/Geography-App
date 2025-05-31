@@ -7,3 +7,9 @@
 .main-content.closed{
   margin-left: calc(var(--sidebar-closed));
 }
+
+.display-area{
+  position: relative;
+  margin-top: 50px;
+  padding-top: var(--radius);
+}

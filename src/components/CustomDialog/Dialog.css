@@ -14,10 +14,10 @@ dialog {
   border-radius: var(--radius);
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-  animation: dialog-fade-in 0.5s;
+  animation: dialog-fade-in 0.8s;
 }
 
-dialog p{
+dialog p {
   font-size: 1.5rem;
   font-weight: 800;
   text-align: left;
@@ -38,22 +38,6 @@ dialog .btn-wrapper {
   justify-content: end;
 }
 
-dialog button {
-  width: 2rem;
-  height: 2rem;
-  padding: 3px;
-
-  border: none;
-  border-radius: var(--radius);
-  background: none;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.05s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
 dialog button i {
   transform: scale(1.75);
   transition: color 0.3s ease-in-out;
@@ -72,11 +56,15 @@ dialog button:active {
 
 /* Animação de entrada */
 @keyframes dialog-fade-in {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(5vh);
+    transform: translateY(8vh);
   }
-  to {
+  50% {
+    opacity: 0.85;
+    transform: translateY(-8vh);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }

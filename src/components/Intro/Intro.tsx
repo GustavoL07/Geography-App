@@ -4,11 +4,7 @@ export default function Intro({}) {
   return (
     <div className="intro">
       <p className="app-title">Geography App</p>
-      <img
-        className="app-image"
-        src="/earth-globe.png"
-        alt="Earth Globe"
-      />
+      <img className="app-image" src="/earth-globe.png" alt="Earth Globe" />
       <section>
         <p className="app-desc">
           Open the sidebar and search for any country you would like to know more about!

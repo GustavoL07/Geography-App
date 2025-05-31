@@ -4,7 +4,7 @@ import { formatOptions } from "../../../../utils/Organizing/formatter.js";
 import CountryOverview from "../Overview/CountryOverview.js";
 import InfoBox from "../InfoBox/InfoBox.js";
 
-export default function FullCountryInfo({}) {
+export default function FullCountry({}) {
   const { selectedCountry } = useCountryContext();
   if (!selectedCountry) return null;
 

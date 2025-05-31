@@ -4,17 +4,18 @@ import { useCountryContext } from "../../Contexts/CountryContext";
 import "./Card.css";
 
 interface Card {
-  isOpen: boolean,
-  country: Country
+  isOpen: boolean;
+  country: Country;
 }
 
 export default function Card({ isOpen, country }: Card) {
   if (!country) return null;
-  const { selectedCountry, setSelectedCountry, sortValue } = useCountryContext();
+  const { selectedCountry, setSelectedCountry, sortValue, setDisplayMode } = useCountryContext();
   const isSelected = country === selectedCountry;
 
   const handleClick = () => {
     setSelectedCountry(country);
+    setDisplayMode("full");
   };
 
   function getDescription() {
