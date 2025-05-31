@@ -1,79 +1,56 @@
-import { useEffect, useRef } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import "./Map.css";
+import "leaflet/dist/leaflet.css";
+import { useEffect, useRef } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useCountryContext } from "../Contexts/CountryContext";
+import FlyToCountry from "./FlyMap";
+import L from "leaflet";
 
-export default function Map({}) {
+export default function Map() {
   const { selectedCountry } = useCountryContext();
+  const markerRef = useRef<L.Marker>(null)
+
   if (!selectedCountry) return null;
 
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<L.Map>(null);
-  const markerRef = useRef<L.Marker>(null);
-
-  const zoom = 3;
-  const mapOptions: L.MapOptions = {
-    minZoom: 2,
-    maxZoom: 5.5,
-    inertia: true,
-    zoomControl: true,
-    boxZoom: true,
-    dragging: true,
-    scrollWheelZoom: true,
-    doubleClickZoom: true,
-    keyboard: false,
-    touchZoom: true,
-    maxBounds: [
-      [-90, -225],
-      [90, 225],
-    ],
-    maxBoundsViscosity: 1,
-  };
+  const { latitude, longitude } = selectedCountry.geography.position;
 
   useEffect(() => {
-    const { latitude, longitude } = selectedCountry.geography.position;
-
-    if (!mapInstanceRef.current && mapContainerRef.current) {
-      mapInstanceRef.current = L.map(mapContainerRef.current, mapOptions).setView(
-        [latitude, longitude],
-        zoom
-      );
-
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
-        attribution: "&copy; OpenStreetMap &copy; CartoDB",
-      }).addTo(mapInstanceRef.current);
+    setTimeout(() => {
+      if (markerRef.current){
+      markerRef.current.openPopup();
     }
-
-    if (mapInstanceRef.current) {
-      mapInstanceRef.current.panTo([latitude, longitude]);
-
-      if (markerRef.current) {
-        markerRef.current.remove();
-      }
-
-      markerRef.current = L.marker([latitude, longitude])
-        .addTo(mapInstanceRef.current)
-        .bindPopup(
-          `<b>${selectedCountry.name.informal}</b><br>${selectedCountry.getFormatted("continent")}`
-        );
-
-      setTimeout(() => {
-
-        if (mapInstanceRef.current) {
-          mapInstanceRef.current.invalidateSize();
-          mapInstanceRef.current.setZoom(zoom);
-        }
-        if (markerRef.current) {
-          markerRef.current.openPopup();
-        }
-      }, 450);
-    }
-  }, [selectedCountry]);
+    }, 1500);
+  }, [selectedCountry])
 
   return (
     <div className="map-container">
-      <div className="map" ref={mapContainerRef} />
+      <MapContainer
+        center={[latitude, longitude]}
+        zoom={3}
+        minZoom={2}
+        maxZoom={5.5}
+        scrollWheelZoom={true}
+        maxBounds={[
+          [-90, -225],
+          [90, 225],
+        ]}
+        maxBoundsViscosity={1}
+      >
+        <TileLayer
+          attribution="&copy; OpenStreetMap &copy; CartoDB"
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        />
+
+        <Marker position={[latitude, longitude]} ref={markerRef}>
+          <Popup >
+            <b>{selectedCountry.name.informal}</b>
+            <br />
+            {selectedCountry.getFormatted("continent")}
+          </Popup>
+        </Marker>
+
+        <FlyToCountry lat={latitude} lng={longitude} />
+      </MapContainer>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useCountryContext } from "../../../Contexts/CountryContext.js";
 import { formatOptions } from "../../../../utils/Organizing/formatter.js";
 import CountryOverview from "../Overview/CountryOverview.js";
 import InfoBox from "../InfoBox/InfoBox.js";
+import Map from "../../../Maps/Map";
 
 export default function FullCountry({}) {
   const { selectedCountry } = useCountryContext();
@@ -25,6 +26,8 @@ export default function FullCountry({}) {
           );
         })}
       </section>
+
+      <Map />
     </div>
   );
 }

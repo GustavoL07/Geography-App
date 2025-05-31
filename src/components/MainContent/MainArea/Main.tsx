@@ -29,7 +29,6 @@ export default function Main({ isSidebarOpen }: Props) {
               return (
                 <>
                   <FullCountry />
-                  <Map></Map>
                 </>
               );
 

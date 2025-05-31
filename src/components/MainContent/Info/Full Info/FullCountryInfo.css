@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: var(--main-margin);
+  padding-bottom: calc(var(--main-margin)*2);
   gap: 1rem;
 }
 
