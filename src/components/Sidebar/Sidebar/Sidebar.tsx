@@ -12,6 +12,7 @@ interface Sidebar {
   isOpen: boolean;
   toggleSidebar: () => void;
 }
+
 export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
   const { searchValue, filteredCountries } = useCountryContext();
   return (

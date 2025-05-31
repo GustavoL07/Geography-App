@@ -4,6 +4,8 @@ import useSearchFilter from "../Hooks/useSearchFilter";
 import Country from "../../utils/Country/Country";
 import { SortKeys } from "../../utils/Organizing/sorter";
 
+type DisplayKey = "intro" | "full" | "map";
+
 type CountryContextType = {
   countryList: Country[];
   filteredCountries: Country[];
@@ -15,6 +17,9 @@ type CountryContextType = {
   setSortValue: (value: SortKeys) => void;
   filterBy: string[];
   setFilterBy: (filters: string[]) => void;
+
+  displayMode: DisplayKey;
+  setDisplayMode: (newMode: DisplayKey) => void;
 };
 
 const CountryContext = createContext<CountryContextType>({
@@ -24,10 +29,13 @@ const CountryContext = createContext<CountryContextType>({
   setSelectedCountry: () => {},
   searchValue: "",
   setSearchValue: () => {},
-  sortValue: "", 
+  sortValue: "",
   setSortValue: () => {},
   filterBy: [],
   setFilterBy: () => {},
+
+  displayMode: "intro",
+  setDisplayMode: () => {},
 });
 
 export function CountryProvider({ children }: any) {
@@ -36,6 +44,7 @@ export function CountryProvider({ children }: any) {
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState<SortKeys>();
   const [filterBy, setFilterBy] = useState<string[]>([]);
+  const [displayMode, setDisplayMode] = useState<DisplayKey>("intro");
 
   useEffect(() => {
     async function fetchData() {
@@ -61,6 +70,8 @@ export function CountryProvider({ children }: any) {
         setSortValue,
         filterBy,
         setFilterBy,
+        displayMode,
+        setDisplayMode,
       }}
     >
       {children}

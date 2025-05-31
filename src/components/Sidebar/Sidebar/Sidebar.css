@@ -1,4 +1,5 @@
 .sidebar {
+  z-index: 3;
   width: var(--sidebar-open); /* OPEN WIDTH */
   height: 100%;
   position: fixed;

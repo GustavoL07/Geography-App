@@ -5,8 +5,6 @@ export default function Intro({}) {
     <div className="intro">
       <p className="app-title">Geography App</p>
       <img
-        width={300}
-        height={300}
         className="app-image"
         src="/earth-globe.png"
         alt="Earth Globe"
