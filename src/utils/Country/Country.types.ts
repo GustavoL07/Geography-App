@@ -1,4 +1,13 @@
 export type MetricsGroup = [number, number] | undefined;
+export type Continents =
+  | "Africa"
+  | "Asia"
+  | "Europe"
+  | "North America"
+  | "South America"
+  | "Oceania"
+  | "Antarctica";
+
 
 export interface CountryName {
   formal: string;

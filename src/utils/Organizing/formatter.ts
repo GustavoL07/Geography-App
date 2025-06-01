@@ -40,10 +40,7 @@ const formatters = {
     const orderedBorders = borders.sort((a, b) => a.localeCompare(b));
     return orderedBorders.length > 0 ? orderedBorders.join(", ") : "None";
   },
-  continent: (country: Country) =>
-    country.getContinentsQuantity() === 1
-      ? `${country.continent[0]}`
-      : country.continent.join(", "),
+  continent: (country: Country) => `${country.continent}`,
 
   internetUsage: (country: Country) => {
     const value = country.indicators.technology.internetUsage;

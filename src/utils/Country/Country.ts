@@ -1,7 +1,7 @@
 import { FormatKey, formatCountryValue } from "../Organizing/formatter";
 import threeDigit from "./symbol";
 import getCurrencyInfo from "./currency";
-import { CountryGeography, CountryIndicators, CountryMoney, CountryName, MetricsGroup } from "./Country.types";
+import { Continents, CountryGeography, CountryIndicators, CountryMoney, CountryName, MetricsGroup } from "./Country.types";
 import getBorders from "./borders";
 
 export default class Country {
@@ -10,7 +10,7 @@ export default class Country {
 
   name: CountryName;
   capital: string[];
-  continent: string[];
+  continent: Continents;
   flag: string;
   money: CountryMoney;
   language: string[];
@@ -25,7 +25,7 @@ export default class Country {
     };
 
     this.capital = data.capital || [Country.#unknown];
-    this.continent = data.continents || [Country.#unknown];
+    this.continent = data.continents[0] || [Country.#unknown];
     this.flag = data.flags.svg || "";
     this.money = getCurrencyInfo(data);
     this.language = Object.values(data.languages || {}) || [Country.#none];
@@ -103,9 +103,5 @@ export default class Country {
 
   getTimezonesQuantity() {
     return this.geography.timezone.length;
-  }
-
-  getContinentsQuantity() {
-    return this.continent.length;
   }
 }
