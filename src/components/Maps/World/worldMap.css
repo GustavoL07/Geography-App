@@ -6,7 +6,7 @@
   gap: var(--radius);
   padding-bottom: 1rem;
 }
-.worldmap-container p {
+.worldmap-container .map-title{
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 750;
 }
