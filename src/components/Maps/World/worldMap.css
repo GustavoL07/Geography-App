@@ -27,3 +27,8 @@
   border-radius: calc(var(--radius) * 1.5);
   box-shadow: var(--shadow-default);
 }
+
+.leaflet-interactive {
+  transition: fill-opacity 0.5s ease-in-out;
+}
+
