@@ -10,10 +10,11 @@ import { createRoot } from "react-dom/client";
 import Popup from "./Popup/Popup";
 import { style } from "../../../utils/World-Map/helpers";
 import { CountryContext } from "../../Contexts/CountryContext";
+import { memo } from "react";
 
 const geoData = rawData as GeoJsonObject;
 
-function handleClick(layer: L.Path, countryList: CountryContext["countryList"], isoCode: string) {
+function handleClick(layer: L.Path, countryList: CountryContext["countryList"], isoCode: string, setSearchValue: CountryContext["setSearchValue"]) {
   layer.on("click", () => {
     const clickedCountry = isoToCountry(countryList, isoCode);
     if (!clickedCountry) return;
@@ -23,15 +24,18 @@ function handleClick(layer: L.Path, countryList: CountryContext["countryList"], 
     root.render(<Popup country={clickedCountry} />);
 
     layer.bindPopup(popupContainer).openPopup();
+
+    setSearchValue(clickedCountry.getFormatted("name"));
   });
 }
 
 type Props = {
+  list: CountryContext["countryList"];
+  setSearchValue: CountryContext["setSearchValue"]
   title?: string;
 };
-export default function WorldMap({ title = "The World Map" }: Props) {
-  const { countryList } = useCountryContext();
 
+function WorldMap({ list, setSearchValue, title = "The World Map" }: Props) {
   const tileUrl =
     "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png";
 
@@ -46,7 +50,7 @@ export default function WorldMap({ title = "The World Map" }: Props) {
     const isoCode = feature.properties?.iso_a3;
     const continent = feature.properties?.continent;
 
-    handleClick(layer, countryList, isoCode);
+    handleClick(layer, list, isoCode, setSearchValue);
     style(layer, continent);
   }
 
@@ -72,3 +76,5 @@ export default function WorldMap({ title = "The World Map" }: Props) {
     </div>
   );
 }
+
+export default memo(WorldMap);

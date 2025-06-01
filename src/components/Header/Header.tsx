@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function Header({ isSidebarOpen, title = "Geography App" }: Props) {
-  const { setDisplayMode, setSelectedCountry } = useCountryContext();
+  const { setDisplayMode, setSelectedCountry, setSearchValue } = useCountryContext();
   const [dialogToggle, setDialogToggle] = useState(false);
 
   const mapIcon = <i className="fa-solid fa-map-location-dot"></i>;
@@ -27,6 +27,7 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
           onClick={() => {
             setDisplayMode("worldMap");
             setSelectedCountry(null);
+            setSearchValue("");
           }}
         />
 

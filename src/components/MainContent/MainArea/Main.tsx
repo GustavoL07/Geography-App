@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Main({ isSidebarOpen }: Props) {
-  const { displayMode } = useCountryContext();
+  const { countryList, displayMode, setSearchValue } = useCountryContext();
 
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
@@ -23,7 +23,7 @@ export default function Main({ isSidebarOpen }: Props) {
               return <Intro />;
 
             case "worldMap":
-              return <WorldMap />;
+              return <WorldMap list={countryList} setSearchValue={setSearchValue}/>;
 
             case "full":
               return (
