@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { getSorted, SortKeys } from "../../utils/Organizing/sorter";
-import Country from "../../utils/Country/Country";
+import { CountryContext } from "../Contexts/CountryContext";
 
-export default function useSearchFilter(countryList: Country[], searchValue: string, sortValue: SortKeys, filterBy: string[] = []) {
+export default function useSearchFilter(countryList: CountryContext["countryList"], searchValue: string, sortValue: SortKeys, filterBy: string[] = []) {
   return useMemo(() => {
     const lowerSearch = (searchValue || "").toLowerCase();
     let filtered = countryList.filter((country) => {

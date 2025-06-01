@@ -6,20 +6,19 @@ import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import { PathOptions } from "leaflet";
 import { useCountryContext } from "../../Contexts/CountryContext";
 import isoToCountry from "../../../utils/Country/isoCountry";
-import Country from "../../../utils/Country/Country";
 import { createRoot } from "react-dom/client";
 import Popup from "./Popup/Popup";
 import { style } from "../../../utils/World-Map/helpers";
+import { CountryContext } from "../../Contexts/CountryContext";
+
 const geoData = rawData as GeoJsonObject;
 
-function handleClick(layer: L.Path, countryList: Country[], isoCode: string) {
+function handleClick(layer: L.Path, countryList: CountryContext["countryList"], isoCode: string) {
   layer.on("click", () => {
     const clickedCountry = isoToCountry(countryList, isoCode);
-
     if (!clickedCountry) return;
 
     const popupContainer = document.createElement("div");
-
     const root = createRoot(popupContainer);
     root.render(<Popup country={clickedCountry} />);
 
@@ -32,22 +31,23 @@ type Props = {
 };
 export default function WorldMap({ title = "The World Map" }: Props) {
   const { countryList } = useCountryContext();
-  const tileUrl = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png";
+
+  const tileUrl =
+    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png";
 
   const basicStyle: PathOptions = {
-  color: "transparent",
-  weight: 0,
-  fillColor: "transparent",
-  fillOpacity: 0,
-};
+    color: "transparent",
+    weight: 0,
+    fillColor: "transparent",
+    fillOpacity: 0,
+  };
 
   function onEachCountry(feature: Feature, layer: L.Path) {
     const isoCode = feature.properties?.iso_a3;
     const continent = feature.properties?.continent;
 
-    style(layer, continent);
-
     handleClick(layer, countryList, isoCode);
+    style(layer, continent);
   }
 
   return (

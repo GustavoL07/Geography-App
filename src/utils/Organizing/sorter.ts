@@ -1,3 +1,4 @@
+import { CountryContext } from "../../components/Contexts/CountryContext";
 import Country from "../Country/Country";
 import { FormatKey } from "./formatter";
 
@@ -503,7 +504,7 @@ export function getFormatOption(key: SortKeys): FormatKey {
   return option?.formatOption !== undefined ? option.formatOption : "capital";
 }
 
-export function getSorted(list: Country[], key: SortKeys) {
+export function getSorted(list: CountryContext["countryList"], key: SortKeys) {
   const sortFunction = getSortFunction(key);
   return [...list].sort(sortFunction);
 }
