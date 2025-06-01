@@ -21,8 +21,10 @@ const basicStyle: PathOptions = {
 
 function onEachCountry(feature: Feature, layer: L.Path) {
   const isoCode = feature.properties?.iso_a3;
+  
   const countryName = feature.properties?.name;
   const continent = feature.properties?.continent;
+  console.log(countryName, isoCode);
 
   style(layer, continent);
 
