@@ -1,0 +1,13 @@
+.option-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.option-wrapper .title{
+  font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.option{
+  display: flex;
+  gap: var(--radius);
+}

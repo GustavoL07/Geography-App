@@ -2,19 +2,26 @@ import { useMemo } from "react";
 import { getSorted, SortKeys } from "../../utils/Organizing/sorter";
 import { CountryContext } from "../Contexts/CountryContext";
 
-export default function useSearchFilter(countryList: CountryContext["countryList"], searchValue: string, sortValue: SortKeys, filterBy: string[] = []) {
+export default function useSearchFilter(
+  countryList: CountryContext["countryList"],
+  searchValue: CountryContext["searchValue"],
+  sortValue: SortKeys,
+  filterBy: CountryContext["filterBy"]
+) {
   return useMemo(() => {
-    const lowerSearch = (searchValue || "").toLowerCase();
+    const lowerSearch = searchValue.toLowerCase();
     let filtered = countryList.filter((country) => {
       const checked = [];
+      checked.push(country.getFormatted("name").toLowerCase().includes(lowerSearch)); // Search by name is always done
 
-      checked.push(country.name.informal.toLowerCase().includes(lowerSearch));
-
+      if (filterBy.includes("continent")) {
+        checked.push(country.getFormatted("continent").toLowerCase().includes(lowerSearch));
+      }
       if (filterBy.includes("capital")) {
         checked.push(country.getFormatted("capital").toLowerCase().includes(lowerSearch));
       }
-      if (filterBy.includes("continent")) {
-        checked.push(country.getFormatted("continent").toLowerCase().includes(lowerSearch));
+      if (filterBy.includes("iso3")) {
+        checked.push(country.name.symbol.toLowerCase().includes(lowerSearch));
       }
 
       return checked.some(Boolean);

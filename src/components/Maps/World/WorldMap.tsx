@@ -4,7 +4,6 @@ import rawData from "../../../data/world.json";
 import { Feature, GeoJsonObject } from "geojson";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import { PathOptions } from "leaflet";
-import { useCountryContext } from "../../Contexts/CountryContext";
 import isoToCountry from "../../../utils/Country/isoCountry";
 import { createRoot } from "react-dom/client";
 import Popup from "./Popup/Popup";

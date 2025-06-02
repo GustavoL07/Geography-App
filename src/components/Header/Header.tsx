@@ -1,6 +1,7 @@
 import "./Header.css";
 import Button from "../CustomButton/Button";
 import Dialog from "../CustomDialog/Dialog";
+import SettingsOptions from "../CustomDialog/SettingsDialog/SettingsOptions.js"
 import { useCountryContext } from "../Contexts/CountryContext";
 import { useState } from "react";
 
@@ -19,7 +20,7 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
 
   return (
     <div className={`header-container ${isSidebarOpen ? "closed" : ""}`}>
-      <img src="public/earth-globe.png" alt="" />
+      <img src="/earth-globe.png" alt="" />
       <p>{title}</p>
       <div className="opt-btns">
         <Button
@@ -51,7 +52,9 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
           onClose={() => {
             setDialogToggle(false);
           }}
-        ></Dialog>
+        >
+          <SettingsOptions />
+        </Dialog>
       </div>
     </div>
   );
