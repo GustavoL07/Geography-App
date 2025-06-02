@@ -35,7 +35,7 @@ export default function Dialog({ title, isOpen, onClose, children }: Props) {
       <div className="btn-wrapper">
         <p>{title}</p>
         <button onClick={handleClose}>
-          <i className="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-xmark close-icon"></i>
         </button>
       </div>
       {children}

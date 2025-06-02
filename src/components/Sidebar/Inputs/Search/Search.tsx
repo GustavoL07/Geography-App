@@ -1,5 +1,6 @@
-import { useCountryContext } from "../../../Contexts/CountryContext";
 import "./Search.css";
+import { useCountryContext } from "../../../Contexts/CountryContext";
+import Button from "../../../CustomButton/Button";
 
 interface Props {
   isOpen: boolean;
@@ -16,6 +17,14 @@ export default function Search({ isOpen }: Props) {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
+      {isOpen && (
+        <Button
+          icon={<i className="fa-solid fa-xmark close-icon"></i>}
+          onClick={() => {
+            setSearchValue("");
+          }}
+        />
+      )}
     </div>
   );
 }

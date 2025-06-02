@@ -2,6 +2,7 @@ import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
 import { useCountryContext } from "../../../Contexts/CountryContext.js";
 import { SORTER, SortKeys } from "../../../../utils/Organizing/sorter.js";
+import Button from "../../../CustomButton/Button";
 
 const icons = {
   AZ: <i className="fa-solid fa-arrow-down-short-wide"></i>,
@@ -32,7 +33,11 @@ export default function Sort({ isOpen }: Props) {
     };
   }, []);
 
-  function handleOptionClicks(sortValue: SortKeys, sortText: string, selectedSortOption: number | null) {
+  function handleOptionClicks(
+    sortValue: SortKeys,
+    sortText: string,
+    selectedSortOption: number | null
+  ) {
     setSortValue(sortValue);
     setOpenSort(false);
     setSortText(sortText);
@@ -53,6 +58,14 @@ export default function Sort({ isOpen }: Props) {
         <i className="fa-solid fa-sort sort-icon"></i>
         <p>{sortText}</p>
       </div>
+      {isOpen && (
+        <Button
+          icon={<i className="fa-solid fa-xmark close-icon"></i>}
+          onClick={() => {
+            handleOptionClicks("", "Sort...", null);
+          }}
+        />
+      )}
 
       <div className="sort-wrapper">
         {openSort && isOpen && (

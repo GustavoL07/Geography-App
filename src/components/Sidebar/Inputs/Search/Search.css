@@ -1,7 +1,7 @@
 .search-wrapper {
   display: flex;
   align-items: center;
-  width: calc(100% - var(--radius)*6);
+  width: calc(100% - var(--radius) * 6);
 
   padding: var(--radius);
 
@@ -14,7 +14,7 @@
   box-shadow: var(--shadow-default);
   border-color: var(--active-color);
 }
-.search-wrapper:focus-within .search-icon{
+.search-wrapper:focus-within .search-icon {
   color: var(--active-color);
   transform: rotateY(180deg);
 }
@@ -29,7 +29,6 @@
 
 .search-icon {
   padding: 0 var(--radius);
-
   transition: color 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 .search-icon.closed {
@@ -37,7 +36,7 @@
 }
 
 .search-input {
-  width: 100%;
+  width: 70%;
   border: none;
   outline: none;
   font-size: 0.95rem;

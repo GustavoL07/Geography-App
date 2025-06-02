@@ -43,10 +43,6 @@ dialog button i {
   transition: color 0.3s ease-in-out;
 }
 
-dialog button:hover {
-  box-shadow: var(--shadow-default);
-  color: var(--active-color);
-}
 dialog button:hover i {
   color: red;
 }
