@@ -9,6 +9,8 @@ export default function useSearchFilter(
   filterBy: CountryContext["filterBy"]
 ) {
   return useMemo(() => {
+    if (countryList === undefined) return;
+
     const lowerSearch = searchValue.toLowerCase();
     let filtered = countryList.filter((country) => {
       const checked = [];

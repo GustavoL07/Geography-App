@@ -1,7 +1,7 @@
 import "./Header.css";
 import Button from "../CustomButton/Button";
 import Dialog from "../CustomDialog/Dialog";
-import SettingsOptions from "../CustomDialog/SettingsDialog/SettingsOptions.js"
+import SettingsOptions from "../CustomDialog/SettingsDialog/SettingsOptions.js";
 import { useCountryContext } from "../Contexts/CountryContext";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function Header({ isSidebarOpen, title = "Geography App" }: Props) {
-  const { setDisplayMode, setSelectedCountry, setSearchValue } = useCountryContext();
+  const { setDisplayMode, setSelectedCountry, setSearchValue, countryList } = useCountryContext();
   const [dialogToggle, setDialogToggle] = useState(false);
 
   const mapIcon = <i className="fa-solid fa-map-location-dot"></i>;
@@ -23,14 +23,16 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
       <img src="/earth-globe.png" alt="" />
       <p>{title}</p>
       <div className="opt-btns">
-        <Button
-          icon={mapIcon}
-          onClick={() => {
-            setDisplayMode("worldMap");
-            setSelectedCountry(null);
-            setSearchValue("");
-          }}
-        />
+        {countryList && (
+          <Button
+            icon={mapIcon}
+            onClick={() => {
+              setDisplayMode("worldMap");
+              setSelectedCountry(null);
+              setSearchValue("");
+            }}
+          />
+        )}
 
         <Button
           icon={introIcon}

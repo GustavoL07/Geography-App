@@ -8,8 +8,8 @@ type DisplayKey = "intro" | "full" | "worldMap";
 export type FilterKey = "continent" | "name" | "iso3" | "capital";
 
 export type CountryContext = {
-  countryList: Country[];
-  filteredCountries: Country[];
+  countryList: Country[] | undefined;
+  filteredCountries: Country[] | undefined;
   selectedCountry: Country | null;
   setSelectedCountry: (country: Country | null) => void;
   searchValue: string;
@@ -40,7 +40,7 @@ const CountryContext = createContext<CountryContext>({
 });
 
 export function CountryProvider({ children }: any) {
-  const [countryList, setCountryList] = useState<CountryContext["countryList"]>([]);
+  const [countryList, setCountryList] = useState<CountryContext["countryList"]>(undefined);
   const [selectedCountry, setSelectedCountry] = useState<CountryContext["selectedCountry"]>(null);
   const [searchValue, setSearchValue] = useState("");
   const [sortValue, setSortValue] = useState<SortKeys>();
