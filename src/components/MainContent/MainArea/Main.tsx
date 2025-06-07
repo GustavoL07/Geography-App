@@ -4,13 +4,19 @@ import WorldMap from "../../Maps/World/WorldMap";
 import Intro from "../../Intro/Intro.js";
 import Header from "../../Header/Header.js";
 import { useCountryContext } from "../../Contexts/CountryContext.js";
+import Country from "../../../utils/Country/Country";
 
 interface Props {
   isSidebarOpen: boolean;
 }
 
 export default function Main({ isSidebarOpen }: Props) {
-  const { countryList, displayMode, setSearchValue } = useCountryContext();
+  const { countryList, displayMode, setSelectedCountry, setDisplayMode } = useCountryContext();
+
+  function handleMapClick(c: Country) {
+    setSelectedCountry(c);
+    setDisplayMode("full");
+  }
 
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
@@ -23,7 +29,7 @@ export default function Main({ isSidebarOpen }: Props) {
               return <Intro />;
 
             case "worldMap":
-              return <WorldMap list={countryList} setSearchValue={setSearchValue}/>;
+              return <WorldMap list={countryList} onPopupClick={handleMapClick} />;
 
             case "full":
               return (
