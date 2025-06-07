@@ -39,8 +39,6 @@ type Props = {
 };
 
 function WorldMap({ list, title = "The World Map", onPopupClick }: Props) {
-  console.log("AAA");
-
   const tileUrl =
     "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png";
 

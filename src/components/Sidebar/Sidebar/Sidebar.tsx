@@ -4,7 +4,7 @@ import Card from "../Card/Card.js";
 import Search from "../Inputs/Search/Search.js";
 import Sort from "../Inputs/Sort/Sort.js";
 import Results from "../Results/Results.js";
-import { useCountryContext } from "../../Contexts/CountryContext.js";
+import { useSettingsContext } from "../../Contexts/SettingsContext";
 
 interface Sidebar {
   isOpen: boolean;
@@ -12,7 +12,7 @@ interface Sidebar {
 }
 
 export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
-  const { searchValue, filteredCountries } = useCountryContext();
+  const { filteredList } = useSettingsContext();
   const sidebarIcon = <i className="fa-solid fa-bars"></i>;
 
   return (
@@ -28,12 +28,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
         </div>
         <Search isOpen={isOpen} />
         <Sort isOpen={isOpen} />
-        {searchValue && isOpen && <Results value={filteredCountries?.length} />}
       </div>
 
-      {filteredCountries && (
+      {filteredList && (
         <ul>
-          {filteredCountries.map((country, index) => {
+          {filteredList.map((country, index) => {
             return (
               <li key={index}>
                 <Card isOpen={isOpen} country={country} />
@@ -42,6 +41,8 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
           })}
         </ul>
       )}
+
+      {isOpen && <Results value={filteredList?.length} />}
     </aside>
   );
 }

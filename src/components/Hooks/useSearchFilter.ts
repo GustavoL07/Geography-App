@@ -1,16 +1,15 @@
 import { useMemo } from "react";
 import { getSorted, SortKeys } from "../../utils/Organizing/sorter";
-import { CountryContext } from "../Contexts/CountryContext";
+import { CountryList } from "../../utils/Country/Country";
+import { SettingsContext } from "../Contexts/SettingsContext";
 
 export default function useSearchFilter(
-  countryList: CountryContext["countryList"],
-  searchValue: CountryContext["searchValue"],
+  countryList: CountryList,
+  searchValue: SettingsContext["searchValue"],
   sortValue: SortKeys,
-  filterBy: CountryContext["filterBy"]
+  filterBy: SettingsContext["filterBy"]
 ) {
   return useMemo(() => {
-    if (countryList === undefined) return;
-
     const lowerSearch = searchValue.toLowerCase();
     let filtered = countryList.filter((country) => {
       const checked = [];

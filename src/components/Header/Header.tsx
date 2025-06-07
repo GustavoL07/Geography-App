@@ -4,6 +4,7 @@ import Dialog from "../CustomDialog/Dialog";
 import SettingsOptions from "../CustomDialog/SettingsDialog/SettingsOptions.js";
 import { useCountryContext } from "../Contexts/CountryContext";
 import { useState } from "react";
+import { useSettingsContext } from "../Contexts/SettingsContext";
 
 type Props = {
   title?: string;
@@ -11,7 +12,8 @@ type Props = {
 };
 
 export default function Header({ isSidebarOpen, title = "Geography App" }: Props) {
-  const { setDisplayMode, setSelectedCountry, setSearchValue, countryList } = useCountryContext();
+  const { setSelectedCountry, countryList } = useCountryContext();
+  const { setDisplayMode, setSearchValue } = useSettingsContext();
   const [dialogToggle, setDialogToggle] = useState(false);
 
   const mapIcon = <i className="fa-solid fa-map-location-dot"></i>;

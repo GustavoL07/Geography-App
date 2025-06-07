@@ -5,13 +5,15 @@ import Intro from "../../Intro/Intro.js";
 import Header from "../../Header/Header.js";
 import { useCountryContext } from "../../Contexts/CountryContext.js";
 import Country from "../../../utils/Country/Country";
+import { useSettingsContext } from "../../Contexts/SettingsContext";
 
 interface Props {
   isSidebarOpen: boolean;
 }
 
 export default function Main({ isSidebarOpen }: Props) {
-  const { countryList, displayMode, setSelectedCountry, setDisplayMode } = useCountryContext();
+  const { countryList, setSelectedCountry } = useCountryContext();
+  const { displayMode, setDisplayMode } = useSettingsContext();
 
   function handleMapClick(c: Country) {
     setSelectedCountry(c);

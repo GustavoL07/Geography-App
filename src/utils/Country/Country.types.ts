@@ -1,4 +1,4 @@
-export type MetricsGroup = [number, number] | undefined;
+type MetricsGroup = [number, number] | undefined;
 export type Continents =
   | "Africa"
   | "Asia"

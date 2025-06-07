@@ -1,8 +1,8 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import { useCountryContext } from "../../../Contexts/CountryContext.js";
 import { SORTER, SortKeys } from "../../../../utils/Organizing/sorter.js";
 import Button from "../../../CustomButton/Button";
+import { useSettingsContext } from "../../../Contexts/SettingsContext";
 
 const icons = {
   AZ: <i className="fa-solid fa-arrow-down-short-wide"></i>,
@@ -13,7 +13,7 @@ interface Props {
   isOpen: boolean;
 }
 export default function Sort({ isOpen }: Props) {
-  const { setSortValue } = useCountryContext();
+  const { setSortValue } = useSettingsContext();
 
   const [openSort, setOpenSort] = useState(false);
   const [sortText, setSortText] = useState("Sort...");

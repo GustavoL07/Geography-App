@@ -1,5 +1,6 @@
 import "./Dialog.css";
 import { useEffect, useRef } from "react";
+import Button from "../CustomButton/Button";
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 export default function Dialog({ title, isOpen, onClose, children }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeIcon = <i className="fa-solid fa-xmark close-icon"></i>;
 
   useEffect(() => {
     if (!dialogRef.current) return;
@@ -33,10 +35,8 @@ export default function Dialog({ title, isOpen, onClose, children }: Props) {
   return (
     <dialog ref={dialogRef}>
       <div className="btn-wrapper">
-        <p>{title}</p>
-        <button onClick={handleClose}>
-          <i className="fa-solid fa-xmark close-icon"></i>
-        </button>
+        <p className="title">{title}</p>
+        <Button icon={closeIcon} onClick={handleClose}></Button>
       </div>
       {children}
     </dialog>

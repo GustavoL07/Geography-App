@@ -3,7 +3,7 @@ import convertSymbolTo3 from "../Country/symbol.js";
 import getCountryData from "./getCountryData.js";
 import getCountryMetrics from "./getCountryMetrics.js";
 
-export default async function getData() {
+export default async function getData(): Promise<Array<Country> | []> {
   try {
     const countryData = await getCountryData();
     const countryMetrics = await getCountryMetrics();

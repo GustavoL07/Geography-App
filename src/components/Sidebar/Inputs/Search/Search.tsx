@@ -1,12 +1,12 @@
 import "./Search.css";
-import { useCountryContext } from "../../../Contexts/CountryContext";
 import Button from "../../../CustomButton/Button";
+import { useSettingsContext } from "../../../Contexts/SettingsContext";
 
 interface Props {
   isOpen: boolean;
 }
 export default function Search({ isOpen }: Props) {
-  const { searchValue, setSearchValue } = useCountryContext();
+  const { searchValue, setSearchValue } = useSettingsContext();
   return (
     <div className={`search-wrapper ${!isOpen ? "closed" : ""}`}>
       <i className={`fas fa-search search-icon ${!isOpen ? "closed" : ""}`}></i>

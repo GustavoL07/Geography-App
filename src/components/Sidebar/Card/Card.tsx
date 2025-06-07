@@ -1,6 +1,7 @@
 import Country from "../../../utils/Country/Country";
 import { getFormatOption } from "../../../utils/Organizing/sorter";
 import { useCountryContext } from "../../Contexts/CountryContext";
+import { useSettingsContext } from "../../Contexts/SettingsContext";
 import "./Card.css";
 
 interface Card {
@@ -10,7 +11,8 @@ interface Card {
 
 export default function Card({ isOpen, country }: Card) {
   if (!country) return null;
-  const { selectedCountry, setSelectedCountry, sortValue, setDisplayMode } = useCountryContext();
+  const { selectedCountry, setSelectedCountry } = useCountryContext();
+  const { sortValue, setDisplayMode } = useSettingsContext();
   const isSelected = country === selectedCountry;
 
   const handleClick = () => {

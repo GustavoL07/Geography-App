@@ -1,8 +1,8 @@
-import { CountryContext, FilterKey, useCountryContext } from "../../Contexts/CountryContext";
+import { FilterKey, SettingsContext, useSettingsContext } from "../../Contexts/SettingsContext";
 import "./SettingsOptions.css";
 
 export default function SettingsOptions({}) {
-  const { filterBy, setFilterBy } = useCountryContext();
+  const { filterBy, setFilterBy } = useSettingsContext();
   return (
     <div>
       <div className="option-wrapper">
@@ -37,7 +37,17 @@ export default function SettingsOptions({}) {
           />
           <p>Symbol</p>
         </div>
+      </div>
+      <div className="option-wrapper">
+        <p className="title">Maps</p>
 
+        <div className="option">
+          <select name="" id="">
+            <option value="">Light</option>
+            <option value="">Dark</option>
+            <option value="">Earth</option>
+          </select>
+        </div>
       </div>
     </div>
   );
@@ -45,12 +55,10 @@ export default function SettingsOptions({}) {
 
 function changeFilter(
   e: React.ChangeEvent<HTMLInputElement>,
-  filterBy: CountryContext["filterBy"],
-  setFilterBy: CountryContext["setFilterBy"],
-  key: FilterKey,
+  filterBy: SettingsContext["filterBy"],
+  setFilterBy: SettingsContext["setFilterBy"],
+  key: FilterKey
 ) {
   const checked = e.target.checked;
-  checked
-    ? setFilterBy([...filterBy, key])
-    : setFilterBy(filterBy.filter((key) => key !== key));
+  checked ? setFilterBy([...filterBy, key]) : setFilterBy(filterBy.filter((key) => key !== key));
 }
