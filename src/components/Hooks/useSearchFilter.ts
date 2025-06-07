@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import { getSorted, SortKeys } from "../../utils/Organizing/sorter";
+import { getSorted, SortKey } from "../../utils/Organizing/sorter";
 import { CountryList } from "../../utils/Country/Country";
 import { SettingsContext } from "../Contexts/SettingsContext";
 
 export default function useSearchFilter(
   countryList: CountryList,
   searchValue: SettingsContext["searchValue"],
-  sortValue: SortKeys,
+  sortValue: SortKey,
   filterBy: SettingsContext["filterBy"]
 ) {
   return useMemo(() => {

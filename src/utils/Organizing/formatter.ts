@@ -1,4 +1,4 @@
-import Country from "../Country/Country";
+import { Country, FormatKey } from "@/types";
 
 const numericalPrecision = 2;
 const unknown = "Unknown";
@@ -167,7 +167,6 @@ const formatters = {
   },
 };
 
-export type FormatKey = (typeof formatOptions)[number]["key"];
 export const formatOptions = [
   { text: "Name", key: "name" },
   { text: "Capital", key: "capital" },

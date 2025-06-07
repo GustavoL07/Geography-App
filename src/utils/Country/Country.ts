@@ -1,16 +1,16 @@
-import { FormatKey, formatCountryValue } from "../Organizing/formatter";
+import { formatCountryValue } from "../Organizing/formatter";
 import threeDigit from "./symbol";
 import getCurrencyInfo from "./currency";
-import {
-  Continents,
-  CountryGeography,
-  CountryIndicators,
-  CountryMoney,
-  CountryName,
-} from "./Country.types";
 import getBorders from "./borders";
 
-export type CountryList = Array<Country> | [];
+import {
+  CountryName,
+  Continents,
+  CountryMoney,
+  CountryGeography,
+  CountryIndicators,
+  FormatKey,
+} from "@/types";
 
 export default class Country {
   static #none = "None";

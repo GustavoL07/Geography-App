@@ -1,6 +1,6 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import { SORTER, SortKeys } from "../../../../utils/Organizing/sorter.js";
+import { SORTER, SortKey } from "../../../../utils/Organizing/sorter.js";
 import Button from "../../../CustomButton/Button";
 import { useSettingsContext } from "../../../Contexts/SettingsContext";
 
@@ -34,7 +34,7 @@ export default function Sort({ isOpen }: Props) {
   }, []);
 
   function handleOptionClicks(
-    sortValue: SortKeys,
+    sortValue: SortKey,
     sortText: string,
     selectedSortOption: number | null
   ) {

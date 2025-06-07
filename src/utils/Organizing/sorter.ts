@@ -1,8 +1,5 @@
-import { CountryContext } from "../../components/Contexts/CountryContext";
-import Country from "../Country/Country";
-import { FormatKey } from "./formatter";
+import { SortKey, FormatKey, CountryList, Country } from "@/types";
 
-export type SortKeys = (typeof SORTER)[number]["key"] | "" | undefined;
 export const SORTER = [
   {
     key: "name-asc",
@@ -343,7 +340,10 @@ export const SORTER = [
     key: "inflationRate-desc",
     text: "Inflation Rate",
     formatOption: "inflationRate",
-    function: sortFunction((country: Country) => country.indicators.economy.inflationRate?.[0], "desc"),
+    function: sortFunction(
+      (country: Country) => country.indicators.economy.inflationRate?.[0],
+      "desc"
+    ),
   },
 
   {
@@ -499,12 +499,12 @@ export const SORTER = [
   },
 ] as const;
 
-export function getFormatOption(key: SortKeys): FormatKey {
+export function getFormatOption(key: SortKey): FormatKey {
   const option = SORTER.find((obj) => key === obj.key);
   return option?.formatOption !== undefined ? option.formatOption : "capital";
 }
 
-export function getSorted(list: CountryContext["countryList"], key: SortKeys) {
+export function getSorted(list: CountryList, key: SortKey) {
   const sortFunction = getSortFunction(key);
   return [...list].sort(sortFunction);
 }
@@ -522,7 +522,7 @@ function sortFunction(path: any, order = "asc") {
   };
 }
 
-function getSortFunction(key: SortKeys) {
+function getSortFunction(key: SortKey) {
   const sortObject = SORTER.find((obj) => key === obj.key);
 
   const sortFunction = sortObject ? sortObject.function : undefined;
