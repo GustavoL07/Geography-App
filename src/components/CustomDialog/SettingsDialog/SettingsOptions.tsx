@@ -1,4 +1,6 @@
-import { FilterKey, SettingsContext, useSettingsContext } from "../../Contexts/SettingsContext";
+import { useSettingsContext } from "../../Contexts/SettingsContext";
+import { FilterKey } from "@/types";
+import { SettingsContextInterface } from "@/types";
 import "./SettingsOptions.css";
 
 export default function SettingsOptions({}) {
@@ -55,8 +57,8 @@ export default function SettingsOptions({}) {
 
 function changeFilter(
   e: React.ChangeEvent<HTMLInputElement>,
-  filterBy: SettingsContext["filterBy"],
-  setFilterBy: SettingsContext["setFilterBy"],
+  filterBy: SettingsContextInterface["filterBy"],
+  setFilterBy: SettingsContextInterface["setFilterBy"],
   key: FilterKey
 ) {
   const checked = e.target.checked;
