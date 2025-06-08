@@ -6,6 +6,7 @@ import Header from "../../Header/Header.js";
 import { useCountryContext } from "../../Contexts/CountryContext.js";
 import Country from "../../../utils/Country/Country";
 import { useSettingsContext } from "../../Contexts/SettingsContext";
+import { useCallback } from "react";
 
 interface Props {
   isSidebarOpen: boolean;
@@ -15,10 +16,10 @@ export default function Main({ isSidebarOpen }: Props) {
   const { countryList, setSelectedCountry } = useCountryContext();
   const { displayMode, setDisplayMode } = useSettingsContext();
 
-  function handleMapClick(c: Country) {
+  const handleMapClick = useCallback((c: Country) => {
     setSelectedCountry(c);
     setDisplayMode("full");
-  }
+  }, []);
 
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
