@@ -38,14 +38,12 @@ i {
   color: var(--icons-color);
 }
 
-
 .close-icon {
   transform: scale(1.75);
   transition: color 0.3s ease-in-out;
 }
-button:hover .close-icon{
+button:hover .close-icon {
   color: red;
-
 }
 
 ::-webkit-scrollbar {
