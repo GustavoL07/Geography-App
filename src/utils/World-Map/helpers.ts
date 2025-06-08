@@ -48,7 +48,7 @@ export function style(layer: L.Path, continent: Continents) {
 export function getMapUrl(tile: MapTileKey): string {
   switch (tile) {
     case "light":
-      return "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+      return "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
 
     case "dark":
       return "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
