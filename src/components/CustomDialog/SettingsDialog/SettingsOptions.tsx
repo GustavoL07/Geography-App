@@ -1,66 +1,75 @@
-import { useSettingsContext } from "../../Contexts/SettingsContext";
-import { FilterKey } from "@/types";
-import { SettingsContextInterface } from "@/types";
 import "./SettingsOptions.css";
+import { useSettingsContext } from "../../Contexts/SettingsContext";
+import { FilterKey, MapTileKey } from "@/types";
+import Button from "@/components/CustomButton/Button";
+import { clearLocalStorage } from "@/components/Hooks/useLocalStorage";
 
-export default function SettingsOptions({}) {
+type Props = {
+  description: string;
+  filterKey: FilterKey;
+};
+function Checkbox({ description, filterKey }: Props) {
   const { filterBy, setFilterBy } = useSettingsContext();
+
+  function changeFilter(e: boolean, key: FilterKey) {
+    const checked = e;
+    if (checked) {
+      if (!filterBy.includes(filterKey)) {
+        setFilterBy([...filterBy, filterKey]);
+      }
+    } else {
+      setFilterBy(filterBy.filter((k) => k !== key));
+    }
+  }
+
   return (
-    <div>
-      <div className="option-wrapper">
-        <p className="title">Search Countries By</p>
-
-        <div className="option">
-          <input
-            type="checkbox"
-            name=""
-            id=""
-            onChange={(e) => changeFilter(e, filterBy, setFilterBy, "capital")}
-          />
-          <p>Capital</p>
-        </div>
-
-        <div className="option">
-          <input
-            type="checkbox"
-            name=""
-            id=""
-            onChange={(e) => changeFilter(e, filterBy, setFilterBy, "continent")}
-          />
-          <p>Continent</p>
-        </div>
-
-        <div className="option">
-          <input
-            type="checkbox"
-            name=""
-            id=""
-            onChange={(e) => changeFilter(e, filterBy, setFilterBy, "iso3")}
-          />
-          <p>Symbol</p>
-        </div>
-      </div>
-      <div className="option-wrapper">
-        <p className="title">Maps</p>
-
-        <div className="option">
-          <select name="" id="">
-            <option value="">Light</option>
-            <option value="">Dark</option>
-            <option value="">Earth</option>
-          </select>
-        </div>
-      </div>
+    <div className="option">
+      <input
+        checked={filterBy.includes(filterKey)}
+        type="checkbox"
+        onChange={(e) => changeFilter(e.target.checked, filterKey)}
+      />
+      <p>{description}</p>
     </div>
   );
 }
 
-function changeFilter(
-  e: React.ChangeEvent<HTMLInputElement>,
-  filterBy: SettingsContextInterface["filterBy"],
-  setFilterBy: SettingsContextInterface["setFilterBy"],
-  key: FilterKey
-) {
-  const checked = e.target.checked;
-  checked ? setFilterBy([...filterBy, key]) : setFilterBy(filterBy.filter((key) => key !== key));
+function Select({}) {
+  const { mapTile, setMapTile } = useSettingsContext();
+
+  return (
+    <div className="option">
+      <select value={mapTile} onChange={(e) => setMapTile(e.target.value as MapTileKey)}>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="earth">Earth</option>
+      </select>
+    </div>
+  );
+}
+
+export default function SettingsOptions({}) {
+  return (
+    <div>
+      <div className="option-wrapper">
+        <p className="title">Search Countries By</p>
+        <Checkbox description="Capital" filterKey="capital" />
+        <Checkbox description="Continent" filterKey="continent" />
+        <Checkbox description="Symbol" filterKey="iso3" />
+      </div>
+
+      <div className="option-wrapper">
+        <p className="title">Map Mode</p>
+        <Select />
+      </div>
+
+      <div className="reset-container">
+        <Button
+          icon={<i className="fa fa-refresh"></i>}
+          onClick={() => clearLocalStorage()}
+        ></Button>
+        <p>Reset to Default</p>
+      </div>
+    </div>
+  );
 }

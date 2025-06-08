@@ -5,9 +5,12 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useCountryContext } from "../../Contexts/CountryContext";
 import FlyToCountry from "./FlyMap";
 import L from "leaflet";
+import { useSettingsContext } from "@/components/Contexts/SettingsContext";
+import { getMapUrl, getMapAttribution } from "@/utils/World-Map/helpers";
 
 export default function Map() {
   const { selectedCountry } = useCountryContext();
+  const { mapTile } = useSettingsContext();
   const markerRef = useRef<L.Marker>(null);
 
   if (!selectedCountry) return null;
@@ -36,12 +39,7 @@ export default function Map() {
         ]}
         maxBoundsViscosity={1}
       >
-        <TileLayer
-          attribution="Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community
-"
-          url={`https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
-`}
-        />
+        <TileLayer attribution={getMapAttribution(mapTile)} url={getMapUrl(mapTile)} />
 
         <Marker position={[latitude, longitude]} ref={markerRef}>
           <Popup>

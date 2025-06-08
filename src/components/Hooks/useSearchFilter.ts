@@ -1,13 +1,12 @@
 import { useMemo } from "react";
-import { getSorted, SortKey } from "../../utils/Organizing/sorter";
-import { CountryList } from "../../utils/Country/Country";
-import { SettingsContext } from "../Contexts/SettingsContext";
+import { getSorted } from "../../utils/Organizing/sorter";
+import { CountryList, SettingsContextInterface, SortKey } from "@/types";
 
 export default function useSearchFilter(
   countryList: CountryList,
-  searchValue: SettingsContext["searchValue"],
+  searchValue: SettingsContextInterface["searchValue"],
   sortValue: SortKey,
-  filterBy: SettingsContext["filterBy"]
+  filterBy: SettingsContextInterface["filterBy"]
 ) {
   return useMemo(() => {
     const lowerSearch = searchValue.toLowerCase();

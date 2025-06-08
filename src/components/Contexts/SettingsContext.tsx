@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import useSearchFilter from "../Hooks/useSearchFilter";
+import useLocalStorage from "../Hooks/useLocalStorage";
 import {
   Country,
   SettingsContextInterface,
@@ -16,10 +17,10 @@ const SettingsContext = createContext<SettingsContextInterface>({
   searchValue: "",
   setSearchValue: () => {},
 
-  sortValue: "",
+  sortValue: "none",
   setSortValue: () => {},
 
-  filterBy: [],
+  filterBy: ["name"],
   setFilterBy: () => {},
 
   filteredList: [],
@@ -33,10 +34,11 @@ type Props = {
   children: any;
 };
 export function SettingsProvider({ countryList, children }: Props) {
-  const [mapTile, setMapTile] = useState<MapTileKey>("light");
+  const [mapTile, setMapTile] = useLocalStorage<MapTileKey>("mapTile", "light");
+  const [sortValue, setSortValue] = useLocalStorage<SortKey>("sortValue", "none");
+  const [filterBy, setFilterBy] = useLocalStorage<FilterKey[]>("filterBy", ["name"]);
+
   const [searchValue, setSearchValue] = useState("");
-  const [sortValue, setSortValue] = useState<SortKey>("");
-  const [filterBy, setFilterBy] = useState<FilterKey[]>(["name"]);
   const [displayMode, setDisplayMode] = useState<DisplayKey>("intro");
 
   const filteredList = useSearchFilter(countryList, searchValue, sortValue, filterBy);

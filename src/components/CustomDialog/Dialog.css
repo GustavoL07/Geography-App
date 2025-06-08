@@ -14,7 +14,7 @@ dialog {
   border-radius: var(--radius);
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-  animation: dialog-fade-in 0.8s;
+  animation: dialog-fade-in 1.2s;
 }
 
 dialog .title {
@@ -38,17 +38,6 @@ dialog .btn-wrapper {
   justify-content: end;
 }
 
-dialog button i {
-  transform: scale(1.75);
-  transition: color 0.3s ease-in-out;
-}
-
-dialog button:hover i {
-  color: red;
-}
-dialog button:active {
-  transform: scale(0.85);
-}
 
 /* Animação de entrada */
 @keyframes dialog-fade-in {
@@ -57,7 +46,7 @@ dialog button:active {
     transform: translateY(8vh);
   }
   50% {
-    opacity: 0.85;
+    opacity: 0.5;
     transform: translateY(-8vh);
   }
   100% {

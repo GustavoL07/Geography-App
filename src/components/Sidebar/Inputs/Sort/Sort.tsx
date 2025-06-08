@@ -1,6 +1,7 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import { SORTER, SortKey } from "../../../../utils/Organizing/sorter.js";
+import { SORTER } from "../../../../utils/Organizing/sorter.js";
+import { SortKey } from "@/types";
 import Button from "../../../CustomButton/Button";
 import { useSettingsContext } from "../../../Contexts/SettingsContext";
 
@@ -62,7 +63,7 @@ export default function Sort({ isOpen }: Props) {
         <Button
           icon={<i className="fa-solid fa-xmark close-icon"></i>}
           onClick={() => {
-            handleOptionClicks("", "Sort...", null);
+            handleOptionClicks("none", "Sort...", null);
           }}
         />
       )}
@@ -73,7 +74,7 @@ export default function Sort({ isOpen }: Props) {
             <div
               className="indicators"
               onClick={() => {
-                handleOptionClicks("", "Sort...", null);
+                handleOptionClicks("none", "Sort...", null);
               }}
             >
               <div className="symbols">{icons["AZ"]}</div>

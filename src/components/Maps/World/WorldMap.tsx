@@ -8,15 +8,14 @@ import isoToCountry from "../../../utils/Country/isoCountry";
 import { createRoot } from "react-dom/client";
 import Popup from "./Popup/Popup";
 import { style } from "../../../utils/World-Map/helpers";
-import { CountryContext } from "../../Contexts/CountryContext";
 import { memo } from "react";
-import Country from "../../../utils/Country/Country";
+import { Country, CountryList } from "@/types";
 
 const geoData = rawData as GeoJsonObject;
 
 function handleClick(
   layer: L.Path,
-  countryList: CountryContext["countryList"],
+  countryList: CountryList,
   isoCode: string,
   onPopupClick: (c: Country) => void
 ) {
@@ -33,15 +32,15 @@ function handleClick(
 }
 
 type Props = {
-  list: CountryContext["countryList"];
+  list: CountryList;
   onPopupClick: (c: Country) => void;
   title?: string;
 };
-
 function WorldMap({ list, title = "The World Map", onPopupClick }: Props) {
-  const tileUrl =
-    "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png";
-
+  const url =
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+  const attribution =
+    "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
   const basicStyle: PathOptions = {
     color: "transparent",
     weight: 0,
@@ -64,15 +63,16 @@ function WorldMap({ list, title = "The World Map", onPopupClick }: Props) {
         <MapContainer
           center={[0, 0]}
           zoom={2.5}
-          minZoom={2.5}
+          minZoom={1.25}
           scrollWheelZoom={true}
           maxBounds={[
             [-90, -180],
             [90, 180],
           ]}
+          inertia={true}
           maxBoundsViscosity={1.25}
         >
-          <TileLayer attribution="&copy; OpenStreetMap &copy; CartoDB" url={tileUrl} />
+          <TileLayer attribution={attribution} url={url} />
           <GeoJSON data={geoData} style={basicStyle} onEachFeature={onEachCountry} />
         </MapContainer>
       </div>
