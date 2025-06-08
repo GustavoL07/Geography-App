@@ -1,0 +1,67 @@
+input[type="checkbox"].switch-toggle {
+  visibility: hidden;
+  display: none;
+}
+
+.switch-label {
+  position: relative;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.switch-label::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(var(--switch-width) - 6px);
+  height: calc(var(--switch-height) - 6px);
+  background: var(--track-color);
+  border-radius: calc(var(--switch-height) / 2);
+  transition: background var(--transition-speed) ease;
+}
+
+.switch-label span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--knob-size);
+  height: var(--knob-size);
+  background: var(--knob-color);
+  border-radius: var(--knob-radius);
+  box-shadow: 0 0 6px var(--shadow-color);
+  transition: all var(--transition-speed) ease;
+}
+
+.switch-label span::before {
+  content: "";
+  position: absolute;
+  margin: calc(-1 * var(--knob-size));
+  width: calc(var(--knob-size) * 2.8);
+  height: calc(var(--knob-size) * 2.8);
+  background: var(--active-color);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+}
+
+input[type="checkbox"].switch-toggle:checked + .switch-label::before {
+  background: var(--track-checked-color);
+}
+
+input[type="checkbox"].switch-toggle:checked + .switch-label span {
+  background: var(--active-color);
+  transform: translateX(calc(var(--switch-width) - var(--knob-size)));
+  transition: all var(--transition-speed) var(--transition-curve), background 0.15s ease;
+  box-shadow: 0 3px 8px var(--active-shadow);
+}
+
+input[type="checkbox"].switch-toggle:checked + .switch-label span::before {
+  transform: scale(1);
+  opacity: 0;
+  transition: all 0.4s ease;
+}

@@ -18,11 +18,26 @@
   --shadow-size: 5px;
   --shadow-color: rgba(0, 0, 0, 0.2);
   --shadow-default: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  /*Checkbox*/
+  --switch-width: 40px;
+  --switch-height: 20px;
+  --knob-size: 20px;
+  --knob-radius: 100%;
+  --track-color: #666;
+  --track-checked-color: #ddd;
+  --knob-color: white;
+  --active-color: #00a0ff;
+  --shadow-color: rgba(154, 153, 153, 0.5);
+  --active-shadow: rgba(79, 46, 220, 0.2);
+  --transition-speed: 0.1s;
+  --transition-curve: cubic-bezier(0.8, 0.4, 0.3, 1.25);
 }
 
 i {
   color: var(--icons-color);
 }
+
 
 .close-icon {
   transform: scale(1.75);

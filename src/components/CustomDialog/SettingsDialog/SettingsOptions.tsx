@@ -3,38 +3,35 @@ import { useSettingsContext } from "../../Contexts/SettingsContext";
 import { FilterKey, MapTileKey } from "@/types";
 import Button from "@/components/CustomButton/Button";
 import { clearLocalStorage } from "@/components/Hooks/useLocalStorage";
+import CheckBox from "@/components/CustomCheckbox/CheckBox";
 
 type Props = {
   description: string;
   filterKey: FilterKey;
 };
-function Checkbox({ description, filterKey }: Props) {
+function OptionCheckboxes({ description, filterKey }: Props) {
   const { filterBy, setFilterBy } = useSettingsContext();
 
-  function changeFilter(e: boolean, key: FilterKey) {
+  function changeFilter(e: boolean) {
     const checked = e;
     if (checked) {
       if (!filterBy.includes(filterKey)) {
         setFilterBy([...filterBy, filterKey]);
       }
     } else {
-      setFilterBy(filterBy.filter((k) => k !== key));
+      setFilterBy(filterBy.filter((k) => k !== filterKey));
     }
   }
 
   return (
     <div className="option">
-      <input
-        checked={filterBy.includes(filterKey)}
-        type="checkbox"
-        onChange={(e) => changeFilter(e.target.checked, filterKey)}
-      />
+      <CheckBox id={filterKey} checked={filterBy.includes(filterKey)} onChange={changeFilter} />
       <p>{description}</p>
     </div>
   );
 }
 
-function Select({}) {
+function OptionSelect({}) {
   const { mapTile, setMapTile } = useSettingsContext();
 
   return (
@@ -53,22 +50,22 @@ export default function SettingsOptions({}) {
     <div>
       <div className="option-wrapper">
         <p className="title">Search Countries By</p>
-        <Checkbox description="Capital" filterKey="capital" />
-        <Checkbox description="Continent" filterKey="continent" />
-        <Checkbox description="Symbol" filterKey="iso3" />
+        <OptionCheckboxes description="Capital" filterKey="capital" />
+        <OptionCheckboxes description="Continent" filterKey="continent" />
+        <OptionCheckboxes description="Symbol" filterKey="iso3" />
       </div>
 
       <div className="option-wrapper">
         <p className="title">Map Mode</p>
-        <Select />
+        <OptionSelect />
       </div>
 
       <div className="reset-container">
+        <p>Reset to Default</p>
         <Button
-          icon={<i className="fa fa-refresh"></i>}
+          icon={<i className="fa fa-refresh" aria-hidden="true"></i>}
           onClick={() => clearLocalStorage()}
         ></Button>
-        <p>Reset to Default</p>
       </div>
     </div>
   );
