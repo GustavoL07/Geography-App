@@ -31,9 +31,10 @@ const formatters = {
     `${country.geography.position.longitude.toFixed(numericalPrecision)}°`,
   currency: (country: Country) => `${country.money.name} (${country.money.symbol})`,
   timezone: (country: Country) => {
-    return country.getTimezonesQuantity() === 1
-      ? country.geography.timezone[0]
-      : country.geography.timezone.join(", ");
+    const time = country.geography.timezone.map((utc) =>
+      utc === "UTC" ? "00:00" : utc.replace(/^UTC/, "")
+    );
+    return time.length === 1 ? time[0] : time.join(", ");
   },
   borderNames: (country: Country) => {
     const borders = country.getBordersQuantity() > 0 ? country.geography.borders.names : [];
@@ -178,7 +179,7 @@ export const formatOptions = [
   { text: "Latitude", key: "latitude" },
   { text: "Longitude", key: "longitude" },
   { text: "Currency", key: "currency" },
-  { text: "Timezone", key: "timezone" },
+  { text: "Timezones (UTC)", key: "timezone" },
   { text: "Borders", key: "borderNames" },
 
   { text: "Internet Usage", key: "internetUsage" },
