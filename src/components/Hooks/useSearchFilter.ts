@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { getSorted } from "../../utils/Organizing/sorter";
+import { getSorted } from "@/utils/Organizing/sorter";
 import { CountryList, SettingsContextInterface, SortKey } from "@/types";
 
 export default function useSearchFilter(

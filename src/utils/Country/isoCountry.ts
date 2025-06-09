@@ -1,5 +1,5 @@
-import { CountryContext } from "../../components/Contexts/CountryContext";
+import { CountryList } from "@/types";
 
-export default function isoToCountry(list: CountryContext["countryList"], iso3: string) {
-  return list.find(country => iso3 === country.name.symbol) || null
-};
+export default function isoToCountry(list: CountryList, iso3: string) {
+  return list.find((country) => iso3 === country.name.symbol) || null;
+}

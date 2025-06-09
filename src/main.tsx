@@ -11,5 +11,5 @@ if (rootElement) {
     </StrictMode>
   );
 } else {
-  throw new Error('Root element not found');
+  throw new Error("Root element not found");
 }

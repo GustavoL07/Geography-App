@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import getData from "../../utils/Fetch/getData";
 import { CountryContextInterface, CountryList } from "@/types";
+import getData from "@/utils/Fetch/getData";
 
 const CountryContext = createContext<CountryContextInterface>({
   countryList: [],

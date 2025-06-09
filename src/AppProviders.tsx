@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import { CountryProvider, useCountryContext } from "./components/Contexts/CountryContext";
 import { SettingsProvider } from "./components/Contexts/SettingsContext";
+import { useCountryContext } from "./components/Contexts/CountryContext";
+import { CountryProvider } from "./components/Contexts/CountryContext";
 
 function SettingsWrapper({ children }: { children: ReactNode }) {
   const { countryList } = useCountryContext();

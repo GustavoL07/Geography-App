@@ -1,7 +1,7 @@
 import "./App.css";
-import Sidebar from "./components/Sidebar/Sidebar/Sidebar";
-import Main from "./components/MainContent/MainArea/Main";
 import AppProviders from "./AppProviders";
+import Sidebar from "./components/App/Sidebar/Sidebar";
+import Main from "./components/App/Main/Main";
 import { useState } from "react";
 
 export default function App() {

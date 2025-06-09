@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import useSearchFilter from "../Hooks/useSearchFilter";
-import useLocalStorage from "../Hooks/useLocalStorage";
+import useSearchFilter from "@/components/Hooks/useSearchFilter";
+import useLocalStorage from "@/components/Hooks/useLocalStorage";
 import {
   Country,
   SettingsContextInterface,
