@@ -2,12 +2,13 @@ import { createContext, useContext, useState } from "react";
 import useSearchFilter from "@/components/Hooks/useSearchFilter";
 import useLocalStorage from "@/components/Hooks/useLocalStorage";
 import {
-  Country,
   SettingsContextInterface,
   MapTileKey,
   SortKey,
   FilterKey,
   DisplayKey,
+  CountryList,
+  SortMode,
 } from "@/types";
 
 const SettingsContext = createContext<SettingsContextInterface>({
@@ -19,6 +20,8 @@ const SettingsContext = createContext<SettingsContextInterface>({
 
   sortValue: "none",
   setSortValue: () => {},
+  sortMode: "asc",
+  setSortMode: () => {},
 
   filterBy: ["name"],
   setFilterBy: () => {},
@@ -30,18 +33,19 @@ const SettingsContext = createContext<SettingsContextInterface>({
 });
 
 type Props = {
-  countryList: Country[];
+  list: CountryList;
   children: any;
 };
-export function SettingsProvider({ countryList, children }: Props) {
+export function SettingsProvider({ list, children }: Props) {
   const [mapTile, setMapTile] = useLocalStorage<MapTileKey>("mapTile", "light");
   const [sortValue, setSortValue] = useLocalStorage<SortKey>("sortValue", "none");
+  const [sortMode, setSortMode] = useState<SortMode>("asc");
   const [filterBy, setFilterBy] = useLocalStorage<FilterKey[]>("filterBy", ["name"]);
 
   const [searchValue, setSearchValue] = useState("");
   const [displayMode, setDisplayMode] = useState<DisplayKey>("intro");
 
-  const filteredList = useSearchFilter(countryList, searchValue, sortValue, filterBy);
+  const filteredList = useSearchFilter(list, searchValue, sortValue, sortMode, filterBy);
 
   return (
     <SettingsContext.Provider
@@ -54,6 +58,8 @@ export function SettingsProvider({ countryList, children }: Props) {
 
         sortValue,
         setSortValue,
+        sortMode,
+        setSortMode,
 
         filterBy,
         setFilterBy,

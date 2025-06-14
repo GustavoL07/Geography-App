@@ -1,6 +1,6 @@
 import "./FullCountry.css";
 import { useCountryContext } from "../../../Contexts/CountryContext.js";
-import { formatOptions } from "@/utils/Organizing/formatter";
+import { FormatOptions } from "@/utils/Organizing/formatter";
 import Overview from "./Overview/Overview";
 import InfoBox from "./InfoBox/InfoBox";
 import Map from "@/components/App/Main/FullCountry/Map/Map";
@@ -14,7 +14,7 @@ export default function FullCountry({}) {
       <Overview country={selectedCountry} />
 
       <section className="info-grid">
-        {formatOptions.map((obj, index) => {
+        {FormatOptions.map((obj, index) => {
           if (obj.key === "name") return null;
 
           return (

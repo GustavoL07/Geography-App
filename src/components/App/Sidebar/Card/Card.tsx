@@ -21,7 +21,7 @@ export default function Card({ isOpen, country }: Card) {
   };
 
   function getDescription() {
-    const formatOption = getFormatOption(sortValue);
+    const formatOption = getFormatOption(sortValue) || "capital";
     return country.getFormatted(formatOption);
   }
 

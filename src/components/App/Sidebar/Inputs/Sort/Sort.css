@@ -72,7 +72,6 @@
 .sort-container {
   z-index: 9999;
   position: fixed;
-  width: auto;
   max-height: 50vh;
   overflow: scroll;
   padding: 0 var(--radius);
@@ -82,28 +81,19 @@
   box-shadow: var(--shadow-base) var(--shadow-size) rgba(0, 0, 0, 0.4);
 }
 
-.indicators {
-  width: 100%;
+.sort-method{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--radius) 0;
+  background-color: white;
   position: sticky;
   top: 0;
-  padding: var(--radius) 0;
-
-  background-color: white;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.sort-modes {
-  width: 100%;
-  display: grid;
-  align-items: center;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  overflow: hidden;
 }
 
 .sort-option {
   padding: 5px;
+  margin: var(--radius) 0;
   text-align: center;
   border-radius: var(--radius);
   color: var(--icons-color);
@@ -121,9 +111,9 @@
 }
 
 .sort-option.active {
-  background-color: rgb(205, 242, 255);
-  color: black;
-  font-weight: bold;
+  background-color: var(--active-color);
+  color: rgb(0, 0, 0);
+  font-weight: 900;
 }
 .sort-option.active i {
   color: black;

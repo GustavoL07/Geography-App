@@ -1,8 +1,9 @@
-import { SORTER } from "@/utils/Organizing/sorter";
-import { formatOptions } from "@/utils/Organizing/formatter";
+import { SortOptions } from "@/utils/Organizing/sorter";
+import { FormatOptions } from "@/utils/Organizing/formatter";
 
-export type FormatKey = (typeof formatOptions)[number]["key"];
-export type SortKey = (typeof SORTER)[number]["key"] | "none";
+export type FormatKey = (typeof FormatOptions)[number]["key"];
+export type SortKey = (typeof SortOptions)[number]["key"] | "none";
 export type MapTileKey = "light" | "dark" | "earth";
 export type DisplayKey = "intro" | "full" | "worldMap";
 export type FilterKey = "continent" | "name" | "iso3" | "capital";
+export type SortMode = "asc" | "desc";

@@ -7,7 +7,7 @@ function SettingsWrapper({ children }: { children: ReactNode }) {
   const { countryList } = useCountryContext();
   if (!countryList || countryList.length === 0) return null;
 
-  return <SettingsProvider countryList={countryList}>{children}</SettingsProvider>;
+  return <SettingsProvider list={countryList}>{children}</SettingsProvider>;
 }
 
 export default function AppProviders({ children }: { children: ReactNode }) {

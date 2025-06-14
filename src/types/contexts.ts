@@ -1,4 +1,4 @@
-import { DisplayKey, FilterKey, MapTileKey, SortKey } from "./keys";
+import { DisplayKey, FilterKey, MapTileKey, SortKey, SortMode } from "./keys";
 import { CountryList, SelectedCountry } from "./country";
 
 export interface CountryContextInterface {
@@ -15,6 +15,8 @@ export interface SettingsContextInterface {
 
   sortValue: SortKey;
   setSortValue: (value: SortKey) => void;
+  sortMode: SortMode;
+  setSortMode: (value: SortMode) => void
 
   filterBy: FilterKey[];
   setFilterBy: (filters: FilterKey[]) => void;

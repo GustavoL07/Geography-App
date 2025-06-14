@@ -1,16 +1,20 @@
 import { useMemo } from "react";
 import { getSorted } from "@/utils/Organizing/sorter";
-import { CountryList, SettingsContextInterface, SortKey } from "@/types";
+import { CountryList, SettingsContextInterface, SortKey, SortMode } from "@/types";
+
+type SearchValue = SettingsContextInterface["searchValue"];
+type filterBy = SettingsContextInterface["filterBy"];
 
 export default function useSearchFilter(
-  countryList: CountryList,
-  searchValue: SettingsContextInterface["searchValue"],
+  list: CountryList,
+  searchValue: SearchValue,
   sortValue: SortKey,
-  filterBy: SettingsContextInterface["filterBy"]
+  sortMode: SortMode,
+  filterBy: filterBy
 ) {
   return useMemo(() => {
     const lowerSearch = searchValue.toLowerCase();
-    let filtered = countryList.filter((country) => {
+    let filtered = list.filter((country) => {
       const checked = [];
       checked.push(country.getFormatted("name").toLowerCase().includes(lowerSearch)); // Search by name is always done
 
@@ -28,9 +32,9 @@ export default function useSearchFilter(
     });
 
     if (sortValue) {
-      filtered = getSorted(filtered, sortValue);
+      filtered = getSorted(filtered, sortValue, sortMode);
     }
 
     return filtered;
-  }, [countryList, searchValue, sortValue, filterBy]);
+  }, [list, searchValue, sortValue, sortMode, filterBy]);
 }
