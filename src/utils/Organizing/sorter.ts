@@ -201,9 +201,10 @@ function getSortFunction(key: SortKey, mode: SortMode) {
     const aValue = value(a);
     const bValue = value(b);
 
+    // Undefined values always go to the end, regardless of sort mode
     if (aValue === undefined && bValue === undefined) return 0;
-    if (aValue === undefined) return mode === "asc" ? 1 : -1;
-    if (bValue === undefined) return mode === "asc" ? -1 : 1;
+    if (aValue === undefined) return 1;
+    if (bValue === undefined) return -1;
 
     if (typeof aValue === "number" && typeof bValue === "number") {
       return mode === "asc" ? aValue - bValue : bValue - aValue;
