@@ -1,15 +1,8 @@
 import "./Sort.css";
 import { useState, useEffect, useRef } from "react";
-import { SortOptions } from "@/utils/Organizing/sorter";
-import { SortKey } from "@/types";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import Button from "@/components/Custom/CustomButton/Button";
-
-const icons = {
-  AZ: <i className="fa-solid fa-arrow-down-short-wide"></i>,
-  ZA: <i className="fa-solid fa-arrow-down-wide-short"></i>,
-  close: <i className="fa-solid fa-xmark close-icon"></i>,
-};
+import SortMenu from "./SortMenu";
 
 interface Props {
   isOpen: boolean;
@@ -48,7 +41,7 @@ export default function Sort({ isOpen }: Props) {
       {isOpen && (
         <>
           <Button
-            icon={icons.close}
+            icon={<i className="fa-solid fa-xmark close-icon"></i>}
             onClick={() => {
               setSortValue("none");
               setSortText("Sort...");
@@ -65,46 +58,6 @@ export default function Sort({ isOpen }: Props) {
           )}
         </>
       )}
-    </div>
-  );
-}
-
-type MenuProps = {
-  close: () => void;
-  selectedOption: number | null;
-  setSelectedOption: (value: number | null) => void;
-  setSortText: (value: string) => void;
-};
-function SortMenu({ close, selectedOption, setSelectedOption, setSortText }: MenuProps) {
-  const { sortMode, setSortMode, setSortValue } = useSettingsContext();
-
-  const changeSort = () => (sortMode === "asc" ? setSortMode("desc") : setSortMode("asc"));
-  const handleClick = (key: SortKey, text: string, i: number) => {
-    setSortValue(key);
-    setSelectedOption(i);
-    setSortText(text);
-    close();
-  };
-
-  return (
-    <div className="sort-wrapper">
-      <div className="sort-container">
-        <div className="sort-method" onClick={changeSort}>
-          <Button icon={sortMode === "asc" ? icons.AZ : icons.ZA} onClick={changeSort} />
-        </div>
-
-        {SortOptions.map((option, index) => {
-          return (
-            <div
-              className={`sort-option ${selectedOption === index ? "active" : ""}`}
-              key={index}
-              onClick={() => handleClick(option.key, option.text, index)}
-            >
-              {option.text}
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 }
