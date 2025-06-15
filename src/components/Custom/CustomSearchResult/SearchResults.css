@@ -1,0 +1,22 @@
+.search-results-wrapper {
+  position: relative;
+}
+.search-results-wrapper .conatiner {
+  position: fixed;
+  width: 75%;
+  max-height: 45vh;
+  overflow: scroll;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius);
+  padding: var(--radius);
+}
+.search-results-wrapper .conatiner::-webkit-scrollbar {
+  display: none;
+}
+
+.container .results {
+  width: 100%;
+  display: flex;
+}

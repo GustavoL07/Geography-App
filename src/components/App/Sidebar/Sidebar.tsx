@@ -1,6 +1,6 @@
 import "./Sidebar.css";
 import Button from "@/components/Custom/CustomButton/Button";
-import Search from "./Inputs/Search/Search";
+import Search from "../../Custom/CustomSearch/Search";
 import Sort from "./Inputs/Sort/Sort";
 import Card from "./Card/Card";
 import Results from "./Results/Results";

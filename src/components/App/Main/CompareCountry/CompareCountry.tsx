@@ -1,55 +1,95 @@
-import { useCountryContext } from "@/components/Contexts/CountryContext";
-import Search from "../../Sidebar/Inputs/Search/Search";
 import "./CompareCountry.css";
-import { useState } from "react";
-import Results from "../../Sidebar/Results/Results";
 import { Country } from "@/types";
+import { useState } from "react";
+import { useCountryContext } from "@/components/Contexts/CountryContext";
+import Search from "@/components/Custom/CustomSearch/Search";
+import SearchResults from "@/components/Custom/CustomSearchResult/SearchResuts";
+import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 
-type Props = {};
-export default function CompareCountry({}: Props) {
-  const { countryList } = useCountryContext();
+type Props = {title?: string};
+export default function CompareCountry({title = "Compare Countries"}: Props) {
+  const { countryList, setSelectedCountry } = useCountryContext();
+  const { setDisplayMode } = useSettingsContext();
   const [searchValue, setSearchValue] = useState("");
   const [comparing, setComparing] = useState<[Country | null, Country | null]>([null, null]);
-  const addCompareCountry = (newCountry: Country) =>
-    setComparing(([first, second]) => [second, newCountry]);
 
-  const filteredByName = countryList.filter((c) =>
-    c.name.informal.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const addCompareCountry = (newCountry: Country) =>
+    setComparing(([first, second]) => {
+      if (
+        first?.name.informal === newCountry.name.informal ||
+        second?.name.informal === newCountry.name.informal
+      ) {
+        return [first, second];
+      }
+      return [second, newCountry];
+    });
+  const resetCompareCountry = () => setComparing([null, null]);
+  const goToCountry = (c: Country) => {
+    setSelectedCountry(c);
+    setDisplayMode("full");
+  };
+
+  const filteredByName = countryList
+    .filter((c) => c.name.informal.toLowerCase().includes(searchValue.toLowerCase()))
+    .sort((a, b) => a.name.informal.toLowerCase().localeCompare(b.name.informal.toLowerCase()));
 
   return (
     <>
       <div className="compare-wrapper">
-        <div className="selected-options">
-          <div className="filtered-option">
-            <p>{comparing[0]?.getFormatted("name")}</p>
-          </div>
-          <p>{comparing[1]?.getFormatted("name")}</p>
-        </div>
+        <p className="compare-title">{title}</p>
+
         <div className="search-area">
           <Search
             value={searchValue}
             onSearch={setSearchValue}
-            resetSearch={() => setSearchValue("")}
+            resetSearch={() => {
+              setSearchValue("");
+              resetCompareCountry();
+            }}
           />
         </div>
         {searchValue && (
-          <div className="compare-options-wrapper">
-            {filteredByName.length !== 0 ? (
-              filteredByName.map((c: any, index: number) => (
-                <div key={index} className="filtered-options" onClick={() => addCompareCountry(c)}>
-                  <img src={c.flag} />
-                  <p>{c.getFormatted("name")}</p>
-                </div>
-              ))
-            ) : (
-              <div className="options-results">
-                <Results />
+          <SearchResults
+            displayableOptions={filteredByName}
+            optionsCallback={(c, index) => (
+              <div
+                key={index}
+                className="filtered-options"
+                onClick={() => {
+                  addCompareCountry(c);
+                  setSearchValue("");
+                }}
+              >
+                <img src={c.flag} alt="" />
+                <p>{c.getFormatted("name")}</p>
               </div>
             )}
-          </div>
+            onLoseFocus={() => setSearchValue("")}
+          />
         )}
+
+        <div className="selected-options">
+          {comparing[0] !== null && (
+            <BeingCompared c={comparing[0]} onClick={() => goToCountry(comparing[0]!)} />
+          )}
+          {comparing[1] !== null && (
+            <BeingCompared c={comparing[1]} onClick={() => goToCountry(comparing[1]!)} />
+          )}
+        </div>
       </div>
     </>
+  );
+}
+
+type BeingComparedProps = {
+  c: Country;
+  onClick: () => void;
+};
+function BeingCompared({ c, onClick }: BeingComparedProps) {
+  return (
+    <div className="filtered-options" onClick={onClick}>
+      <img src={c.flag} alt="" />
+      <p>{c.name.symbol}</p>
+    </div>
   );
 }
