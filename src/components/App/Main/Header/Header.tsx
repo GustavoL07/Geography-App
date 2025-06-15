@@ -18,6 +18,7 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
   const mapIcon = <i className="fa-solid fa-map-location-dot"></i>;
   const introIcon = <i className="fa-solid fa-globe"></i>;
   const settingsIcon = <i className="fa-solid fa-gear"></i>;
+  const compareIcon = <i className="fa-solid fa-chart-pie"></i>;
 
   return (
     <div className={`header-container ${isSidebarOpen ? "closed" : ""}`}>
@@ -34,6 +35,14 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
             }}
           />
         )}
+
+        <Button
+          icon={compareIcon}
+          onClick={() => {
+            setDisplayMode("compare");
+            setSelectedCountry(null);
+          }}
+        />
 
         <Button
           icon={introIcon}

@@ -11,7 +11,7 @@ interface Sidebar {
   toggleSidebar: () => void;
 }
 export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
-  const { filteredList } = useSettingsContext();
+  const { filteredList, searchValue, setSearchValue } = useSettingsContext();
   const sidebarIcon = <i className="fa-solid fa-bars"></i>;
 
   return (
@@ -25,7 +25,17 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
             }}
           />
         </div>
-        <Search isOpen={isOpen} />
+
+        {isOpen === true ? (
+          <Search
+            value={searchValue}
+            onSearch={setSearchValue}
+            resetSearch={() => setSearchValue("")}
+          />
+        ) : (
+          <i className="fas fa-search search-icon"></i>
+        )}
+
         <Sort isOpen={isOpen} />
       </div>
 

@@ -3,6 +3,7 @@ import FullCountry from "./FullCountry/FullCountry";
 import WorldMap from "./WorldMap/WorldMap";
 import Intro from "./Intro/Intro";
 import Header from "./Header/Header";
+import CompareCountry from "./CompareCountry/CompareCountry"
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { useCallback } from "react";
@@ -40,6 +41,13 @@ export default function Main({ isSidebarOpen }: Props) {
                   <FullCountry />
                 </>
               );
+
+            case "compare":
+              return(
+                <>
+                  <CompareCountry/>
+                </>
+              )
 
             default:
               return <Intro />;
