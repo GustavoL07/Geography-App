@@ -1,7 +1,7 @@
 import "./Results.css";
 
 interface Props {
-  value: number | undefined;
+  value?: number | undefined;
 }
 export default function Results({ value }: Props) {
   return (

@@ -39,6 +39,13 @@
 
   padding: var(--radius);
 }
+
+.search-area{
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .btns-wrapper.off {
   border: none;
   width: 100%;

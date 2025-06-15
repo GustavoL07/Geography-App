@@ -27,11 +27,13 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
         </div>
 
         {isOpen === true ? (
-          <Search
-            value={searchValue}
-            onSearch={setSearchValue}
-            resetSearch={() => setSearchValue("")}
-          />
+          <div className="search-area">
+            <Search
+              value={searchValue}
+              onSearch={setSearchValue}
+              resetSearch={() => setSearchValue("")}
+            />
+          </div>
         ) : (
           <i className="fas fa-search search-icon"></i>
         )}
