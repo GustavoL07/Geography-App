@@ -5,6 +5,9 @@ import { useCountryContext } from "@/components/Contexts/CountryContext";
 import Search from "@/components/Custom/CustomSearch/Search";
 import SearchResults from "@/components/Custom/CustomSearchResult/SearchResuts";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
+import Overview from "../FullCountry/Overview/Overview";
+import InfoBox from "../FullCountry/InfoBox/InfoBox";
+import { FormatOptions } from "@/utils/Organizing/formatter";
 
 type Props = { title?: string };
 export default function CompareCountry({ title = "Compare Countries" }: Props) {
@@ -24,10 +27,6 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
       return [second, newCountry];
     });
   const resetCompareCountry = () => setComparing([null, null]);
-  const goToCountry = (c: Country) => {
-    setSelectedCountry(c);
-    setDisplayMode("full");
-  };
 
   const filteredByName = countryList
     .filter((c) => c.name.informal.toLowerCase().includes(searchValue.toLowerCase()))
@@ -74,12 +73,8 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
         )}
 
         <div className="selected-options">
-          {comparing[0] !== null && (
-            <BeingCompared c={comparing[0]} onClick={() => goToCountry(comparing[0]!)} />
-          )}
-          {comparing[1] !== null && (
-            <BeingCompared c={comparing[1]} onClick={() => goToCountry(comparing[1]!)} />
-          )}
+          {comparing[0] !== null && <BeingCompared c={comparing[0]} />}
+          {comparing[1] !== null && <BeingCompared c={comparing[1]} />}
         </div>
       </div>
     </>
@@ -88,13 +83,18 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
 
 type BeingComparedProps = {
   c: Country;
-  onClick: () => void;
 };
-function BeingCompared({ c, onClick }: BeingComparedProps) {
+function BeingCompared({ c }: BeingComparedProps) {
   return (
-    <div className="filtered-options" onClick={onClick}>
-      <img src={c.flag} alt="" />
-      <p>{c.name.symbol}</p>
+    <div className="being-compared">
+      <Overview country={c}></Overview>
+      <section className="info-grid">
+        {FormatOptions.map((obj, index) => {
+          if (obj.key === "name") return null;
+
+          return <InfoBox key={index} text={`${obj.text}:`} value={c.getFormatted(obj.key)} />;
+        })}
+      </section>
     </div>
   );
 }
