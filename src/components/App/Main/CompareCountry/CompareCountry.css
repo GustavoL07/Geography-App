@@ -29,6 +29,9 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+.filtered-options.comparing {
+  background-color: #ccc;
+}
 .filtered-options img {
   width: 3rem;
   object-fit: cover;

@@ -29,7 +29,7 @@ export default function SearchResults<T>({
 
   return (
     <div className="search-results-wrapper" ref={wrapperRef}>
-      <div className="conatiner">
+      <div className="search-results">
         {displayableOptions.length !== 0 ? (
           displayableOptions.map(optionsCallback)
         ) : (

@@ -6,8 +6,8 @@ import Search from "@/components/Custom/CustomSearch/Search";
 import SearchResults from "@/components/Custom/CustomSearchResult/SearchResuts";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 
-type Props = {title?: string};
-export default function CompareCountry({title = "Compare Countries"}: Props) {
+type Props = { title?: string };
+export default function CompareCountry({ title = "Compare Countries" }: Props) {
   const { countryList, setSelectedCountry } = useCountryContext();
   const { setDisplayMode } = useSettingsContext();
   const [searchValue, setSearchValue] = useState("");
@@ -54,7 +54,12 @@ export default function CompareCountry({title = "Compare Countries"}: Props) {
             optionsCallback={(c, index) => (
               <div
                 key={index}
-                className="filtered-options"
+                className={`filtered-options ${
+                  c.name.symbol === comparing[0]?.name.symbol ||
+                  c.name.symbol === comparing[1]?.name.symbol
+                    ? "comparing"
+                    : ""
+                }`}
                 onClick={() => {
                   addCompareCountry(c);
                   setSearchValue("");
