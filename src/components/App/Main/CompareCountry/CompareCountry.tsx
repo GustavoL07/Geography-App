@@ -4,15 +4,13 @@ import { useState } from "react";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import Search from "@/components/Custom/CustomSearch/Search";
 import SearchResults from "@/components/Custom/CustomSearchResult/SearchResuts";
-import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import Overview from "../FullCountry/Overview/Overview";
 import InfoBox from "../FullCountry/InfoBox/InfoBox";
 import { FormatOptions } from "@/utils/Organizing/formatter";
 
 type Props = { title?: string };
 export default function CompareCountry({ title = "Compare Countries" }: Props) {
-  const { countryList, setSelectedCountry } = useCountryContext();
-  const { setDisplayMode } = useSettingsContext();
+  const { countryList } = useCountryContext();
   const [searchValue, setSearchValue] = useState("");
   const [comparing, setComparing] = useState<[Country | null, Country | null]>([null, null]);
 

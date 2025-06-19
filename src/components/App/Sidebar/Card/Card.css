@@ -1,50 +1,64 @@
-.container {
+.card-container {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px;
-  margin: 6px 10px;
-  border-radius: 10px;
+  gap: 0.75rem;
+  padding: calc(var(--radius) * 2);
+  margin: var(--radius);
+  border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.container.selected {
-  background-color: lightgray;
+.card-container.selected {
+  background-color: #ccc;
 }
-.container.selected .flag {
+.card-container.selected .flag {
   transform: scale(1.1);
 }
-.container.closed.selected {
+.card-container.closed.selected {
   background-color: transparent;
 }
-.container.closed.selected .flag {
+.card-container.closed.selected .flag {
   transform: scale(1);
 }
-.container.closed {
+.card-container.closed {
   margin: 10px 0;
   padding: 0;
   justify-content: space-around;
 }
-.container.closed .flag {
+.card-container.closed .flag {
   width: calc(var(--sidebar-closed) - 8px);
 }
-.container.closed .description {
+.card-container.closed .description {
   display: none;
   padding: 0;
   margin: 0;
 }
-.container.closed:hover {
+.card-container.closed:hover {
   background-color: transparent;
 }
-.container:hover {
+.card-container:hover {
   background-color: lightgray;
 }
-.container:active {
+.card-container:active {
   background-color: white;
   transform: scale(0.95);
 }
-.container:hover .flag {
+.card-container:hover .flag {
   transform: scale(1.1);
+}
+
+.favoriting {
+  padding: 0.75rem;
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+.card-container.closed .favoriting{
+  display: none;
+}
+.favoriting i.yellow {
+  color: gold;
 }
 
 .flag {
