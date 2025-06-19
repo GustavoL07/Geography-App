@@ -53,7 +53,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
         </ul>
       )}
 
-      {isOpen && <Results value={filteredList?.length} />}
+      {isOpen && (
+        <div className="sidebar-results">
+          <Results value={filteredList?.length} />
+        </div>
+      )}
     </aside>
   );
 }

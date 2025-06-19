@@ -1,13 +1,9 @@
 .results-container {
-  position: sticky;
-  bottom: 0;
   display: flex;
   align-items: center;
   width: 100%;
 
   padding: var(--radius);
-
-  border: 1px solid #ccc;
   background-color: var(--sidebar-bg-color);
 }
 

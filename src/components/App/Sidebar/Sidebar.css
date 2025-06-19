@@ -58,6 +58,12 @@
   list-style: none;
 }
 
+.sidebar-results {
+  position: sticky;
+  bottom: 0;
+  border: 1px solid #ccc;
+}
+
 /*SIDEBAR SCROLLBAR*/
 .sidebar {
   overflow-y: auto;
