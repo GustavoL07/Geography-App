@@ -5,12 +5,6 @@
   justify-content: center;
 }
 
-.compare-title {
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 750;
-  padding-bottom: var(--radius);
-}
-
 .selected-options {
   width: 90%;
   display: flex;

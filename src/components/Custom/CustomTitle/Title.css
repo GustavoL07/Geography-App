@@ -1,0 +1,5 @@
+.page-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 7vw, 5rem);
+  font-weight: 750;
+}

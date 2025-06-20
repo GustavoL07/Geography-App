@@ -51,6 +51,13 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
             setSelectedCountry(null);
           }}
         />
+        <Button
+          icon={<i className="fa-solid fa-star"></i>}
+          onClick={() => {
+            setDisplayMode("favorite");
+            setSelectedCountry(null);
+          }}
+        />
 
         <Button
           icon={settingsIcon}
@@ -58,6 +65,7 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
             setDialogToggle(!dialogToggle);
           }}
         />
+
         <Dialog
           title={"Settings"}
           isOpen={dialogToggle}

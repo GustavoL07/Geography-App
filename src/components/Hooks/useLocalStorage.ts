@@ -1,16 +1,25 @@
+import Country from "@/utils/Country/Country";
 import { useEffect, useState } from "react";
 
-function getSavedValue(key: string, initialValue: any) {
+function getSavedValue<T>(key: string, initialValue: any): T {
   const item = localStorage.getItem(key);
   if (item === null) return initialValue;
 
   const savedValue = JSON.parse(item);
+
+  if (key === "favoriteList" && Array.isArray(savedValue)) {
+    return savedValue.map((obj) => Country.fromJSON(obj)) as T;
+  }
+
   return savedValue ? savedValue : initialValue;
 }
 
-export default function useLocalStorage<T>(key: string, initialValue: T) {
-  const [value, setValue] = useState(() => {
-    return getSavedValue(key, initialValue);
+export default function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [value, setValue] = useState<T>(() => {
+    return getSavedValue<T>(key, initialValue);
   });
 
   useEffect(() => {

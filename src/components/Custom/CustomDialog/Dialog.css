@@ -38,7 +38,6 @@ dialog .btn-wrapper {
   justify-content: end;
 }
 
-/* Animação de entrada */
 @keyframes dialog-fade-in {
   0% {
     opacity: 0;

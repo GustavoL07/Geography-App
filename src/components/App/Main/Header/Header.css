@@ -10,7 +10,6 @@
   background-color: var(--sidebar-bg-color);
   border-bottom: 1px solid var(--shadow-color);
   box-shadow: var(--shadow-base) var(--shadow-size) rgba(0, 0, 0, 0.3);
-  background-color: var(--sidebar-bg-color);
 
   transition: all var(--sidebar-time) var(--sidebar-mode);
 }
@@ -22,7 +21,7 @@
   height: 1.5rem;
 }
 .header-container p {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(0.75rem, 2vw, 1.5rem);
   font-weight: 750;
 }
 

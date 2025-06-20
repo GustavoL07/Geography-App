@@ -7,6 +7,7 @@ import SearchResults from "@/components/Custom/CustomSearchResult/SearchResuts";
 import Overview from "../FullCountry/Overview/Overview";
 import InfoBox from "../FullCountry/InfoBox/InfoBox";
 import { FormatOptions } from "@/utils/Organizing/formatter";
+import Title from "@/components/Custom/CustomTitle/Title";
 
 type Props = { title?: string };
 export default function CompareCountry({ title = "Compare Countries" }: Props) {
@@ -33,7 +34,7 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
   return (
     <>
       <div className="compare-wrapper">
-        <p className="compare-title">{title}</p>
+        <Title title={title} />
 
         <div className="search-area">
           <Search

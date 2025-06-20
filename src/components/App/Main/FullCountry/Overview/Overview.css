@@ -18,7 +18,7 @@
 
 .overview-title {
   text-align: center;
-  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 3rem);
   font-weight: 800;
   color: var(--text-color);
 }

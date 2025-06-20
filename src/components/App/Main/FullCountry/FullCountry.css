@@ -9,11 +9,11 @@
 }
 
 .info-grid {
-  max-width: 85%;
+  width: 80%;
 
   --grid-max-col-count: 3;
   --grid-min-col-size: 150px;
-  --grid-gap: var(--radius);
+  --grid-gap: calc(var(--radius) * 3);
 
   /* calculations, do not touch */
   --grid-col-size-calc: calc(

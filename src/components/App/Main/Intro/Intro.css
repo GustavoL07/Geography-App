@@ -4,11 +4,6 @@
   align-items: center;
 }
 
-.app-title {
-  font-size: clamp(0.5rem, 8vw, 4rem);
-  font-weight: 750;
-}
-
 .app-image {
   width: clamp(3rem, 20vw, 16rem);
   height: clamp(3rem, 20vw, 16rem);
@@ -20,10 +15,10 @@
 
   cursor: pointer;
 }
-.app-image:hover{
+.app-image:hover {
   transform: scale(1.03);
 }
-.app-image:active{
+.app-image:active {
   transform: scale(0.85);
 }
 

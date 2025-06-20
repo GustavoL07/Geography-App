@@ -1,0 +1,21 @@
+.favorite-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: calc(var(--radius) * 1.25) 0;
+}
+
+.favorite-option {
+  cursor: pointer;
+  border-radius: var(--radius);
+  padding: var(--radius);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.favorite-option:active {
+  transform: scale(0.95);
+}

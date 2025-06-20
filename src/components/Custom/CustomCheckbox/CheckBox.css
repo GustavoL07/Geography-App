@@ -3,6 +3,10 @@ input[type="checkbox"].switch-toggle {
   display: none;
 }
 
+.checkbox-wrapper {
+  display: flex;
+}
+
 .switch-label {
   position: relative;
   display: inline-block;

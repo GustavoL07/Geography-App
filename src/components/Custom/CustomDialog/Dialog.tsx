@@ -10,7 +10,6 @@ interface Props {
 }
 export default function Dialog({ title, isOpen, onClose, children }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const closeIcon = <i className="fa-solid fa-xmark close-icon"></i>;
 
   useEffect(() => {
     if (!dialogRef.current) return;
@@ -36,7 +35,7 @@ export default function Dialog({ title, isOpen, onClose, children }: Props) {
     <dialog ref={dialogRef}>
       <div className="btn-wrapper">
         <p className="title">{title}</p>
-        <Button icon={closeIcon} onClick={handleClose}></Button>
+        <Button icon={<i className="fa-solid fa-xmark close-icon"></i>} onClick={handleClose} />
       </div>
       {children}
     </dialog>

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { Country, CountryContextInterface, CountryList } from "@/types";
 import getData from "@/utils/Fetch/getData";
+import useLocalStorage from "../Hooks/useLocalStorage";
 
 const CountryContext = createContext<CountryContextInterface>({
   countryList: [],
@@ -18,7 +19,7 @@ export function CountryProvider({ children }: any) {
   const [selectedCountry, setSelectedCountry] =
     useState<CountryContextInterface["selectedCountry"]>(null);
 
-  const [favoriteList, setFavoriteListState] = useState<CountryList>([]);
+  const [favoriteList, setFavoriteListState] = useLocalStorage<CountryList>("favoriteList", []);
   function setFavoriteList(country: Country) {
     setFavoriteListState((prevList) => {
       const exists = prevList.some((c) => c.name.symbol === country.name.symbol);

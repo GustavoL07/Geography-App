@@ -10,6 +10,7 @@ import Popup from "./Popup/Popup";
 import { style } from "../../../../utils/World-Map/helpers";
 import { memo } from "react";
 import { Country, CountryList } from "@/types";
+import Title from "@/components/Custom/CustomTitle/Title";
 
 const geoData = rawData as GeoJsonObject;
 
@@ -58,7 +59,7 @@ function WorldMap({ list, title = "The World Map", onPopupClick }: Props) {
 
   return (
     <div className="worldmap-container">
-      <p className="map-title">{title}</p>
+      <Title title={title} />
       <div className="world-container">
         <MapContainer
           center={[0, 0]}

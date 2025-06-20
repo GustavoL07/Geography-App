@@ -7,7 +7,7 @@ type Props = {
 };
 export default function CheckBox({ id, checked, onChange }: Props) {
   return (
-    <div className="checkbox-wrapper-3">
+    <div className="checkbox-wrapper">
       <input
         type="checkbox"
         id={id}

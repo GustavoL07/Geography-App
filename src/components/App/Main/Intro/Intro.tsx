@@ -1,12 +1,13 @@
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import "./Intro.css";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
+import Title from "@/components/Custom/CustomTitle/Title";
 
 export default function Intro({}) {
   const { countryList, setSelectedCountry } = useCountryContext();
-  const {setDisplayMode} = useSettingsContext()
+  const { setDisplayMode } = useSettingsContext();
 
-  function onImageClick(){
+  function onImageClick() {
     const randomCountry = countryList[Math.round(Math.random() * countryList.length)];
     setSelectedCountry(randomCountry);
     setDisplayMode("full");
@@ -14,8 +15,13 @@ export default function Intro({}) {
 
   return (
     <div className="intro">
-      <p className="app-title">Geography App</p>
-      <img className="app-image" src="/earth-globe.png" alt="Earth Globe" onClick={() => onImageClick()}/>
+      <Title title="Geography App" />
+      <img
+        className="app-image"
+        src="/earth-globe.png"
+        alt="Earth Globe"
+        onClick={() => onImageClick()}
+      />
       <section>
         <p className="app-desc">
           Open the sidebar and search for any country you would like to know more about!

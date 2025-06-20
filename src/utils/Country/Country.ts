@@ -24,6 +24,7 @@ export default class Country {
   language: string[];
   geography: CountryGeography;
   indicators: CountryIndicators;
+  favorited: boolean;
 
   constructor(data: any, borderNameMap: Map<string, string>, metrics: any) {
     this.name = {
@@ -91,6 +92,31 @@ export default class Country {
         forestAreaPercent: metrics.forestAreaPercent,
       },
     };
+
+    this.favorited = false;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      capital: this.capital,
+      continent: this.continent,
+      flag: this.flag,
+      money: this.money,
+      language: this.language,
+      geography: this.geography,
+      indicators: this.indicators,
+      favorited: this.favorited,
+    };
+  }
+
+  static fromJSON(obj: any): Country {
+    const dummy = Object.create(Country.prototype);
+    return Object.assign(dummy, obj);
+  }
+
+  setFavorited() {
+    this.favorited = !this.favorited;
   }
 
   getFormatted(key: FormatKey) {
