@@ -4,7 +4,7 @@
 .search-results-wrapper .search-results {
   transform: translateX(-50%);
   position: fixed;
-  width: 75%;
+  width: 50vw;
   max-height: 45vh;
   overflow: scroll;
   background-color: white;
