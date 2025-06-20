@@ -3,6 +3,7 @@ import { Country, CountryList, SelectedCountry } from "./country";
 
 export interface CountryContextInterface {
   countryList: CountryList;
+  setCountryList: (list: CountryList) => void;
 
   selectedCountry: SelectedCountry;
   setSelectedCountry: (country: SelectedCountry) => void;

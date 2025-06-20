@@ -11,6 +11,10 @@ function getSavedValue<T>(key: string, initialValue: any): T {
     return savedValue.map((obj) => Country.fromJSON(obj)) as T;
   }
 
+  if (key === "countryList" && Array.isArray(savedValue)) {
+    return savedValue.map((obj) => Country.fromJSON(obj)) as T;
+  }
+
   return savedValue ? savedValue : initialValue;
 }
 

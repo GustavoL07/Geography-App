@@ -87,7 +87,7 @@
 .sort-method{
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: var(--radius) 0;
   background-color: white;
   position: sticky;

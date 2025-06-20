@@ -5,6 +5,7 @@ import useLocalStorage from "../Hooks/useLocalStorage";
 
 const CountryContext = createContext<CountryContextInterface>({
   countryList: [],
+  setCountryList: () => {},
 
   selectedCountry: null,
   setSelectedCountry: () => {},
@@ -14,23 +15,27 @@ const CountryContext = createContext<CountryContextInterface>({
 });
 
 export function CountryProvider({ children }: any) {
-  const [countryList, setCountryList] = useState<CountryList>([]);
+  const [countryList, setCountryList] = useLocalStorage<CountryList>("countryList", []);
+  const favoriteList = countryList.filter((c) => c.favorited);
 
   const [selectedCountry, setSelectedCountry] =
     useState<CountryContextInterface["selectedCountry"]>(null);
 
-  const [favoriteList, setFavoriteListState] = useLocalStorage<CountryList>("favoriteList", []);
   function setFavoriteList(country: Country) {
-    setFavoriteListState((prevList) => {
-      const exists = prevList.some((c) => c.name.symbol === country.name.symbol);
-      return exists
-        ? prevList.filter((c) => c.name.symbol !== country.name.symbol)
-        : [...prevList, country];
-    });
+    setCountryList((prevList) =>
+      prevList.map((c) => {
+        if (c.name.symbol === country.name.symbol) {
+          c.setFavorited();
+        }
+        return c;
+      })
+    );
   }
 
   useEffect(() => {
     async function fetchData() {
+      if (countryList.length > 0) return;
+
       const data = await getData();
       setCountryList(data);
     }
@@ -42,6 +47,7 @@ export function CountryProvider({ children }: any) {
     <CountryContext.Provider
       value={{
         countryList,
+        setCountryList,
         selectedCountry,
         setSelectedCountry,
         favoriteList,

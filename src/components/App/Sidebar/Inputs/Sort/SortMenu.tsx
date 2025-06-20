@@ -13,6 +13,12 @@ export default function SortMenu({ close, selectedOption, setSelectedOption, set
   const { sortMode, setSortMode, setSortValue } = useSettingsContext();
 
   const changeSort = () => (sortMode === "asc" ? setSortMode("desc") : setSortMode("asc"));
+  const sortByFavorite = () => {
+    setSortValue("favorite");
+    setSortText("Favorites");
+    setSortMode("desc");
+    close();
+  };
   const handleClick = (key: SortKey, text: string, i: number) => {
     setSortValue(key);
     setSelectedOption(i);
@@ -23,7 +29,7 @@ export default function SortMenu({ close, selectedOption, setSelectedOption, set
   return (
     <div className="sort-wrapper">
       <div className="sort-container">
-        <div className="sort-method" onClick={changeSort}>
+        <div className="sort-method">
           <Button
             icon={
               sortMode === "asc" ? (
@@ -34,9 +40,11 @@ export default function SortMenu({ close, selectedOption, setSelectedOption, set
             }
             onClick={changeSort}
           />
+          <Button icon={<i className="fa-solid fa-star"></i>} onClick={sortByFavorite} />
         </div>
 
         {SortOptions.map((option, index) => {
+          if (option.key === "favorite") return;
           return (
             <div
               className={`sort-option ${selectedOption === index ? "active" : ""}`}

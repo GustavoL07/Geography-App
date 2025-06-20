@@ -8,6 +8,7 @@ type Filds = {
 };
 
 export const SortOptions = [
+  { key: "favorite", value: (c) => Number(c.favorited), formatOption: "", text: "" },
   { key: "name", value: (c) => c.name.informal, formatOption: "name", text: "Name" },
   { key: "area", value: (c) => c.geography.area, formatOption: "area", text: "Area" },
   { key: "pop", value: (c) => c.geography.population, formatOption: "pop", text: "Population" },
@@ -192,7 +193,7 @@ function getFildFormatOption(key: SortKey) {
 }
 
 function getSortFunction(key: SortKey, mode: SortMode) {
-  return (a: Country, b: Country) => {
+  const sortFunction = (a: Country, b: Country) => {
     const value = getFildValue(key);
     if (!value) {
       return 0;
@@ -214,6 +215,8 @@ function getSortFunction(key: SortKey, mode: SortMode) {
     }
     return 0;
   };
+
+  return sortFunction;
 }
 
 export function getFormatOption(key: SortKey) {
