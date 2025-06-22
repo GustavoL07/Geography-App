@@ -10,7 +10,7 @@ import Popup from "./Popup/Popup";
 import { style } from "../../../../utils/World-Map/helpers";
 import { memo } from "react";
 import { Country, CountryList } from "@/types";
-import Title from "@/components/Custom/CustomTitle/Title";
+import Title from "@/components/Custom/Title/Title";
 
 const geoData = rawData as GeoJsonObject;
 

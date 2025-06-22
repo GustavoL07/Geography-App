@@ -1,0 +1,10 @@
+.bottom {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--sidebar-bg-color);
+  border-top: 1px solid black;
+}
+
+.bottom .text {
+  text-align: center;
+}

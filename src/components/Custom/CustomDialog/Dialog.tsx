@@ -1,6 +1,6 @@
 import "./Dialog.css";
 import { useEffect, useRef } from "react";
-import Button from "../CustomButton/Button";
+import Button from "../Button/Button";
 
 interface Props {
   title: string;

@@ -1,45 +1,20 @@
 import "./Sidebar.css";
-import Button from "@/components/Custom/CustomButton/Button";
-import Search from "../../Custom/CustomSearch/Search";
-import Sort from "./Inputs/Sort/Sort";
-import Card from "./Card/Card";
-import Results from "./Results/Results";
 import { useSettingsContext } from "../../Contexts/SettingsContext";
+import Top from "./Sidebar/Top/Top";
+import Card from "./Card/Card";
+import Bottom from "./Sidebar/Bottom/Bottom";
 
 interface Sidebar {
   isOpen: boolean;
   toggleSidebar: () => void;
 }
 export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
-  const { filteredList, searchValue, setSearchValue } = useSettingsContext();
-  const sidebarIcon = <i className="fa-solid fa-bars"></i>;
+  const { filteredList } = useSettingsContext();
+  const bottomText = filteredList.length > 0 ? `${filteredList.length} Results` : "No results";
 
   return (
     <aside className={`sidebar ${isOpen ? "" : "closed"}`}>
-      <div className="sidebar-top">
-        <div className={`btns-wrapper ${isOpen ? "" : "off"}`}>
-          <Button
-            icon={sidebarIcon}
-            onClick={() => {
-              toggleSidebar();
-            }}
-          />
-        </div>
-
-        {isOpen === true ? (
-          <div className="search-area">
-            <Search
-              value={searchValue}
-              onSearch={setSearchValue}
-              resetSearch={() => setSearchValue("")}
-            />
-          </div>
-        ) : (
-          <i className="fas fa-search search-icon"></i>
-        )}
-
-        <Sort isOpen={isOpen} />
-      </div>
+      <Top isOpen={isOpen} toggleIsOpen={toggleSidebar} />
 
       {filteredList && (
         <ul>
@@ -53,11 +28,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
         </ul>
       )}
 
-      {isOpen && (
-        <div className="sidebar-results">
-          <Results value={filteredList?.length} />
-        </div>
-      )}
+      <Bottom isOpen={isOpen} text={bottomText} />
     </aside>
   );
 }

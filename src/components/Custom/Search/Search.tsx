@@ -1,5 +1,5 @@
 import "./Search.css";
-import Button from "@/components/Custom/CustomButton/Button";
+import Button from "@/components/Custom/Button/Button";
 
 interface Props {
   value: string;

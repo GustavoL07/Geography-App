@@ -2,12 +2,12 @@ import "./CompareCountry.css";
 import { Country } from "@/types";
 import { useState } from "react";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
-import Search from "@/components/Custom/CustomSearch/Search";
-import SearchResults from "@/components/Custom/CustomSearchResult/SearchResuts";
+import Search from "@/components/Custom/Search/Search";
+import SearchResults from "@/components/Custom/SearchResult/SearchResuts";
 import Overview from "../FullCountry/Overview/Overview";
 import InfoBox from "../FullCountry/InfoBox/InfoBox";
 import { FormatOptions } from "@/utils/Organizing/formatter";
-import Title from "@/components/Custom/CustomTitle/Title";
+import Title from "@/components/Custom/Title/Title";
 
 type Props = { title?: string };
 export default function CompareCountry({ title = "Compare Countries" }: Props) {

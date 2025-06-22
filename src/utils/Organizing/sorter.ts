@@ -8,7 +8,7 @@ type Filds = {
 };
 
 export const SortOptions = [
-  { key: "favorite", value: (c) => Number(c.favorited), formatOption: "", text: "" },
+  { key: "favorite", value: (c) => Number(c.favorited), formatOption: "", text: "Favorite" },
   { key: "name", value: (c) => c.name.informal, formatOption: "name", text: "Name" },
   { key: "area", value: (c) => c.geography.area, formatOption: "area", text: "Area" },
   { key: "pop", value: (c) => c.geography.population, formatOption: "pop", text: "Population" },

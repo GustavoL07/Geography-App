@@ -16,7 +16,9 @@ const CountryContext = createContext<CountryContextInterface>({
 
 export function CountryProvider({ children }: any) {
   const [countryList, setCountryList] = useLocalStorage<CountryList>("countryList", []);
-  const favoriteList = countryList.filter((c) => c.favorited);
+  const favoriteList = countryList
+    .filter((c) => c.favorited)
+    .sort((a, b) => a.name.informal.toLowerCase().localeCompare(b.name.informal.toLowerCase()));
 
   const [selectedCountry, setSelectedCountry] =
     useState<CountryContextInterface["selectedCountry"]>(null);

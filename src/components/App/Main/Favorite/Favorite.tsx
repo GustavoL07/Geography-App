@@ -3,8 +3,8 @@ import { useCountryContext } from "@/components/Contexts/CountryContext";
 import Overview from "../FullCountry/Overview/Overview";
 import { Country } from "@/types";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
-import Message from "@/components/Custom/CustomMessage/Message";
-import Title from "@/components/Custom/CustomTitle/Title";
+import Message from "@/components/Custom/Message/Message";
+import Title from "@/components/Custom/Title/Title";
 
 type Props = {
   title?: string;

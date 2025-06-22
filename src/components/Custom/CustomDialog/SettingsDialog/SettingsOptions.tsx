@@ -1,6 +1,6 @@
 import "./SettingsOptions.css";
-import Button from "@/components/Custom/CustomButton/Button";
-import CheckBox from "@/components/Custom/CustomCheckbox/CheckBox";
+import Button from "@/components/Custom/Button/Button";
+import CheckBox from "@/components/Custom/Checkbox/CheckBox";
 import { FilterKey, MapTileKey } from "@/types";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { clearLocalStorage } from "@/components/Hooks/useLocalStorage";

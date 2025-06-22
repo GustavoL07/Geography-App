@@ -1,7 +1,7 @@
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import "./Intro.css";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
-import Title from "@/components/Custom/CustomTitle/Title";
+import Title from "@/components/Custom/Title/Title";
 
 export default function Intro({}) {
   const { countryList, setSelectedCountry } = useCountryContext();

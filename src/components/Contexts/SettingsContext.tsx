@@ -38,7 +38,7 @@ type Props = {
 };
 export function SettingsProvider({ list, children }: Props) {
   const [mapTile, setMapTile] = useLocalStorage<MapTileKey>("mapTile", "light");
-  const [sortValue, setSortValue] = useLocalStorage<SortKey>("sortValue", "none");
+  const [sortValue, setSortValue] = useState<SortKey>("none");
   const [sortMode, setSortMode] = useState<SortMode>("asc");
   const [filterBy, setFilterBy] = useLocalStorage<FilterKey[]>("filterBy", ["name"]);
 

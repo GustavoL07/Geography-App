@@ -1,8 +1,9 @@
 .search-wrapper {
+  width: calc(100% - 2px); /* 2px for border*/
   display: flex;
   align-items: center;
-  width: 100%;
-  padding: var(--radius);
+  justify-content: center;
+  padding: var(--radius) 0;
   border: 1px solid #ccc;
   border-radius: var(--radius);
   background-color: var(--sidebar-bg-color);
@@ -27,5 +28,5 @@
   outline: none;
   font-size: 0.95rem;
   background-color: transparent;
-  width: 100%;
+  width: 70%;
 }

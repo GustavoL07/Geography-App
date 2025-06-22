@@ -1,5 +1,5 @@
 import "./Header.css";
-import Button from "@/components/Custom/CustomButton/Button";
+import Button from "@/components/Custom/Button/Button";
 import Dialog from "@/components/Custom/CustomDialog/Dialog";
 import SettingsOptions from "../../../Custom/CustomDialog/SettingsDialog/SettingsOptions.js";
 import { useState } from "react";
@@ -25,6 +25,14 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
       <img src="/earth-globe.png" alt="" />
       <p>{title}</p>
       <div className="opt-btns">
+        <Button
+          icon={introIcon}
+          onClick={() => {
+            setDisplayMode("intro");
+            setSelectedCountry(null);
+          }}
+        />
+
         {countryList && (
           <Button
             icon={mapIcon}
@@ -44,13 +52,6 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
           }}
         />
 
-        <Button
-          icon={introIcon}
-          onClick={() => {
-            setDisplayMode("intro");
-            setSelectedCountry(null);
-          }}
-        />
         <Button
           icon={<i className="fa-solid fa-star"></i>}
           onClick={() => {
