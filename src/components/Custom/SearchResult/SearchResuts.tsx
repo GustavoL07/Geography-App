@@ -1,6 +1,5 @@
 import "./SearchResults.css";
 import { useEffect, useRef } from "react";
-import Results from "@/components/App/Sidebar/Results/Results";
 
 type Props<T> = {
   onLoseFocus: () => void;
@@ -33,9 +32,7 @@ export default function SearchResults<T>({
         {displayableOptions.length !== 0 ? (
           displayableOptions.map(optionsCallback)
         ) : (
-          <div className="results">
-            <Results />
-          </div>
+          <p>No results.</p>
         )}
       </div>
     </div>

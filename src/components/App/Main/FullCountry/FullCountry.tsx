@@ -28,7 +28,7 @@ export default function FullCountry({}) {
         })}
       </section>
 
-      <Map />
+      <Map toDisplay={[selectedCountry]} />
       <Button
         icon={<i className="fa-solid fa-star"></i>}
         onClick={() => setFavoriteCountry(selectedCountry)}

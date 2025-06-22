@@ -1,34 +1,39 @@
 import "./Map.css";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useCountryContext } from "@/components/Contexts/CountryContext";
-import FlyToCountry from "./FlyMap";
-import L from "leaflet";
+import { useEffect } from "react";
+import { useMap, MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { CountryList } from "@/types";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { getMapUrl, getMapAttribution } from "@/utils/World-Map/helpers";
 
-export default function Map() {
-  const { selectedCountry } = useCountryContext();
-  const { mapTile } = useSettingsContext();
-  const markerRef = useRef<L.Marker>(null);
-
-  if (!selectedCountry) return null;
-
-  const { latitude, longitude } = selectedCountry.geography.position;
-
+function MapCenterer({ center }: { center: [number, number] }) {
+  const map = useMap();
   useEffect(() => {
-    setTimeout(() => {
-      if (markerRef.current) {
-        markerRef.current.openPopup();
-      }
-    }, 1500);
-  }, [selectedCountry]);
+    map.setView(center);
+  }, [center, map]);
+  return null;
+}
+
+type Props = {
+  toDisplay: CountryList;
+};
+export default function Map({ toDisplay }: Props) {
+  const { mapTile } = useSettingsContext();
+  const center: [number, number] =
+    toDisplay.length > 1
+      ? [0, 0]
+      : [
+          toDisplay[0]?.geography.position.latitude ?? 0,
+          toDisplay[0]?.geography.position.longitude ?? 0,
+        ];
 
   return (
     <div className="map-container">
       <MapContainer
-        center={[latitude, longitude]}
+        center={[
+          toDisplay[0]?.geography.position.latitude ?? 0,
+          toDisplay[0]?.geography.position.longitude ?? 0,
+        ]}
         zoom={3}
         minZoom={2}
         maxZoom={5.5}
@@ -39,17 +44,20 @@ export default function Map() {
         ]}
         maxBoundsViscosity={1}
       >
+        <MapCenterer center={center} />
         <TileLayer attribution={getMapAttribution(mapTile)} url={getMapUrl(mapTile)} />
-
-        <Marker position={[latitude, longitude]} ref={markerRef}>
-          <Popup>
-            <b>{selectedCountry.name.informal}</b>
-            <br />
-            {selectedCountry.getFormatted("continent")}
-          </Popup>
-        </Marker>
-
-        <FlyToCountry lat={latitude} lng={longitude} />
+        {toDisplay.map((country) => {
+          const { latitude, longitude } = country.geography.position;
+          return (
+            <Marker key={country.name.symbol} position={[latitude, longitude]}>
+              <Popup>
+                <b>{country.name.informal}</b>
+                <br />
+                {country.getFormatted("continent")}
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </div>
   );

@@ -1,5 +1,5 @@
 import "./CompareCountry.css";
-import { Country } from "@/types";
+import { Country, CountryList } from "@/types";
 import { useState } from "react";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import Search from "@/components/Custom/Search/Search";
@@ -8,12 +8,14 @@ import Overview from "../FullCountry/Overview/Overview";
 import InfoBox from "../FullCountry/InfoBox/InfoBox";
 import { FormatOptions } from "@/utils/Organizing/formatter";
 import Title from "@/components/Custom/Title/Title";
+import Map from "../FullCountry/Map/Map";
+import Button from "@/components/Custom/Button/Button";
 
 type Props = { title?: string };
 export default function CompareCountry({ title = "Compare Countries" }: Props) {
   const { countryList } = useCountryContext();
   const [searchValue, setSearchValue] = useState("");
-  const [comparing, setComparing] = useState<[Country | null, Country | null]>([null, null]);
+  const [comparing, setComparing] = useState<CountryList>([]);
 
   const addCompareCountry = (newCountry: Country) =>
     setComparing(([first, second]) => {
@@ -25,7 +27,7 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
       }
       return [second, newCountry];
     });
-  const resetCompareCountry = () => setComparing([null, null]);
+  const resetCompareCountry = () => setComparing([]);
 
   const filteredByName = countryList
     .filter((c) => c.name.informal.toLowerCase().includes(searchValue.toLowerCase()))
@@ -45,8 +47,7 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
               resetCompareCountry();
             }}
           />
-        </div>
-        {searchValue && (
+          {searchValue && (
           <SearchResults
             displayableOptions={filteredByName}
             optionsCallback={(c, index) => (
@@ -70,11 +71,19 @@ export default function CompareCountry({ title = "Compare Countries" }: Props) {
             onLoseFocus={() => setSearchValue("")}
           />
         )}
+          <div className="controls-area">
+            <Button icon={<i className="fa-solid fa-info"></i>}/>
+            <Button icon={<i className="fa-solid fa-info"></i>}/>
+          </div>
+        </div>
+
+        
 
         <div className="selected-options">
           {comparing[0] !== null && <BeingCompared c={comparing[0]} />}
           {comparing[1] !== null && <BeingCompared c={comparing[1]} />}
         </div>
+        {comparing[0] && comparing[1] && <Map toDisplay={[comparing[0], comparing[1]]} />}
       </div>
     </>
   );
@@ -84,13 +93,13 @@ type BeingComparedProps = {
   c: Country;
 };
 function BeingCompared({ c }: BeingComparedProps) {
+  if (!c) return;
   return (
     <div className="being-compared">
       <Overview country={c}></Overview>
       <section className="info-grid">
         {FormatOptions.map((obj, index) => {
           if (obj.key === "name") return null;
-
           return <InfoBox key={index} text={`${obj.text}:`} value={c.getFormatted(obj.key)} />;
         })}
       </section>
