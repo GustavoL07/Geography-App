@@ -4,6 +4,7 @@ import CheckBox from "@/components/Custom/Checkbox/CheckBox";
 import { FilterKey, MapTileKey } from "@/types";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { clearLocalStorage } from "@/components/Hooks/useLocalStorage";
+import Menu from "../../Menu/Menu";
 
 type Props = {
   description: string;
@@ -33,14 +34,30 @@ function OptionCheckboxes({ description, filterKey }: Props) {
 
 function OptionSelect({}) {
   const { mapTile, setMapTile } = useSettingsContext();
+  const menuIcon = <i className="fas fa-sort"></i>;
+  const menuTitle = `${mapTile.charAt(0).toUpperCase()}${mapTile.slice(1)}`;
 
   return (
-    <div className="option">
-      <select value={mapTile} onChange={(e) => setMapTile(e.target.value as MapTileKey)}>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="earth">Earth</option>
-      </select>
+    <div className="opt-sel-wrapper">
+      <Menu icon={menuIcon} text={menuTitle}>
+        <div className="map-opt-wrapper">
+          <p
+            className={`${mapTile === "light" ? "active" : ""}`}
+            onClick={() => setMapTile("light")}
+          >
+            Light
+          </p>
+          <p className={`${mapTile === "dark" ? "active" : ""}`} onClick={() => setMapTile("dark")}>
+            Dark
+          </p>
+          <p
+            className={`${mapTile === "earth" ? "active" : ""}`}
+            onClick={() => setMapTile("earth")}
+          >
+            Earth
+          </p>
+        </div>
+      </Menu>
     </div>
   );
 }

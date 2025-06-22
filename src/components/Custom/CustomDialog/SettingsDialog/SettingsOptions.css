@@ -20,3 +20,35 @@
   align-items: center;
   gap: var(--radius);
 }
+
+.opt-sel-wrapper {
+  width: 25%;
+}
+
+.map-opt-wrapper {
+  position: fixed;
+  width: 10vw;
+  text-align: center;
+  border-radius: var(--radius);
+  border: 1px solid black;
+  padding: var(--radius);
+  background-color: white;
+}
+
+.map-opt-wrapper p {
+  font-weight: 500;
+  margin: var(--radius) 0;
+  padding: var(--radius);
+  border-radius: var(--radius);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.map-opt-wrapper p.active {
+  font-weight: 650;
+  box-shadow: 0 0 5px var(--active-color);
+}
+
+.map-opt-wrapper p:hover {
+  box-shadow: 0 0 3px var(--active-color);
+}
