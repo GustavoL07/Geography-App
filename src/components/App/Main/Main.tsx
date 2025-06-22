@@ -12,9 +12,10 @@ import Favorite from "./Favorite/Favorite";
 
 interface Props {
   isSidebarOpen: boolean;
+  closeSidebar: () => void;
 }
 
-export default function Main({ isSidebarOpen }: Props) {
+export default function Main({ isSidebarOpen, closeSidebar }: Props) {
   const { countryList, setSelectedCountry } = useCountryContext();
   const { displayMode, setDisplayMode } = useSettingsContext();
 
@@ -25,7 +26,7 @@ export default function Main({ isSidebarOpen }: Props) {
 
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
-      <Header isSidebarOpen={isSidebarOpen} />
+      <Header closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
 
       <div className="display-area">
         {(() => {

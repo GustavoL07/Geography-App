@@ -9,8 +9,9 @@ import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 type Props = {
   title?: string;
   isSidebarOpen: boolean;
+  closeSidebar: () => void;
 };
-export default function Header({ isSidebarOpen, title = "Geography App" }: Props) {
+export default function Header({ closeSidebar, isSidebarOpen, title = "Geography App" }: Props) {
   const { setSelectedCountry, countryList } = useCountryContext();
   const { setDisplayMode, setSearchValue } = useSettingsContext();
   const [dialogToggle, setDialogToggle] = useState(false);
@@ -37,9 +38,12 @@ export default function Header({ isSidebarOpen, title = "Geography App" }: Props
           <Button
             icon={mapIcon}
             onClick={() => {
-              setDisplayMode("worldMap");
-              setSelectedCountry(null);
-              setSearchValue("");
+              closeSidebar();
+              setTimeout(() => {
+                setDisplayMode("worldMap");
+                setSelectedCountry(null);
+                setSearchValue(""); // time for the sidebar to close completely and avoid map colors to go missing
+              }, 0.6 * 1000);
             }}
           />
         )}

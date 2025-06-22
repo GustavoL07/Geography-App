@@ -7,11 +7,12 @@ import { useState } from "react";
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <AppProviders>
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <Main isSidebarOpen={isSidebarOpen} />
+      <Main closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
     </AppProviders>
   );
 }
