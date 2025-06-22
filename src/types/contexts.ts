@@ -9,7 +9,7 @@ export interface CountryContextInterface {
   setSelectedCountry: (country: SelectedCountry) => void;
 
   favoriteList: CountryList;
-  setFavoriteList: (country: Country) => void;
+  setFavoriteCountry: (country: Country) => void;
 }
 
 export interface SettingsContextInterface {

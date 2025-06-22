@@ -4,9 +4,10 @@ import { FormatOptions } from "@/utils/Organizing/formatter";
 import Overview from "./Overview/Overview";
 import InfoBox from "./InfoBox/InfoBox";
 import Map from "@/components/App/Main/FullCountry/Map/Map";
+import Button from "@/components/Custom/Button/Button";
 
 export default function FullCountry({}) {
-  const { selectedCountry } = useCountryContext();
+  const { selectedCountry, setFavoriteCountry } = useCountryContext();
   if (!selectedCountry) return null;
 
   return (
@@ -28,6 +29,10 @@ export default function FullCountry({}) {
       </section>
 
       <Map />
+      <Button
+        icon={<i className="fa-solid fa-star"></i>}
+        onClick={() => setFavoriteCountry(selectedCountry)}
+      />
     </div>
   );
 }

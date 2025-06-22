@@ -11,27 +11,18 @@ interface Card {
 
 export default function Card({ isOpen, country }: Card) {
   if (!country) return null;
-  const {
-    countryList,
-    setCountryList,
-    selectedCountry,
-    setSelectedCountry,
-    favoriteList,
-    setFavoriteList,
-  } = useCountryContext();
+  const { selectedCountry, setSelectedCountry, favoriteList, setFavoriteCountry } =
+    useCountryContext();
   const { sortValue, setDisplayMode } = useSettingsContext();
   const isSelected = country === selectedCountry;
 
   const handleClick = () => {
     setSelectedCountry(country);
     setDisplayMode("full");
-    console.log(selectedCountry);
   };
-  const handleFavorite = () => {
-    country.setFavorited();
-    setFavoriteList(country);
-    setCountryList(countryList.map((c) => (c.name.symbol === country.name.symbol ? country : c)));
-  };
+
+  const handleFavorite = (country: Country) => setFavoriteCountry(country);
+
   const isFavorited = (country: Country) => {
     return favoriteList.some((c) => c.name.symbol === country.name.symbol);
   };
@@ -60,7 +51,7 @@ export default function Card({ isOpen, country }: Card) {
         className="favoriting"
         onClick={(e) => {
           e.stopPropagation();
-          handleFavorite();
+          handleFavorite(country);
         }}
       >
         <i className={`fa-solid fa-star ${isFavorited(country) ? "yellow" : ""}`}></i>

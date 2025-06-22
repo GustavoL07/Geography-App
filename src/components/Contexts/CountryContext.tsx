@@ -11,7 +11,7 @@ const CountryContext = createContext<CountryContextInterface>({
   setSelectedCountry: () => {},
 
   favoriteList: [],
-  setFavoriteList: () => {},
+  setFavoriteCountry: () => {},
 });
 
 export function CountryProvider({ children }: any) {
@@ -20,19 +20,13 @@ export function CountryProvider({ children }: any) {
     .filter((c) => c.favorited)
     .sort((a, b) => a.name.informal.toLowerCase().localeCompare(b.name.informal.toLowerCase()));
 
+  function setFavoriteCountry(country: Country) {
+    country.setFavorited();
+    setCountryList(countryList.map((c) => (c.name.symbol === country.name.symbol ? country : c)));
+  }
+
   const [selectedCountry, setSelectedCountry] =
     useState<CountryContextInterface["selectedCountry"]>(null);
-
-  function setFavoriteList(country: Country) {
-    setCountryList((prevList) =>
-      prevList.map((c) => {
-        if (c.name.symbol === country.name.symbol) {
-          c.setFavorited();
-        }
-        return c;
-      })
-    );
-  }
 
   useEffect(() => {
     async function fetchData() {
@@ -53,7 +47,7 @@ export function CountryProvider({ children }: any) {
         selectedCountry,
         setSelectedCountry,
         favoriteList,
-        setFavoriteList,
+        setFavoriteCountry,
       }}
     >
       {children}
