@@ -3,7 +3,7 @@ import getCountryData from "./getCountryData";
 import getCountryMetrics from "./getCountryMetrics";
 import threeDigit from "../Country/symbol";
 
-export default async function getData(): Promise<Array<Country> | []> {
+export default async function getData() {
   try {
     const countryData = await getCountryData();
     const countryMetrics = await getCountryMetrics();
@@ -17,7 +17,6 @@ export default async function getData(): Promise<Array<Country> | []> {
 
     return countryList;
   } catch (error) {
-    console.log(error);
-    return [];
+    throw error;
   }
 }

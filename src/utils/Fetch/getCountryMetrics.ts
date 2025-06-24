@@ -81,7 +81,7 @@ export default async function getCountryMetrics() {
 
     return metricsMap;
   } catch (error) {
-    console.log(error);
-    return new Map();
+    console.log("World bank API error", error);
+    throw error;
   }
 }

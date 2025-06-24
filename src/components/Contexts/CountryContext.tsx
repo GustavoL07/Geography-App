@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { Country, CountryContextInterface, CountryList } from "@/types";
+import { CountryContextInterface, CountryList } from "@/types";
 import getData from "@/utils/Fetch/getData";
 import useLocalStorage from "../Hooks/useLocalStorage";
+import backupInformation from "../../data/backupData.json";
+import Country from "@/utils/Country/Country";
 
 const CountryContext = createContext<CountryContextInterface>({
   countryList: [],
@@ -30,10 +32,16 @@ export function CountryProvider({ children }: any) {
 
   useEffect(() => {
     async function fetchData() {
-      if (countryList.length > 0) return;
+      if (countryList.length > 0) return; /* If there is something in localStorage, use it. */
 
-      const data = await getData();
-      setCountryList(data);
+      try {
+        const data = await getData();
+        setCountryList(data);
+      } catch (error) {
+        console.log("Using backup\nSomething went wrong...", error);
+        const backUpList = backupInformation.map((obj: any) => Country.fromJSON(obj));
+        setCountryList(backUpList);
+      }
     }
 
     fetchData();

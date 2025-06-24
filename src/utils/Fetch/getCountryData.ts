@@ -1,12 +1,12 @@
 import createSymbolToNameMap from "../Country/symbolToNameMap.js";
 
 export default async function getCountryData() {
-  const URL = "https://restcountries.com/v3.1/all";
+  const URL = "https://restcountries.com/v3.1/independent?status=true";
 
   try {
     const response = await fetch(URL);
     const data = await response.json();
-    const filtered = data.filter((country: any) => country.unMember); /* Only UN members */
+    const filtered = data.filter((country: any) => country.unMember);
     const symbolToNameMap = createSymbolToNameMap(filtered);
 
     return {
@@ -14,10 +14,7 @@ export default async function getCountryData() {
       symbolToNameMap,
     };
   } catch (error) {
-    console.log(error);
-    return {
-      list: [],
-      symbolToNameMap: new Map(),
-    };
+    console.log("Restcountries API error", error);
+    throw error;
   }
 }
