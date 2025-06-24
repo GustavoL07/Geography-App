@@ -1,16 +1,21 @@
-import createSymbolToNameMap from "../Country/symbolToNameMap.js";
+import { RestCountry } from "@/types/restCountries";
+import createSymbolToNameMap from "../Country/symbolToNameMap";
 
 export default async function getCountryData() {
-  const URL = "https://restcountries.com/v3.1/independent?status=true";
+  const URLS = [
+    "https://restcountries.com/v3.1/independent?status=true",
+    "https://restcountries.com/v3.1/independent?status=false",
+  ];
 
   try {
-    const response = await fetch(URL);
-    const data = await response.json();
-    const filtered = data.filter((country: any) => country.unMember);
-    const symbolToNameMap = createSymbolToNameMap(filtered);
+    const responses = await Promise.all(URLS.map((url) => fetch(url)));
+    const dataArrays = await Promise.all(responses.map((res) => res.json()));
+    const data: RestCountry[] = [].concat(...dataArrays);
+
+    const symbolToNameMap = createSymbolToNameMap(data);
 
     return {
-      list: filtered,
+      list: data,
       symbolToNameMap,
     };
   } catch (error) {
