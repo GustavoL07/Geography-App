@@ -1,4 +1,4 @@
-export default function createSymbolToNameMap(countryList: []) {
+export default function createSymbolToNameMap(countryList: any[]) {
   const map = new Map();
 
   countryList.forEach((country: any) => {
