@@ -1,3 +1,4 @@
+import { RestCountry } from "@/types";
 import { formatCountryValue } from "../Organizing/formatter";
 import threeDigit from "./symbol";
 import getCurrencyInfo from "./currency";
@@ -25,8 +26,10 @@ export default class Country {
   geography: CountryGeography;
   indicators: CountryIndicators;
   favorited: boolean;
+  independent: boolean;
+  unMember: boolean;
 
-  constructor(data: any, borderNameMap: Map<string, string>, metrics: any) {
+  constructor(data: RestCountry, borderNameMap: Map<string, string>, metrics: any) {
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
@@ -38,6 +41,8 @@ export default class Country {
     this.flag = data.flags.svg || "";
     this.money = getCurrencyInfo(data);
     this.language = Object.values(data.languages || {}) || [Country.#none];
+    this.independent = data.independent;
+    this.unMember = data.unMember;
 
     this.geography = {
       timezone: data.timezones || [],
@@ -107,6 +112,8 @@ export default class Country {
       geography: this.geography,
       indicators: this.indicators,
       favorited: this.favorited,
+      independent: this.independent,
+      unMember: this.unMember,
     };
   }
 
