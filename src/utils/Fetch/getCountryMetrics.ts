@@ -77,8 +77,10 @@ function cleanMetrics(map: Map<string, IndicatorObject>) {
 
   for (const [iso3, metric] of map.entries()) {
     const cleaned: Record<string, number> = {};
-    for (const [key, [firstValue]] of Object.entries(metric)) {
-      cleaned[key] = firstValue;
+    for (const [key, valueArr] of Object.entries(metric)) {
+      if (Array.isArray(valueArr) && valueArr.length > 0) {
+        cleaned[key] = valueArr[0];
+      }
     }
     cleanedMap.set(iso3, cleaned);
   }
