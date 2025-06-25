@@ -14,9 +14,6 @@ export default async function getData() {
 
       return new Country(country, symbolToNameMap, metric);
     });
-
-    console.log(countryList);
-
     return countryList;
   } catch (error) {
     throw error;
