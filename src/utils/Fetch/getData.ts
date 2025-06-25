@@ -8,7 +8,7 @@ export default async function getData() {
     const { list, symbolToNameMap } = await getCountryData();
     const countryMetrics = await getCountryMetrics();
 
-    const countryList = list.map((country: any) => {
+    const countryList = list.map((country) => {
       const countrySymbol = threeDigit(country.cca2);
       const metric = countryMetrics.has(countrySymbol) ? countryMetrics.get(countrySymbol) : {};
 

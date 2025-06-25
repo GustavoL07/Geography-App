@@ -1,6 +1,8 @@
-export default function getBorders(data: any, borderNameMap: Map<string, string>) {
+import { RestCountry } from "@/types";
+
+export default function getBorders(data: RestCountry, borderNameMap: Map<string, string>) {
   const borderSymbols = data.borders || [];
-  const borderNames = borderSymbols.map((code: any) => borderNameMap.get(code) || code);
+  const borderNames = borderSymbols.map((code) => borderNameMap.get(code) || code);
 
   return {
     symbols: borderSymbols,

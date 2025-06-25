@@ -1,9 +1,14 @@
-import { WorldBankIndicator } from "@/types";
+import { Indicators, WorldBankIndicator } from "@/types";
 import addHDIToMap from "./getHDI";
+
+interface IndicatorObject {
+  [indicator: string]: [number, number];
+}
 
 const INDICATORS = [
   { id: "IT.NET.USER.ZS", key: "internetUsage" },
   { id: "EG.ELC.ACCS.ZS", key: "electricityAccess" },
+  { id: "SH.H2O.BASW.ZS", key: "basicWaterService" },
   { id: "SH.STA.BASS.ZS", key: "basicSanitationService" },
   { id: "SE.ADT.1524.LT.ZS", key: "literacyRate" },
   { id: "SP.DYN.IMRT.IN", key: "infantMortality" },
@@ -15,6 +20,7 @@ const INDICATORS = [
   { id: "SP.POP.TOTL.MA.ZS", key: "malePercent" },
   { id: "SP.POP.TOTL.FE.ZS", key: "femalePercent" },
   { id: "SP.POP.65UP.TO.ZS", key: "elderlyPercent" },
+  { id: "NY.GDP.MKTP.CD", key: "gdp" },
   { id: "NY.GDP.PCAP.CD", key: "gdpPerCapita" },
   { id: "FP.CPI.TOTL.ZG", key: "inflationRate" },
   { id: "NE.EXP.GNFS.CD", key: "exports" },
@@ -31,7 +37,7 @@ const INDICATORS = [
 const BASE_URL = "https://api.worldbank.org/v2/country/all/indicator/";
 
 export default async function getCountryMetrics() {
-  const metricsMap = new Map();
+  const metricsMap: Map<string, IndicatorObject> = new Map();
 
   try {
     const fetches = INDICATORS.map(async ({ id, key }) => {
@@ -47,14 +53,10 @@ export default async function getCountryMetrics() {
         const date = parseInt(entry.date);
 
         if (!iso || value == null) continue;
-
-        if (!metricsMap.has(iso)) {
-          metricsMap.set(iso, {});
-        }
+        if (!metricsMap.has(iso)) metricsMap.set(iso, {});
 
         const countryMetrics = metricsMap.get(iso);
-
-        if (!(key in countryMetrics) || (countryMetrics[key][1] ?? 0) < date) {
+        if (countryMetrics && (!(key in countryMetrics) || (countryMetrics[key][1] ?? 0) < date)) {
           countryMetrics[key] = [value, date];
         }
       }
@@ -63,17 +65,25 @@ export default async function getCountryMetrics() {
     await Promise.all(fetches);
     addHDIToMap(metricsMap);
 
-    cleanMetrics(metricsMap);
-
-    return metricsMap;
+    return cleanMetrics(metricsMap);
   } catch (error) {
     console.log("World bank API error", error);
     throw error;
   }
 }
 
-function cleanMetrics(map: Map<string, object>) {
+function cleanMetrics(map: Map<string, IndicatorObject>) {
+  const cleanedMap = new Map<string, Indicators>();
 
+  for (const [iso3, metric] of map.entries()) {
+    const cleaned: Record<string, number> = {};
+    for (const [key, [firstValue]] of Object.entries(metric)) {
+      cleaned[key] = firstValue;
+    }
+    cleanedMap.set(iso3, cleaned);
+  }
+
+  return cleanedMap;
 }
 
 /*

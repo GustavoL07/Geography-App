@@ -1,17 +1,17 @@
-import { RestCountry } from "@/types";
+import {
+  FormatKey,
+  Continent,
+  Indicators,
+  RestCountry,
+  CountryName,
+  CountryMoney,
+  CountryGeography,
+  CountryIndicator,
+} from "@/types";
 import { formatCountryValue } from "../Organizing/formatter";
 import threeDigit from "./symbol";
 import getCurrencyInfo from "./currency";
 import getBorders from "./borders";
-
-import {
-  CountryName,
-  Continents,
-  CountryMoney,
-  CountryGeography,
-  CountryIndicators,
-  FormatKey,
-} from "@/types";
 
 export default class Country {
   static #none = "None";
@@ -19,17 +19,21 @@ export default class Country {
 
   name: CountryName;
   capital: string[];
-  continent: Continents;
+  continent: Continent;
   flag: string;
   money: CountryMoney;
   language: string[];
-  geography: CountryGeography;
-  indicators: CountryIndicators;
-  favorited: boolean;
   independent: boolean;
   unMember: boolean;
+  geography: CountryGeography;
+  indicator: CountryIndicator;
+  favorited: boolean;
 
-  constructor(data: RestCountry, borderNameMap: Map<string, string>, metrics: any) {
+  constructor(
+    data: RestCountry,
+    borderNameMap: Map<string, string>,
+    indicator: Indicators | undefined
+  ) {
     this.name = {
       formal: data.name.official || Country.#unknown,
       informal: data.name.common || Country.#unknown,
@@ -57,44 +61,44 @@ export default class Country {
       borders: { ...getBorders(data, borderNameMap) },
     };
 
-    this.indicators = {
+    this.indicator = {
       technology: {
-        internetUsage: metrics.internetUsage,
-        electricityAccess: metrics.electricityAccess,
-        basicWaterService: metrics.basicWaterService,
-        basicSanitationService: metrics.basicSanitationService,
+        internetUsage: indicator?.internetUsage ?? null,
+        electricityAccess: indicator?.electricityAccess ?? null,
+        basicWaterService: indicator?.basicWaterService ?? null,
+        basicSanitationService: indicator?.basicSanitationService ?? null,
       },
 
       population: {
-        birthRate: metrics.birthRate,
-        growthRate: metrics.growthRate,
-        urbanPercent: metrics.urbanPercent,
-        ruralPercent: metrics.ruralPercent,
-        malePercent: metrics.malePercent,
-        femalePercent: metrics.femalePercent,
-        elderlyPercent: metrics.elderlyPercent,
-        infantMortality: metrics.infantMortality,
-        lifeExpectancy: metrics.lifeExpectancy,
-        literacyRate: metrics.literacyRate,
-        homicideRate: metrics.homicideRate,
+        birthRate: indicator?.birthRate ?? null,
+        growthRate: indicator?.growthRate ?? null,
+        urbanPercent: indicator?.urbanPercent ?? null,
+        ruralPercent: indicator?.ruralPercent ?? null,
+        malePercent: indicator?.malePercent ?? null,
+        femalePercent: indicator?.femalePercent ?? null,
+        elderlyPercent: indicator?.elderlyPercent ?? null,
+        infantMortality: indicator?.infantMortality ?? null,
+        lifeExpectancy: indicator?.lifeExpectancy ?? null,
+        literacyRate: indicator?.literacyRate ?? null,
+        homicideRate: indicator?.homicideRate ?? null,
       },
 
       economy: {
-        gdp: metrics.gdp,
-        gdpPerCapita: metrics.gdpPerCapita,
-        inflationRate: metrics.inflationRate,
-        exports: metrics.exports,
-        imports: metrics.imports,
-        workingAgePopulation: metrics.workingAgePopulation,
-        totalLaborForce: metrics.totalLaborForce,
-        unemploymentRate: metrics.unemploymentRate,
-        giniIndex: metrics.giniIndex,
-        HDI: metrics.HDI,
+        gdp: indicator?.gdp ?? null,
+        gdpPerCapita: indicator?.gdpPerCapita ?? null,
+        inflationRate: indicator?.inflationRate ?? null,
+        exports: indicator?.exports ?? null,
+        imports: indicator?.imports ?? null,
+        workingAgePopulation: indicator?.workingAgePopulation ?? null,
+        totalLaborForce: indicator?.totalLaborForce ?? null,
+        unemploymentRate: indicator?.unemploymentRate ?? null,
+        giniIndex: indicator?.giniIndex ?? null,
+        HDI: indicator?.HDI ?? null,
       },
 
       environment: {
-        agriculturalLandPercent: metrics.agriculturalLandPercent,
-        forestAreaPercent: metrics.forestAreaPercent,
+        agriculturalLandPercent: indicator?.agriculturalLandPercent ?? null,
+        forestAreaPercent: indicator?.forestAreaPercent ?? null,
       },
     };
 
@@ -110,7 +114,7 @@ export default class Country {
       money: this.money,
       language: this.language,
       geography: this.geography,
-      indicators: this.indicators,
+      indicator: this.indicator,
       favorited: this.favorited,
       independent: this.independent,
       unMember: this.unMember,
