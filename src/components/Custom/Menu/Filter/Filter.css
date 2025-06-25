@@ -1,0 +1,11 @@
+.filter-wrapper{
+  position: relative;
+  width: calc(100% - 2px); /* 2px for border*/
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: var(--radius) 0;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  background-color: var(--sidebar-bg-color);
+}

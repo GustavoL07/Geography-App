@@ -30,5 +30,7 @@
 }
 
 .top-element {
+  display: flex;
+  gap: var(--radius);
   width: calc(100% - var(--radius) * 3);
 }
