@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { getSorted } from "@/utils/Organizing/sorter";
-import { CountryList, SettingsContextInterface, SortKey, SortMode } from "@/types";
+import { CountryList, FilterKey, SortKey, SortMode } from "@/types";
 
-type SearchValue = SettingsContextInterface["searchValue"];
-type filterBy = SettingsContextInterface["filterBy"];
+type SearchValue = string;
+type filterBy = FilterKey;
 
 export default function useSearchFilter(
   list: CountryList,
@@ -15,21 +15,21 @@ export default function useSearchFilter(
   return useMemo(() => {
     const lowerSearch = searchValue.toLowerCase();
     let filtered = list.filter((country) => {
-      const checked = [];
-      checked.push(country.getFormatted("name").toLowerCase().includes(lowerSearch)); // Search by name is always done
-
-      if (filterBy.includes("continent")) {
-        checked.push(country.getFormatted("continent").toLowerCase().includes(lowerSearch));
+      switch (filterBy) {
+        case "UNMember":
+          return country.unMember;
+        case "independent":
+          return country.independent;
+        default:
+          return country;
       }
-      if (filterBy.includes("capital")) {
-        checked.push(country.getFormatted("capital").toLowerCase().includes(lowerSearch));
-      }
-      if (filterBy.includes("iso3")) {
-        checked.push(country.name.symbol.toLowerCase().includes(lowerSearch));
-      }
-
-      return checked.some(Boolean);
     });
+
+    if (lowerSearch) {
+      filtered = filtered.filter((country) =>
+        country.name.informal.toLowerCase().includes(lowerSearch)
+      );
+    }
 
     if (sortValue) {
       filtered = getSorted(filtered, sortValue, sortMode);

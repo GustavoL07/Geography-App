@@ -24,8 +24,8 @@ export interface SettingsContextInterface {
   sortMode: SortMode;
   setSortMode: (value: SortMode) => void;
 
-  filterBy: FilterKey[];
-  setFilterBy: (filters: FilterKey[]) => void;
+  filterBy: FilterKey;
+  setFilterBy: (filters: FilterKey) => void;
 
   filteredList: CountryList;
 

@@ -23,7 +23,7 @@ const SettingsContext = createContext<SettingsContextInterface>({
   sortMode: "asc",
   setSortMode: () => {},
 
-  filterBy: ["name"],
+  filterBy: "UNMember",
   setFilterBy: () => {},
 
   filteredList: [],
@@ -40,7 +40,7 @@ export function SettingsProvider({ list, children }: Props) {
   const [mapTile, setMapTile] = useLocalStorage<MapTileKey>("mapTile", "light");
   const [sortValue, setSortValue] = useState<SortKey>("none");
   const [sortMode, setSortMode] = useState<SortMode>("asc");
-  const [filterBy, setFilterBy] = useLocalStorage<FilterKey[]>("filterBy", ["name"]);
+  const [filterBy, setFilterBy] = useLocalStorage<FilterKey>("filterBy", "UNMember");
 
   const [searchValue, setSearchValue] = useState("");
   const [displayMode, setDisplayMode] = useState<DisplayKey>("intro");

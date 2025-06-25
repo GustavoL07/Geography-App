@@ -46,6 +46,7 @@ export default function Top({ isOpen, toggleIsOpen }: Props) {
         <>
           <i className="fas fa-search search-icon"></i>
           <i className="fas fa-sort"></i>
+          <i className="fa-solid fa-filter"></i>
         </>
       )}
     </div>
