@@ -54,149 +54,149 @@ const formatters = {
 
   internetUsage: (country: Country) => {
     const value = country.indicators.technology.internetUsage;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   electricityAccess: (country: Country) => {
     const value = country.indicators.technology.electricityAccess;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   basicWaterService: (country: Country) => {
     const value = country.indicators.technology.basicWaterService;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   basicSanitationService: (country: Country) => {
     const value = country.indicators.technology.basicSanitationService;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   literacyRate: (country: Country) => {
     const value = country.indicators.population.literacyRate;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   lifeExpectancy: (country: Country) => {
     const value = country.indicators.population.lifeExpectancy;
-    return value != null ? `${value[0].toFixed(numericalPrecision)} years` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)} years` : unknown;
   },
 
   infantMortality: (country: Country) => {
     const value = country.indicators.population.infantMortality;
     return value != null
-      ? `${value[0].toFixed(numericalPrecision)} per 1.000 live births`
+      ? `${value.toFixed(numericalPrecision)} per 1.000 live births`
       : unknown;
   },
 
   birthRate: (country: Country) => {
     const value = country.indicators.population.birthRate;
-    return value != null ? `${value[0].toFixed(numericalPrecision)} per 1.000 people` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)} per 1.000 people` : unknown;
   },
 
   popGrowthRate: (country: Country) => {
     const value = country.indicators.population.growthRate;
-    return value != null ? `${value[0].toFixed(2)}%` : unknown;
+    return value != null ? `${value.toFixed(2)}%` : unknown;
   },
 
   urbanPop: (country: Country) => {
     const value = country.indicators.population.urbanPercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   ruralPop: (country: Country) => {
     const value = country.indicators.population.ruralPercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   malePop: (country: Country) => {
     const value = country.indicators.population.malePercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   femalePop: (country: Country) => {
     const value = country.indicators.population.femalePercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   elderlyPop: (country: Country) => {
     const value = country.indicators.population.elderlyPercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}% (+65 years)` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}% (+65 years)` : unknown;
   },
 
   GDP: (country: Country) => {
     const value = country.indicators.economy.gdp;
     return value != null
-      ? `$${value[0].toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+      ? `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : unknown;
   },
 
   GDPPerCapita: (country: Country) => {
     const value = country.indicators.economy.gdpPerCapita;
     return value != null
-      ? `$${value[0].toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+      ? `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : unknown;
   },
 
   inflationRate: (country: Country) => {
     const value = country.indicators.economy.inflationRate;
-    return value != null ? `${value[0].toFixed(2)}%` : unknown;
+    return value != null ? `${value.toFixed(2)}%` : unknown;
   },
 
   exports: (country: Country) => {
     const value = country.indicators.economy.exports;
     return value != null
-      ? `$${value[0].toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+      ? `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : unknown;
   },
 
   imports: (country: Country) => {
     const value = country.indicators.economy.imports;
     return value != null
-      ? `$${value[0].toLocaleString(undefined, { maximumFractionDigits: 0 })}`
+      ? `$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : unknown;
   },
 
   workingAgePop: (country: Country) => {
     const value = country.indicators.economy.workingAgePopulation;
-    return value != null ? value[0].toLocaleString() : unknown;
+    return value != null ? value.toLocaleString() : unknown;
   },
 
   totalLaborForce: (country: Country) => {
     const value = country.indicators.economy.totalLaborForce;
-    return value != null ? value[0].toLocaleString() : unknown;
+    return value != null ? value.toLocaleString() : unknown;
   },
 
   unemploymentRate: (country: Country) => {
     const value = country.indicators.economy.unemploymentRate;
     return value != null
-      ? `${value[0].toFixed(numericalPrecision)}% of Total Labor Force`
+      ? `${value.toFixed(numericalPrecision)}% of Total Labor Force`
       : unknown;
   },
 
   HDI: (country: Country) => {
     const value = country.indicators.economy.HDI;
-    return value != null ? `${value[0].toFixed(3)}` : unknown;
+    return value != null ? `${value.toFixed(3)}` : unknown;
   },
 
   giniIndex: (country: Country) => {
     const value = country.indicators.economy.giniIndex;
-    return value != null ? value[0].toFixed(2) : unknown;
+    return value != null ? value.toFixed(2) : unknown;
   },
 
   homicideRate: (country: Country) => {
     const value = country.indicators.population.homicideRate;
-    return value != null ? `${value[0].toFixed(2)} per 100.000 people` : unknown;
+    return value != null ? `${value.toFixed(2)} per 100.000 people` : unknown;
   },
 
   agriculturalArea: (country: Country) => {
     const value = country.indicators.environment.agriculturalLandPercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 
   forestArea: (country: Country) => {
     const value = country.indicators.environment.forestAreaPercent;
-    return value != null ? `${value[0].toFixed(numericalPrecision)}%` : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}%` : unknown;
   },
 };
 

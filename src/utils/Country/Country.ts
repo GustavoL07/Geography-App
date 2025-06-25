@@ -26,7 +26,7 @@ export default class Country {
   independent: boolean;
   unMember: boolean;
   geography: CountryGeography;
-  indicator: CountryIndicator;
+  indicators: CountryIndicator;
   favorited: boolean;
 
   constructor(
@@ -61,7 +61,7 @@ export default class Country {
       borders: { ...getBorders(data, borderNameMap) },
     };
 
-    this.indicator = {
+    this.indicators = {
       technology: {
         internetUsage: indicator?.internetUsage ?? null,
         electricityAccess: indicator?.electricityAccess ?? null,
@@ -114,7 +114,7 @@ export default class Country {
       money: this.money,
       language: this.language,
       geography: this.geography,
-      indicator: this.indicator,
+      indicators: this.indicators,
       favorited: this.favorited,
       independent: this.independent,
       unMember: this.unMember,

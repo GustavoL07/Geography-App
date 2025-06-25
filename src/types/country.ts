@@ -31,8 +31,8 @@ export interface CountryPosition {
 }
 
 export interface CountryBorders {
-  symbols: any;
-  names: any;
+  symbols: string[];
+  names: string[];
 }
 
 export interface CountryGeography {
