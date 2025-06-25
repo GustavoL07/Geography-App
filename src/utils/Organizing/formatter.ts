@@ -31,6 +31,10 @@ const formatters = {
     return sortedLanguages.length > 0 ? sortedLanguages.join(", ") : "None";
   },
 
+  independent: (country: Country) => (country.independent ? "Yes" : "No"),
+  
+  UNMember: (country: Country) => (country.unMember ? "Yes" : "No"),
+
   latitude: (country: Country) =>
     `${country.geography.position.latitude.toFixed(numericalPrecision)}°`,
 
@@ -84,9 +88,7 @@ const formatters = {
 
   infantMortality: (country: Country) => {
     const value = country.indicators.population.infantMortality;
-    return value != null
-      ? `${value.toFixed(numericalPrecision)} per 1.000 live births`
-      : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)} per 1.000 live births` : unknown;
   },
 
   birthRate: (country: Country) => {
@@ -169,9 +171,7 @@ const formatters = {
 
   unemploymentRate: (country: Country) => {
     const value = country.indicators.economy.unemploymentRate;
-    return value != null
-      ? `${value.toFixed(numericalPrecision)}% of Total Labor Force`
-      : unknown;
+    return value != null ? `${value.toFixed(numericalPrecision)}% of Total Labor Force` : unknown;
   },
 
   HDI: (country: Country) => {
@@ -208,6 +208,8 @@ export const FormatOptions = [
   { text: "Population", key: "pop" },
   { text: "Population Density", key: "popDensity" },
   { text: "Language", key: "language" },
+  { text: "Independent", key: "independent" },
+  { text: "UN Member", key: "UNMember" },
   { text: "Latitude", key: "latitude" },
   { text: "Longitude", key: "longitude" },
   { text: "Currency", key: "currency" },
