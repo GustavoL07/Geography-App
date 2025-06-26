@@ -1,42 +1,29 @@
-type MetricsGroup = [number, number] | undefined;
-
-export interface CountryIndicators {
-  technology: {
-    internetUsage: MetricsGroup;
-    electricityAccess: MetricsGroup;
-    basicWaterService: MetricsGroup;
-    basicSanitationService: MetricsGroup;
-  };
-
-  population: {
-    birthRate: MetricsGroup;
-    growthRate: MetricsGroup;
-    urbanPercent: MetricsGroup;
-    ruralPercent: MetricsGroup;
-    malePercent: MetricsGroup;
-    femalePercent: MetricsGroup;
-    elderlyPercent: MetricsGroup;
-    infantMortality: MetricsGroup;
-    lifeExpectancy: MetricsGroup;
-    literacyRate: MetricsGroup;
-    homicideRate: MetricsGroup;
-  };
-
-  economy: {
-    gdp: MetricsGroup;
-    gdpPerCapita: MetricsGroup;
-    inflationRate: MetricsGroup;
-    exports: MetricsGroup;
-    imports: MetricsGroup;
-    workingAgePopulation: MetricsGroup;
-    totalLaborForce: MetricsGroup;
-    unemploymentRate: MetricsGroup;
-    giniIndex: MetricsGroup;
-    HDI: MetricsGroup;
-  };
-
-  environment: {
-    agriculturalLandPercent: MetricsGroup;
-    forestAreaPercent: MetricsGroup;
-  };
-}
+export interface Indicators {
+  internetUsage?: number;
+  electricityAccess?: number;
+  basicWaterService?: number;
+  basicSanitationService?: number;
+  literacyRate?: number;
+  infantMortality?: number;
+  lifeExpectancy?: number;
+  birthRate?: number;
+  growthRate?: number;
+  urbanPercent?: number;
+  ruralPercent?: number;
+  malePercent?: number;
+  femalePercent?: number;
+  elderlyPercent?: number;
+  gdp?: number;
+  gdpPerCapita?: number;
+  inflationRate?: number;
+  exports?: number;
+  imports?: number;
+  workingAgePopulation?: number;
+  totalLaborForce?: number;
+  unemploymentRate?: number;
+  giniIndex?: number;
+  homicideRate?: number;
+  agriculturalLandPercent?: number;
+  forestAreaPercent?: number;
+  HDI?: number;
+} 

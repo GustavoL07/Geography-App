@@ -1,14 +1,16 @@
-import createSymbolToNameMap from "../Country/symbolToNameMap.js";
-import { RawCountry } from "@/types/rawCountry.js";
+import { RestCountry } from "@/types/restCountries";
+import createSymbolToNameMap from "../Country/symbolToNameMap";
 
 export default async function getCountryData() {
-  const URL = "https://restcountries.com/v3.1/all";
+  const URLS = [
+    "https://restcountries.com/v3.1/independent?status=true",
+    "https://restcountries.com/v3.1/independent?status=false",
+  ];
 
   try {
-    const response = await fetch(URL);
-    const rawData = await response.json();
-    console.log(rawData);
-    const data = [...rawData];
+    const responses = await Promise.all(URLS.map((url) => fetch(url)));
+    const dataArrays = await Promise.all(responses.map((res) => res.json()));
+    const data: RestCountry[] = [].concat(...dataArrays);
 
     const symbolToNameMap = createSymbolToNameMap(data);
 
@@ -17,10 +19,7 @@ export default async function getCountryData() {
       symbolToNameMap,
     };
   } catch (error) {
-    console.log(error);
-    return {
-      list: [],
-      symbolToNameMap: new Map(),
-    };
+    console.log("Restcountries API error", error);
+    throw error;
   }
 }
