@@ -3,23 +3,28 @@ import { getSorted } from "@/utils/Organizing/sorter";
 import { CountryList, FilterKey, SortKey, SortMode } from "@/types";
 
 type SearchValue = string;
-type filterBy = FilterKey;
+type filterValue = FilterKey;
 
 export default function useSearchFilter(
   list: CountryList,
   searchValue: SearchValue,
   sortValue: SortKey,
   sortMode: SortMode,
-  filterBy: filterBy
+  filterValue: filterValue
 ) {
   return useMemo(() => {
     const lowerSearch = searchValue.toLowerCase();
     let filtered = list.filter((country) => {
-      switch (filterBy) {
+      switch (filterValue) {
         case "UNMember":
           return country.unMember;
+        case "notUNMember":
+          return !country.unMember && country;
+
         case "independent":
           return country.independent;
+        case "notIndependent":
+          return !country.independent && country;
         default:
           return country;
       }
@@ -36,5 +41,5 @@ export default function useSearchFilter(
     }
 
     return filtered;
-  }, [list, searchValue, sortValue, sortMode, filterBy]);
+  }, [list, searchValue, sortValue, sortMode, filterValue]);
 }

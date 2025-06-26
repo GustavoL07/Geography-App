@@ -201,8 +201,7 @@ function getSortFunction(key: SortKey, mode: SortMode) {
 
     const aValue = value(a);
     const bValue = value(b);
-
-    // Undefined values always go to the end, regardless of sort mode
+    
     if (aValue === null && bValue === null) return 0;
     if (aValue === null) return 1;
     if (bValue === null) return -1;

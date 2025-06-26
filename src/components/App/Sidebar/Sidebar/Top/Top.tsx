@@ -6,15 +6,17 @@ import Menu from "@/components/Custom/Menu/Menu";
 import Sort from "@/components/Custom/Menu/Sort/Sort";
 import { SortOptions } from "@/utils/Organizing/sorter";
 import Filter from "@/components/Custom/Menu/Filter/Filter";
+import { FilterOptions } from "@/utils/Organizing/filter";
 
 type Props = {
   isOpen: boolean;
   toggleIsOpen: () => void;
 };
 export default function Top({ isOpen, toggleIsOpen }: Props) {
-  const { sortValue, searchValue, setSearchValue } = useSettingsContext();
+  const { filterValue, sortValue, searchValue, setSearchValue } = useSettingsContext();
 
   const sortMenuText = SortOptions.find((opt) => opt.key === sortValue)?.text || "Sort...";
+  const filterMenuText = FilterOptions.find((opt) => opt.key === filterValue)?.text || "Filter...";
 
   return (
     <div className={`top ${isOpen ? "" : "closed"}`}>
@@ -35,7 +37,7 @@ export default function Top({ isOpen, toggleIsOpen }: Props) {
               {(closeMenu) => <Sort onClose={closeMenu} />}
             </Menu >
 
-            <Menu icon={<i className="fa-solid fa-filter"></i>} text={"filter"}>
+            <Menu icon={<i className="fa-solid fa-filter"></i>} text={filterMenuText}>
               {(closeMenu) => <Filter onClose={closeMenu} />}
             </Menu>
             
