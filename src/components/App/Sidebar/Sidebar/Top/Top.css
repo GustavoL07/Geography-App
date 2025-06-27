@@ -8,8 +8,8 @@
 
   gap: var(--radius);
 
-  border-bottom: 1px solid var(--shadow-color);
-  background-color: var(--sidebar-bg-color);
+  border-bottom: var(--border);
+  background-color: var(--bg-col);
   padding-bottom: var(--radius);
 }
 .top.closed {

@@ -1,5 +1,5 @@
-import { useCountryContext } from "@/components/Contexts/CountryContext";
 import "./Intro.css";
+import { useCountryContext } from "@/components/Contexts/CountryContext";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import Title from "@/components/Custom/Title/Title";
 
@@ -22,15 +22,11 @@ export default function Intro({}) {
         alt="Earth Globe"
         onClick={() => onImageClick()}
       />
-      <section>
-        <p className="app-desc">
-          Open the sidebar and search for any country you would like to know more about!
+      <section className="app-desc">
+        <p className="center">
+          Made by <a href="https://github.com/GustavoL07" target="_blank">Gustavo Lepinsk Carvalho</a>
         </p>
-        <p className="app-desc">
-          Discover detailed information about countries, including population, area, languages, and
-          more!
-        </p>
-        <p className="app-desc">Make sure to also check out the maps and the other features!</p>
+        
       </section>
     </div>
   );

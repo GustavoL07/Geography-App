@@ -10,7 +10,7 @@
   height: auto;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-base) 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow);
   padding: 2px;
 
   background-color: rgba(0, 0, 0, 0.03);
@@ -20,11 +20,11 @@
   text-align: center;
   font-size: clamp(1.5rem, 3vw, 3rem);
   font-weight: 800;
-  color: var(--text-color);
+  color: var(--text-col);
 }
 .overview-subtitle {
   text-align: center;
   font-size: clamp(0.8rem, 2vw, 1.6rem);
   font-weight: 600;
-  color: var(--gray);
+  color: var(--text-col2);
 }

@@ -6,15 +6,15 @@
   padding: var(--radius) 0;
   border: 1px solid #ccc;
   border-radius: var(--radius);
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--bg-col);
   transition: box-shadow 0.5s ease-in-out;
 }
 .search-wrapper:focus-within {
   box-shadow: var(--shadow-default);
-  border-color: var(--active-color);
+  border-color: var(--active-col);
 }
 .search-wrapper:focus-within .search-icon {
-  color: var(--active-color);
+  color: var(--active-col);
   transform: rotateY(180deg);
 }
 

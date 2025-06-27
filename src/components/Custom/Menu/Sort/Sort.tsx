@@ -29,7 +29,7 @@ export default function Sort({ onClose }: Props) {
   const resetIcon = <i className="fa-solid fa-xmark close-icon"></i>;
 
   return (
-    <div className="sort-wrapper">
+    <div className="menu-child-wrapper">
       <div className="btns">
         <Button icon={sortModeIcon} onClick={toggleSortMode} />
         <Button icon={favoritesIcon} onClick={() => configSort("desc", "favorite", true)} />

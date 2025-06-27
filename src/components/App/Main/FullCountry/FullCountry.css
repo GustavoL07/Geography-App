@@ -2,10 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: var(--main-margin);
-  padding-top: var(--radius);
-  padding-bottom: calc(var(--main-margin) * 2);
   gap: 1rem;
+  padding-bottom: 0.75rem;
 }
 
 .info-grid {
@@ -13,7 +11,7 @@
 
   --grid-max-col-count: 3;
   --grid-min-col-size: 150px;
-  --grid-gap: calc(var(--radius) * 3);
+  --grid-gap: calc(var(--radius) * 1.75);
 
   /* calculations, do not touch */
   --grid-col-size-calc: calc(

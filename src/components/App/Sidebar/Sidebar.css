@@ -6,11 +6,9 @@
   box-sizing: border-box;
   overflow-y: scroll;
   overflow-x: hidden;
-
-  border-right: 1px solid var(--shadow-color);
-  box-shadow: var(--shadow-base) var(--shadow-size) rgba(0, 0, 0, 0.3);
-  background-color: var(--sidebar-bg-color);
-  transition: all var(--sidebar-time) var(--sidebar-mode);
+  box-shadow: var(--shadow);
+  background-color: var(--bg-col);
+  transition: var(--sidebar-transition);
 }
 .sidebar.closed {
   width: var(--sidebar-closed);

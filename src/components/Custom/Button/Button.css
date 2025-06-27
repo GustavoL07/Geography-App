@@ -19,8 +19,8 @@ button i {
   transition: color 0.3s ease-in-out;
 }
 button:hover {
-  box-shadow: var(--shadow-default);
-  color: var(--active-color);
+  box-shadow: var(--shadow);
+  color: var(--active-col);
 }
 button:hover i {
   color: var(--selected-color);

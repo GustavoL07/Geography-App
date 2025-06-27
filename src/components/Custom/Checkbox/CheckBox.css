@@ -46,7 +46,7 @@ input[type="checkbox"].switch-toggle {
   margin: calc(-1 * var(--knob-size));
   width: calc(var(--knob-size) * 2.8);
   height: calc(var(--knob-size) * 2.8);
-  background: var(--active-color);
+  background: var(--active-col);
   border-radius: 50%;
   transform: scale(0);
   opacity: 1;
@@ -58,7 +58,7 @@ input[type="checkbox"].switch-toggle:checked + .switch-label::before {
 }
 
 input[type="checkbox"].switch-toggle:checked + .switch-label span {
-  background: var(--active-color);
+  background: var(--active-col);
   transform: translateX(calc(var(--switch-width) - var(--knob-size)));
   transition: all var(--transition-speed) var(--transition-curve), background 0.15s ease;
   box-shadow: 0 3px 8px var(--active-shadow);

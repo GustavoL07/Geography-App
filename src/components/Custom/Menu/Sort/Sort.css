@@ -1,21 +1,4 @@
-.sort-wrapper {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--radius);
-
-  max-height: 40vh;
-  overflow-y: auto;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius);
-  background-color: var(--sidebar-bg-color);
-  padding: var(--radius);
-}
-
-.sort-wrapper .btns {
+.btns {
   position: sticky;
   top: 0;
   width: 100%;
@@ -23,7 +6,7 @@
   align-items: center;
   justify-content: space-evenly;
   gap: var(--radius);
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--bg-col);
 }
 
 .sort-content {
@@ -51,10 +34,10 @@
 }
 
 .sort-opt:hover {
-  border-color: var(--active-color);
+  border-color: var(--active-col);
 }
 
 .sort-opt.active {
   color: black;
-  box-shadow: 0 0 5px var(--active-color);
+  box-shadow: 0 0 5px var(--active-col);
 }

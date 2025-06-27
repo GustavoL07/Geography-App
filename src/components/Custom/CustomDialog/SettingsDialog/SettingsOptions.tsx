@@ -12,18 +12,21 @@ function OptionSelect({}) {
   return (
     <div className="opt-sel-wrapper">
       <Menu icon={menuIcon} text={menuTitle}>
-        <div className="map-opt-wrapper">
+        <div className="menu-child-wrapper">
           <p
-            className={`${mapTile === "light" ? "active" : ""}`}
+            className={`menu-map-opt ${mapTile === "light" ? "active" : ""}`}
             onClick={() => setMapTile("light")}
           >
             Light
           </p>
-          <p className={`${mapTile === "dark" ? "active" : ""}`} onClick={() => setMapTile("dark")}>
+          <p
+            className={`menu-map-opt ${mapTile === "dark" ? "active" : ""}`}
+            onClick={() => setMapTile("dark")}
+          >
             Dark
           </p>
           <p
-            className={`${mapTile === "earth" ? "active" : ""}`}
+            className={`menu-map-opt ${mapTile === "earth" ? "active" : ""}`}
             onClick={() => setMapTile("earth")}
           >
             Earth
@@ -37,7 +40,6 @@ function OptionSelect({}) {
 export default function SettingsOptions({}) {
   return (
     <div>
-
       <div className="option-wrapper">
         <p className="title">Map Mode</p>
         <OptionSelect />

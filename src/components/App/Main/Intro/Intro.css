@@ -28,6 +28,11 @@
 
 .app-desc {
   font-size: clamp(0.5rem, 3vw, 1.5rem);
+  color: var(--text-col);
   font-weight: 600;
   padding-bottom: 0.4rem;
+}
+
+.app-desc .center {
+  text-align: center;
 }

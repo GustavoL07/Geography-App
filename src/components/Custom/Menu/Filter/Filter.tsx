@@ -1,5 +1,4 @@
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
-import "./Filter.css";
 import { FilterOptions } from "@/utils/Organizing/filter";
 import Button from "../../Button/Button";
 import { FilterKey } from "@/types";
@@ -13,7 +12,7 @@ export default function Filter({ onClose }: Props) {
     if (close) onClose();
   };
   return (
-    <div className="filter-wrapper">
+    <div className="menu-child-wrapper">
       <Button
         icon={<i className="fa-solid fa-xmark close-icon"></i>}
         onClick={() => onChangeFilter("none", true)}

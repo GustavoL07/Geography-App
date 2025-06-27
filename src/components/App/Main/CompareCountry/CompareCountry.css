@@ -37,21 +37,21 @@
   transition: all 0.3s ease-in-out;
 }
 .filtered-options.comparing {
-  background-color: #ccc;
+  background-color: var(--hover-col);
 }
 .filtered-options img {
   width: 3rem;
   object-fit: cover;
   aspect-ratio: 4/3;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-base) 10px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow);
 }
 .filtered-options p {
   font-size: 1.1rem;
   font-weight: 650;
 }
 .filtered-options:hover {
-  background-color: #ccc;
+  background-color: var(--hover-col);
 }
 
 .being-compared {

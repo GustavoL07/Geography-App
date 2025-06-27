@@ -1,10 +1,11 @@
 .bottom {
   position: sticky;
   bottom: 0;
-  background-color: var(--sidebar-bg-color);
-  border-top: 1px solid black;
+  background-color: var(--bg-col);
+  border-top: var(--border);
 }
 
 .bottom .text {
   text-align: center;
+  color: var(--text-col2)
 }

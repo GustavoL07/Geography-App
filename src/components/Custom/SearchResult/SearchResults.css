@@ -5,11 +5,11 @@
 }
 .search-results-wrapper .search-results {
   position: absolute;
-  width: calc(100% - var(--radius)*2 - 2px);
+  width: calc(100% - var(--radius) * 2);
   max-height: 45vh;
   overflow: scroll;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  background-color: var(--bg-col);
+  box-shadow: var(--shadow);
   border-radius: var(--radius);
   padding: var(--radius);
 }

@@ -7,11 +7,9 @@
   align-items: center;
   gap: var(--radius);
 
-  background-color: var(--sidebar-bg-color);
-  border-bottom: 1px solid var(--shadow-color);
-  box-shadow: var(--shadow-base) var(--shadow-size) rgba(0, 0, 0, 0.3);
-
-  transition: all var(--sidebar-time) var(--sidebar-mode);
+  background-color: var(--bg-col);
+  box-shadow: var(--shadow);
+  transition: var(--sidebar-transition);
 }
 .header-container.closed {
   width: calc(100% - var(--sidebar-open) - var(--radius) * 2);

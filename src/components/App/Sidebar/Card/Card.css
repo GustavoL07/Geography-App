@@ -37,7 +37,7 @@
   background-color: transparent;
 }
 .card-container:hover {
-  background-color: lightgray;
+  background-color: var(--hover-col);
 }
 .card-container:active {
   background-color: white;
@@ -67,7 +67,7 @@
   padding: 1px;
   object-fit: cover;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-base) 5px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow);
   transition: all 0.4s ease;
 }
 
@@ -87,6 +87,6 @@
 .description p:last-child {
   font-size: 0.8rem;
   font-weight: 650;
-  color: var(--gray);
+  color: var(--text-col2);
   margin: 2px 0 0 0;
 }
