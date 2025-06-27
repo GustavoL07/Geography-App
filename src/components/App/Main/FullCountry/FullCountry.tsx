@@ -10,6 +10,9 @@ export default function FullCountry({}) {
   const { selectedCountry, setFavoriteCountry } = useCountryContext();
   if (!selectedCountry) return null;
 
+  const { latitude, longitude } = selectedCountry.geography.position;
+  const mapCenter: [number, number] = [latitude, longitude];
+
   return (
     <div className="info-container">
       <Overview country={selectedCountry} />
@@ -28,7 +31,7 @@ export default function FullCountry({}) {
         })}
       </section>
 
-      <Map toDisplay={[selectedCountry]} />
+      <Map toDisplay={[selectedCountry]} center={mapCenter} />
       <Button
         icon={<i className="fa-solid fa-star"></i>}
         onClick={() => setFavoriteCountry(selectedCountry)}
