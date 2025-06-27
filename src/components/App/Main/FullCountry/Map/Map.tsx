@@ -16,27 +16,18 @@ function MapCenterer({ center }: { center: [number, number] }) {
 
 type Props = {
   toDisplay: CountryList;
+  center: [number, number];
+  zoom?: number;
 };
-export default function Map({ toDisplay }: Props) {
+export default function Map({ toDisplay, center, zoom = 3 }: Props) {
   const { mapTile } = useSettingsContext();
-  const center: [number, number] =
-    toDisplay.length > 1
-      ? [0, 0]
-      : [
-          toDisplay[0]?.geography.position.latitude ?? 0,
-          toDisplay[0]?.geography.position.longitude ?? 0,
-        ];
 
   return (
     <div className="map-container">
       <MapContainer
-        center={[
-          toDisplay[0]?.geography.position.latitude ?? 0,
-          toDisplay[0]?.geography.position.longitude ?? 0,
-        ]}
-        zoom={3}
+        center={center}
+        zoom={zoom}
         minZoom={2}
-        maxZoom={5.5}
         scrollWheelZoom={true}
         maxBounds={[
           [-90, -225],
