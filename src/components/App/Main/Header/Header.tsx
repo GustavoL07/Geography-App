@@ -5,6 +5,7 @@ import SettingsOptions from "../../../Custom/CustomDialog/SettingsDialog/Setting
 import { useState } from "react";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
+import earthGlobe from "@/assets/earth-globe.png";
 
 type Props = {
   title?: string;
@@ -23,7 +24,7 @@ export default function Header({ closeSidebar, isSidebarOpen, title = "Geography
 
   return (
     <div className={`header-container ${isSidebarOpen ? "closed" : ""}`}>
-      <img src="/earth-globe.png" alt="" />
+      <img src={earthGlobe} alt="" />
       <p>{title}</p>
       <div className="opt-btns">
         <Button
