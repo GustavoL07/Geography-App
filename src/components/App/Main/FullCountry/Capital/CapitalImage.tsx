@@ -1,3 +1,4 @@
+import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import "./CapitalImage.css";
 import useGetCapitalUrl from "@/components/Hooks/useGetCapitalUrl";
 
@@ -5,8 +6,10 @@ type Props = {
   capital: string;
 };
 export default function CapitalImage({ capital }: Props) {
-  const url = useGetCapitalUrl(capital);
+  const { cityImageVisibility } = useSettingsContext();
+  if (!cityImageVisibility) return null;
 
+  const url = useGetCapitalUrl(capital);
   if (!url) return null;
   return (
     <div className="capital-image-wrapper">

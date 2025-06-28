@@ -9,7 +9,9 @@ export default function useGetCapitalUrl(capital: string) {
 
     const fetchImage = async () => {
       try {
-        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(capital)}`);
+        const res = await fetch(
+          `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(capital)}`
+        );
         const data = await res.json();
 
         if (data.originalimage?.source) {

@@ -34,4 +34,7 @@ export interface SettingsContextInterface {
 
   theme: "light" | "dark";
   toggleTheme: () => void;
+
+  cityImageVisibility: boolean;
+  toggleCityVisibility: () => void;
 }

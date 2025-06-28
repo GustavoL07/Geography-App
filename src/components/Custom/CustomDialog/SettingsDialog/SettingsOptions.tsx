@@ -3,6 +3,7 @@ import Button from "@/components/Custom/Button/Button";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { clearLocalStorage } from "@/components/Hooks/useLocalStorage";
 import Menu from "../../Menu/Menu";
+import CheckBox from "../../Checkbox/CheckBox";
 
 function OptionSelect({}) {
   const { mapTile, setMapTile } = useSettingsContext();
@@ -38,7 +39,7 @@ function OptionSelect({}) {
 }
 
 export default function SettingsOptions({}) {
-  const { toggleTheme } = useSettingsContext();
+  const { toggleTheme, cityImageVisibility, toggleCityVisibility } = useSettingsContext();
   return (
     <div>
       <div className="option-wrapper">
@@ -46,12 +47,21 @@ export default function SettingsOptions({}) {
         <OptionSelect />
       </div>
 
-      <div className="reset-container">
+      <div className="option-container">
+        <CheckBox
+          id="cityImage"
+          checked={cityImageVisibility}
+          onChange={() => toggleCityVisibility()}
+        />
+        <p>City Capital Image</p>
+      </div>
+
+      <div className="option-container">
         <p>Toggle:</p>
         <Button icon={<i className="fa-solid fa-lightbulb"></i>} onClick={() => toggleTheme()} />
       </div>
 
-      <div className="reset-container">
+      <div className="option-container">
         <p>Reset to Default:</p>
         <Button
           icon={<i className="fa fa-refresh" aria-hidden="true"></i>}
