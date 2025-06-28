@@ -5,6 +5,7 @@ import Overview from "./Overview/Overview";
 import InfoBox from "./InfoBox/InfoBox";
 import Map from "@/components/App/Main/FullCountry/Map/Map";
 import Button from "@/components/Custom/Button/Button";
+import CapitalImage from "./Capital/CapitalImage";
 
 export default function FullCountry({}) {
   const { selectedCountry, setFavoriteCountry } = useCountryContext();
@@ -16,6 +17,8 @@ export default function FullCountry({}) {
   return (
     <div className="info-container">
       <Overview country={selectedCountry} />
+
+      <CapitalImage capital={selectedCountry.capital[0]} />
 
       <section className="info-grid">
         {FormatOptions.map((obj, index) => {

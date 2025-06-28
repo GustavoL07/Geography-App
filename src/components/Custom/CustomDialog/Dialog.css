@@ -13,7 +13,7 @@ dialog {
   border: none;
   border-radius: var(--radius);
 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  box-shadow: var(--shadow);
   animation: dialog-fade-in 1.2s;
   background-color: var(--bg-col);
 }
