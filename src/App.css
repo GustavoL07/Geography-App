@@ -88,3 +88,7 @@ button:hover .close-icon {
   box-shadow: var(--shadow);
   padding: var(--radius);
 }
+
+ul {
+  list-style-type: none;
+}
