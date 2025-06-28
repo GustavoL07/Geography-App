@@ -1,4 +1,6 @@
-# Geography App [](/src/assets/earth-globe-small.png)
+# Geography App 
+
+![](/src/assets/earth-globe-small.png)
 
 ## Full Version
 
