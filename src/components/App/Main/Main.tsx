@@ -15,7 +15,7 @@ interface Props {
   closeSidebar: () => void;
 }
 export default function Main({ isSidebarOpen, closeSidebar }: Props) {
-  const { setSelectedCountry } = useCountryContext();
+  const { setSelectedCountry, selectedCountry } = useCountryContext();
   const { displayMode, setDisplayMode } = useSettingsContext();
 
   const handleMapClick = useCallback((c: Country) => {
@@ -23,9 +23,11 @@ export default function Main({ isSidebarOpen, closeSidebar }: Props) {
     setDisplayMode("full");
   }, []);
 
+  const headerTitle = selectedCountry?.name.informal || "Geography App";
+
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
-      <Header closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
+      <Header title={headerTitle} closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
 
       <div className="display-area">
         {(() => {
