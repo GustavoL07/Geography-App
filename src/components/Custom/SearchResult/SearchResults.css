@@ -24,3 +24,7 @@
   padding: var(--radius);
   display: flex;
 }
+
+.search-results p {
+  color: var(--text-col2);
+}
