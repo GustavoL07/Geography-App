@@ -34,8 +34,8 @@ const SettingsContext = createContext<SettingsContextInterface>({
   theme: "light",
   toggleTheme: () => {},
 
-  cityImageVisibility: true,
-  toggleCityVisibility: () => {}
+  cityImageVisibility: false,
+  toggleCityVisibility: () => {},
 });
 
 type Props = {
@@ -47,10 +47,13 @@ export function SettingsProvider({ list, children }: Props) {
   const [sortMode, setSortMode] = useState<SortMode>("asc");
   const [sortValue, setSortValue] = useState<SortKey>("name");
   const [filterValue, setFilterValue] = useState<FilterKey>("UNMember");
-  const [cityImageVisibility, setCityImageVisibility] = useLocalStorage<boolean>("cityImage", true);
+  const [cityImageVisibility, setCityImageVisibility] = useLocalStorage<boolean>(
+    "cityImage",
+    false
+  );
   const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
-  
-   useEffect(() => {
+
+  useEffect(() => {
     document.body.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
@@ -59,7 +62,7 @@ export function SettingsProvider({ list, children }: Props) {
   }
 
   function toggleCityVisibility() {
-    setCityImageVisibility((prev) => (!prev))
+    setCityImageVisibility((prev) => !prev);
   }
 
   const [searchValue, setSearchValue] = useState("");
@@ -92,7 +95,7 @@ export function SettingsProvider({ list, children }: Props) {
         toggleTheme,
 
         cityImageVisibility,
-        toggleCityVisibility
+        toggleCityVisibility,
       }}
     >
       {children}

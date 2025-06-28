@@ -1,3 +1,10 @@
+.leaflet-popup-content-wrapper {
+  background-color: var(--bg-col);
+  box-shadow: var(--shadow);
+}
+.leaflet-popup-tip {
+  background-color: var(--bg-col);
+}
 .leaflet-popup-content {
   margin: 15px clamp(20px, 6vw, 50px);
 }
