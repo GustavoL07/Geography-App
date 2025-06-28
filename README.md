@@ -8,9 +8,6 @@
 - **Compare Countries:** Select and compare two countries side by side across various metrics.
 - **World Map:** Visualize countries on an interactive map and click to view details.
 - **Favorites:** Mark countries as favorites for quick access.
-- **Advanced Search & Sort:** Search countries by name and sort by population, area, GDP, and more.
-- **Responsive Design:** Works seamlessly on desktop and mobile devices.
-- **Settings Dialog:** Customize your experience with various settings.
 
 ## Screenshots
 ![](public/screenshot1.png)
