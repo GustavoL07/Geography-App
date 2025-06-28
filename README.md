@@ -1,6 +1,8 @@
-# Geography App 🌍
+# Geography App [](/src/assets/earth-globe-small.png)
 
-![App Logo](public/earth-globe.png)
+## Full Version
+
+-- [App](https://gustavol07.github.io/Geography-App/)
 
 ## Features
 
