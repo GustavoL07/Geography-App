@@ -29,4 +29,5 @@
   font-size: 0.95rem;
   background-color: transparent;
   width: 70%;
+  color: var(--text-col);
 }

@@ -9,7 +9,7 @@
   transition: all 0.2s ease-in-out;
 }
 .card-container.selected {
-  background-color: #ccc;
+  background-color: var(--hover-col);
 }
 .card-container.selected .flag {
   transform: scale(1.1);

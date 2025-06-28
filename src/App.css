@@ -7,7 +7,7 @@
 
   --radius: 5px;
   --text-col: black;
-  --text-col2: #767676;
+  --text-col2: #4d4d4d;
   --active-col: #00a0ff;
   --icons-color: #767676;
 
@@ -16,7 +16,7 @@
   --hover-col: #d3d3d3;
   --bg-col: #fafafa;
 
-  /*Checkbox*/
+  /* Checkbox */
   --switch-width: 40px;
   --switch-height: 20px;
   --knob-size: 20px;
@@ -24,11 +24,29 @@
   --track-color: #666;
   --track-checked-color: #ddd;
   --knob-color: white;
-  --active-col: #00a0ff;
   --shadow-color: rgba(154, 153, 153, 0.5);
   --active-shadow: rgba(79, 46, 220, 0.2);
   --transition-speed: 0.1s;
   --transition-curve: cubic-bezier(0.8, 0.4, 0.3, 1.25);
+}
+
+body.dark {
+  --l-gray: #3d3d3d;
+  --bg-col: #121212;
+  --text-col: #f1f1f1;
+  --text-col2: #aaaaaa;
+  --icons-color: #bbbbbb;
+  --hover-col: #333333;
+  --border: 1px solid rgba(255, 255, 255, 0.2);
+  --shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  --active-col: #00aaff;
+
+  /* Checkbox */
+  --track-color: #999;
+  --track-checked-color: #444;
+  --knob-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --active-shadow: rgba(0, 153, 255, 0.2);
 }
 
 i {

@@ -4,6 +4,7 @@
   border-radius: var(--radius);
   font-size: clamp(0.75rem, 2vw, 0.9rem);
   font-weight: 600;
+  color: var(--text-col2);
 }
 .info-box strong {
   display: block;

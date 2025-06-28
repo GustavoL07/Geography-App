@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import useSearchFilter from "@/components/Hooks/useSearchFilter";
 import useLocalStorage from "@/components/Hooks/useLocalStorage";
 import {
@@ -30,6 +30,9 @@ const SettingsContext = createContext<SettingsContextInterface>({
 
   displayMode: "intro",
   setDisplayMode: () => {},
+
+  theme: "light",
+  toggleTheme: () => {}
 });
 
 type Props = {
@@ -41,6 +44,15 @@ export function SettingsProvider({ list, children }: Props) {
   const [sortMode, setSortMode] = useState<SortMode>("asc");
   const [sortValue, setSortValue] = useState<SortKey>("name");
   const [filterValue, setFilterValue] = useState<FilterKey>("UNMember");
+  const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
+  
+   useEffect(() => {
+    document.body.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }
 
   const [searchValue, setSearchValue] = useState("");
   const [displayMode, setDisplayMode] = useState<DisplayKey>("intro");
@@ -67,6 +79,9 @@ export function SettingsProvider({ list, children }: Props) {
 
         displayMode,
         setDisplayMode,
+
+        theme,
+        toggleTheme,
       }}
     >
       {children}

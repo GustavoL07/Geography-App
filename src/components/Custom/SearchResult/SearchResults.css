@@ -12,6 +12,8 @@
   box-shadow: var(--shadow);
   border-radius: var(--radius);
   padding: var(--radius);
+
+  background-color: var(--bg-col);
 }
 .search-results-wrapper .search-results::-webkit-scrollbar {
   display: none;

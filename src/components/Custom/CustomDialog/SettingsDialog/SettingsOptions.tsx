@@ -38,6 +38,7 @@ function OptionSelect({}) {
 }
 
 export default function SettingsOptions({}) {
+  const { toggleTheme } = useSettingsContext();
   return (
     <div>
       <div className="option-wrapper">
@@ -46,11 +47,16 @@ export default function SettingsOptions({}) {
       </div>
 
       <div className="reset-container">
-        <p>Reset to Default</p>
+        <p>Toggle:</p>
+        <Button icon={<i className="fa-solid fa-lightbulb"></i>} onClick={() => toggleTheme()} />
+      </div>
+
+      <div className="reset-container">
+        <p>Reset to Default:</p>
         <Button
           icon={<i className="fa fa-refresh" aria-hidden="true"></i>}
           onClick={() => clearLocalStorage()}
-        ></Button>
+        />
       </div>
     </div>
   );

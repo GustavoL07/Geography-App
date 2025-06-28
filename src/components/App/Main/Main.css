@@ -2,6 +2,7 @@
   width: 100%;
   margin-left: calc(var(--sidebar-open));
   transition: var(--sidebar-transition);
+  background-color: var(--bg-col);
 }
 
 .main-content.closed {
@@ -11,4 +12,5 @@
 .display-area {
   position: relative;
   margin-top: 50px;
+  background-color: var(--bg-col);
 }

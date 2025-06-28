@@ -31,4 +31,7 @@ export interface SettingsContextInterface {
 
   displayMode: DisplayKey;
   setDisplayMode: (newMode: DisplayKey) => void;
+
+  theme: "light" | "dark";
+  toggleTheme: () => void;
 }
