@@ -58,8 +58,8 @@
 ## Credits
 
 Made by [Gustavo Lepinsk Carvalho](https://github.com/GustavoL07)
-[Rest Countries](https://restcountries.com/)
-[World Bank API](https://www.worldbank.org/ext/en/home)
+- [Rest Countries](https://restcountries.com/)
+- [World Bank API](https://www.worldbank.org/ext/en/home)
 
 ## License
 
