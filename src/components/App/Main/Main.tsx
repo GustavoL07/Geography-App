@@ -9,6 +9,7 @@ import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { useCallback } from "react";
 import Favorite from "./Favorite/Favorite";
 import Country from "@/utils/Country/Country";
+import { getHeaderTitle } from "@/utils/Organizing/getHeaderTitle";
 
 interface Props {
   isSidebarOpen: boolean;
@@ -23,11 +24,9 @@ export default function Main({ isSidebarOpen, closeSidebar }: Props) {
     setDisplayMode("full");
   }, []);
 
-  const headerTitle = selectedCountry?.name.informal || "Geography App";
-
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
-      <Header title={headerTitle} closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
+      <Header title={getHeaderTitle(selectedCountry)} closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
 
       <div className="display-area">
         {(() => {
