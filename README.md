@@ -2,7 +2,7 @@
 
 ## Full Version
 
--- [App](https://gustavol07.github.io/Geography-App/)
+- [App](https://gustavol07.github.io/Geography-App/)
 
 ## Features
 
