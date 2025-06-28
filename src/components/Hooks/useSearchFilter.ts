@@ -2,15 +2,12 @@ import { useMemo } from "react";
 import { getSorted } from "@/utils/Organizing/sorter";
 import { CountryList, FilterKey, SortKey, SortMode } from "@/types";
 
-type SearchValue = string;
-type filterValue = FilterKey;
-
 export default function useSearchFilter(
   list: CountryList,
-  searchValue: SearchValue,
+  searchValue: string,
   sortValue: SortKey,
   sortMode: SortMode,
-  filterValue: filterValue
+  filterValue: FilterKey
 ) {
   return useMemo(() => {
     const lowerSearch = searchValue.toLowerCase();
@@ -25,6 +22,22 @@ export default function useSearchFilter(
           return country.independent;
         case "notIndependent":
           return !country.independent && country;
+
+        case "Africa":
+          return country.continent === "Africa" && country;
+        case "Asia":
+          return country.continent === "Asia" && country;
+        case "Europe":
+          return country.continent === "Europe" && country;
+        case "North America":
+          return country.continent === "North America" && country;
+        case "South America":
+          return country.continent === "South America" && country;
+        case "Oceania":
+          return country.continent === "Oceania" && country;
+        case "Antarctica":
+          return country.continent === "Antarctica" && country;
+
         default:
           return country;
       }

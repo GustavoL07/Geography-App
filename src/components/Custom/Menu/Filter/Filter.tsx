@@ -1,3 +1,4 @@
+import "./Filter.css"
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { FilterOptions } from "@/utils/Organizing/filter";
 import Button from "../../Button/Button";
@@ -13,11 +14,14 @@ export default function Filter({ onClose }: Props) {
   };
   return (
     <div className="menu-child-wrapper">
-      <Button
+      <div className="btns">
+        <Button
         icon={<i className="fa-solid fa-xmark close-icon"></i>}
         onClick={() => onChangeFilter("none", true)}
       />
-      <ul>
+      </div>
+      <div className="sort-content">
+        <ul>
         {FilterOptions.filter((opt) => opt.key !== "none").map((opt, index) => (
           <li
             key={index}
@@ -28,6 +32,7 @@ export default function Filter({ onClose }: Props) {
           </li>
         ))}
       </ul>
+      </div>
     </div>
   );
 }
