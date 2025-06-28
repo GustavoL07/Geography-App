@@ -1,7 +1,7 @@
-import { Continents, MapTileKey } from "@/types";
+import { Continent, MapTileKey } from "@/types";
 
-export function style(layer: L.Path, continent: Continents) {
-  function getContinentColor(continent: Continents): string {
+export function style(layer: L.Path, continent: Continent) {
+  function getContinentColor(continent: Continent): string {
     switch (continent) {
       case "Africa":
         return "#f94144";

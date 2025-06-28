@@ -32,7 +32,8 @@ export function CountryProvider({ children }: any) {
 
   useEffect(() => {
     async function fetchData() {
-      if (countryList.length > 0) return; /* If there is something in localStorage, it will be used*/
+      if (countryList.length > 0)
+        return; /* If there is something in localStorage, it will be used*/
 
       try {
         const data = await getData();

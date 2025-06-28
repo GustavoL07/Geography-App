@@ -7,16 +7,15 @@ import CompareCountry from "./CompareCountry/CompareCountry";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import { useCallback } from "react";
-import { Country } from "@/types";
 import Favorite from "./Favorite/Favorite";
+import Country from "@/utils/Country/Country";
 
 interface Props {
   isSidebarOpen: boolean;
   closeSidebar: () => void;
 }
-
 export default function Main({ isSidebarOpen, closeSidebar }: Props) {
-  const { countryList, setSelectedCountry } = useCountryContext();
+  const { setSelectedCountry } = useCountryContext();
   const { displayMode, setDisplayMode } = useSettingsContext();
 
   const handleMapClick = useCallback((c: Country) => {
@@ -38,7 +37,7 @@ export default function Main({ isSidebarOpen, closeSidebar }: Props) {
               return <CompareCountry />;
 
             case "worldMap":
-              return <WorldMap list={countryList} onPopupClick={handleMapClick} />;
+              return <WorldMap onPopupClick={handleMapClick} />;
 
             case "full":
               return <FullCountry />;

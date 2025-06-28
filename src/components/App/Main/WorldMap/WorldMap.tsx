@@ -1,17 +1,19 @@
 import "./WorldMap.css";
 import "leaflet/dist/leaflet.css";
-import rawData from "@/data/world.json";
+import { PathOptions } from "leaflet";
 import { Feature, GeoJsonObject } from "geojson";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import { PathOptions } from "leaflet";
-import isoToCountry from "@/utils/Country/isoCountry";
+import { memo, useCallback } from "react";
 import { createRoot } from "react-dom/client";
+import { style } from "@/utils/World-Map/helpers";
+import { CountryList } from "@/types";
+import isoToCountry from "@/utils/Country/isoCountry";
 import Popup from "./Popup/Popup";
-import { style } from "../../../../utils/World-Map/helpers";
-import { memo } from "react";
-import { Country, CountryList } from "@/types";
 import Title from "@/components/Custom/Title/Title";
+import Country from "@/utils/Country/Country";
 
+import backupData from "@/data/backupData.json";
+import rawData from "@/data/world.json";
 const geoData = rawData as GeoJsonObject;
 
 function handleClick(
@@ -33,11 +35,14 @@ function handleClick(
 }
 
 type Props = {
-  list: CountryList;
   onPopupClick: (c: Country) => void;
   title?: string;
 };
-function WorldMap({ list, title = "The World Map", onPopupClick }: Props) {
+function WorldMap({ title = "The World Map", onPopupClick }: Props) {
+  const list = useCallback((): CountryList => {
+    return backupData.map((obj) => Country.fromJSON(obj));
+  }, []);
+
   const url =
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
   const attribution =
@@ -53,7 +58,7 @@ function WorldMap({ list, title = "The World Map", onPopupClick }: Props) {
     const isoCode = feature.properties?.iso_a3;
     const continent = feature.properties?.continent;
 
-    handleClick(layer, list, isoCode, onPopupClick);
+    handleClick(layer, list(), isoCode, onPopupClick);
     style(layer, continent);
   }
 
