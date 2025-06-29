@@ -48,6 +48,11 @@
   margin: 0;
   line-height: 0;
   font-size: 1rem;
+  color: var(--text-col);
+}
+
+.leaflet-popup-content b {
+  line-height: 2rem;
 }
 
 .leaflet-popup-tip {

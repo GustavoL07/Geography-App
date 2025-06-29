@@ -45,8 +45,7 @@ export default function Map({ toDisplay, center, zoom = 3 }: Props) {
             <Marker key={country.name.symbol} position={[latitude, longitude]}>
               <Popup>
                 <b>{country.name.informal}</b>
-                <br />
-                {country.getFormatted("continent")}
+                <h5>{country.getFormatted("continent")}</h5>
               </Popup>
             </Marker>
           );
