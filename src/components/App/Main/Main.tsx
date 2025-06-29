@@ -26,7 +26,11 @@ export default function Main({ isSidebarOpen, closeSidebar }: Props) {
 
   return (
     <main className={`main-content ${!isSidebarOpen ? "closed" : ""}`}>
-      <Header title={getHeaderTitle(selectedCountry)} closeSidebar={closeSidebar} isSidebarOpen={isSidebarOpen} />
+      <Header
+        title={getHeaderTitle(selectedCountry)}
+        closeSidebar={closeSidebar}
+        isSidebarOpen={isSidebarOpen}
+      />
 
       <div className="display-area">
         {(() => {

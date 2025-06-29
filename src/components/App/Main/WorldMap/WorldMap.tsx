@@ -1,85 +1,57 @@
 import "./WorldMap.css";
-import "leaflet/dist/leaflet.css";
-import { PathOptions } from "leaflet";
-import { Feature, GeoJsonObject } from "geojson";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-import { memo, useCallback } from "react";
-import { createRoot } from "react-dom/client";
-import { style } from "@/utils/World-Map/helpers";
-import { CountryList } from "@/types";
-import isoToCountry from "@/utils/Country/isoCountry";
-import Popup from "./Popup/Popup";
+import { memo } from "react";
+import { PathOptions } from "leaflet";
+import { GeoJsonObject } from "geojson";
 import Title from "@/components/Custom/Title/Title";
 import Country from "@/utils/Country/Country";
-
-import backupData from "@/data/backupData.json";
+import { CountryList } from "@/types";
 import rawData from "@/data/world.json";
+import backupData from "@/data/backupData.json";
+import { onEachCountry } from "@/utils/World-Map/helpers";
 const geoData = rawData as GeoJsonObject;
 
-function handleClick(
-  layer: L.Path,
-  countryList: CountryList,
-  isoCode: string,
-  onPopupClick: (c: Country) => void
-) {
-  layer.on("click", () => {
-    const clickedCountry = isoToCountry(countryList, isoCode);
-    if (!clickedCountry) return;
+const MAP_TILE_URL =
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+const MAP_ATTRIBUTION =
+  "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
 
-    const popupContainer = document.createElement("div");
-    const root = createRoot(popupContainer);
-    root.render(<Popup country={clickedCountry} handleImageClick={onPopupClick} />);
+const BASIC_STYLE: PathOptions = {
+  color: "transparent",
+  weight: 0,
+  fillColor: "transparent",
+  fillOpacity: 0,
+};
 
-    layer.bindPopup(popupContainer).openPopup();
-  });
-}
+const backupList: CountryList = backupData.map((obj) => Country.fromJSON(obj));
 
 type Props = {
   onPopupClick: (c: Country) => void;
   title?: string;
 };
 function WorldMap({ title = "The World Map", onPopupClick }: Props) {
-  const list = useCallback((): CountryList => {
-    return backupData.map((obj) => Country.fromJSON(obj));
-  }, []);
-
-  const url =
-    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
-  const attribution =
-    "Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
-  const basicStyle: PathOptions = {
-    color: "transparent",
-    weight: 0,
-    fillColor: "transparent",
-    fillOpacity: 0,
-  };
-
-  function onEachCountry(feature: Feature, layer: L.Path) {
-    const isoCode = feature.properties?.iso_a3;
-    const continent = feature.properties?.continent;
-
-    handleClick(layer, list(), isoCode, onPopupClick);
-    style(layer, continent);
-  }
-
   return (
     <div className="worldmap-container">
       <Title title={title} />
       <div className="world-container">
         <MapContainer
           center={[0, 0]}
-          zoom={2.5}
-          minZoom={1.25}
-          scrollWheelZoom={true}
+          zoom={3}
+          minZoom={3}
+          scrollWheelZoom
           maxBounds={[
             [-90, -180],
             [90, 180],
           ]}
-          inertia={true}
+          inertia
           maxBoundsViscosity={1.25}
         >
-          <TileLayer attribution={attribution} url={url} />
-          <GeoJSON data={geoData} style={basicStyle} onEachFeature={onEachCountry} />
+          <TileLayer attribution={MAP_ATTRIBUTION} url={MAP_TILE_URL} />
+          <GeoJSON
+            data={geoData}
+            style={BASIC_STYLE}
+            onEachFeature={onEachCountry(backupList, onPopupClick)}
+          />
         </MapContainer>
       </div>
     </div>

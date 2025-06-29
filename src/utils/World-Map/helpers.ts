@@ -1,4 +1,12 @@
 import { Continent, MapTileKey } from "@/types";
+import { Layer } from "leaflet";
+import { Feature } from "geojson";
+import { createRoot } from "react-dom/client";
+import Popup from "@/components/App/Main/WorldMap/Popup/Popup";
+import isoToCountry from "@/utils/Country/isoCountry";
+import Country from "@/utils/Country/Country";
+import { CountryList } from "@/types";
+import React from "react";
 
 export function style(layer: L.Path, continent: Continent) {
   function getContinentColor(continent: Continent): string {
@@ -70,4 +78,32 @@ export function getMapAttribution(tile: MapTileKey): string {
     default:
       return '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
   }
+}
+
+export function bindPopupToLayer(
+  layer: Layer,
+  isoCode: string,
+  onPopupClick: (c: Country) => void,
+  countryList: CountryList
+) {
+  const country = isoToCountry(countryList, isoCode);
+  if (!country) return;
+
+  const popupContainer = document.createElement("div");
+  const root = createRoot(popupContainer);
+  root.render(React.createElement(Popup, { country: country, handleImageClick: onPopupClick }));
+
+  layer.bindPopup(popupContainer).openPopup();
+}
+
+export function onEachCountry(countryList: CountryList, onPopupClick: (c: Country) => void) {
+  return (feature: Feature, layer: Layer) => {
+    const isoCode = feature.properties?.iso_a3;
+    const continent = feature.properties?.continent;
+
+    if (!isoCode || !continent) return;
+
+    bindPopupToLayer(layer, isoCode, onPopupClick, countryList);
+    style(layer as any, continent);
+  };
 }

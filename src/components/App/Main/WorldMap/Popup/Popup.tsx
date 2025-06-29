@@ -15,8 +15,8 @@ export default function Popup({ country, handleImageClick }: Props) {
         src={country.flag}
         alt={`${country.name.informal}'s flag`}
       />
-      <p className="popup-title">{country.name.informal}</p>
-      <p className="popup-subtitle">{country.getFormatted("capital")}</p>
+      <p id="popup-title">{country.name.informal}</p>
+      <p id="popup-subtitle">{country.capital[0]}</p>
     </div>
   );
 }
