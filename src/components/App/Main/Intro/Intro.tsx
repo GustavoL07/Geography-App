@@ -1,17 +1,17 @@
 import "./Intro.css";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
-import { useSettingsContext } from "@/components/Contexts/SettingsContext";
 import Title from "@/components/Custom/Title/Title";
 import earthGlobe from "@/assets/earth-globe.png";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "@/routes";
 
 export default function Intro({}) {
-  const { countryList, setSelectedCountry } = useCountryContext();
-  const { setDisplayMode } = useSettingsContext();
+  const navigate = useNavigate();
+  const { countryList } = useCountryContext();
 
   function onImageClick() {
     const randomCountry = countryList[Math.round(Math.random() * countryList.length)];
-    setSelectedCountry(randomCountry);
-    setDisplayMode("full");
+    navigate(ROUTES.COUNTRY(randomCountry.name.symbol));
   }
 
   return (
