@@ -6,38 +6,38 @@ import InfoBox from "./InfoBox/InfoBox";
 import Map from "@/components/App/Main/FullCountry/Map/Map";
 import Button from "@/components/Custom/Button/Button";
 import CapitalImage from "./Capital/CapitalImage";
+import { useParams } from "react-router-dom";
 
+type Props = {};
 export default function FullCountry({}) {
-  const { selectedCountry, setFavoriteCountry } = useCountryContext();
-  if (!selectedCountry) return null;
+  const { setFavoriteCountry, getCountryFromId } = useCountryContext();
+  const { id } = useParams();
+  const country = getCountryFromId(id ?? "");
+  if (!country) return;
 
-  const { latitude, longitude } = selectedCountry.geography.position;
+  const { latitude, longitude } = country.geography.position;
   const mapCenter: [number, number] = [latitude, longitude];
 
   return (
     <div className="info-container">
-      <Overview country={selectedCountry} />
+      <Overview country={country} />
 
-      <CapitalImage capital={selectedCountry.capital[0]} />
+      <CapitalImage capital={country.capital[0]} />
 
       <section className="info-grid">
         {FormatOptions.map((obj, index) => {
           if (obj.key === "name") return null;
 
           return (
-            <InfoBox
-              key={index}
-              text={`${obj.text}:`}
-              value={selectedCountry.getFormatted(obj.key)}
-            />
+            <InfoBox key={index} text={`${obj.text}:`} value={country.getFormatted(obj.key)} />
           );
         })}
       </section>
 
-      <Map toDisplay={[selectedCountry]} center={mapCenter} />
+      <Map toDisplay={[country]} center={mapCenter} />
       <Button
         icon={<i className="fa-solid fa-star"></i>}
-        onClick={() => setFavoriteCountry(selectedCountry)}
+        onClick={() => setFavoriteCountry(country)}
       />
     </div>
   );

@@ -1,8 +1,9 @@
 import "./Favorite.css";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
-import Overview from "../FullCountry/Overview/Overview";
 import { Country } from "@/types";
-import { useSettingsContext } from "@/components/Contexts/SettingsContext";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "@/routes";
+import Overview from "../FullCountry/Overview/Overview";
 import Message from "@/components/Custom/Message/Message";
 import Title from "@/components/Custom/Title/Title";
 
@@ -10,13 +11,10 @@ type Props = {
   title?: string;
 };
 export default function Favorite({ title = "Favorite Countries" }: Props) {
-  const { favoriteList, setSelectedCountry } = useCountryContext();
-  const { setDisplayMode } = useSettingsContext();
+  const navigate = useNavigate();
+  const { favoriteList } = useCountryContext();
 
-  const handleClick = (c: Country) => {
-    setSelectedCountry(c);
-    setDisplayMode("full");
-  };
+  const handleClick = (c: Country) => navigate(ROUTES.COUNTRY(c.name.symbol));
 
   return (
     <>

@@ -1,11 +1,12 @@
 import "./Header.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCountryContext } from "@/components/Contexts/CountryContext";
+import ROUTES from "@/routes";
+import earthGlobe from "@/assets/earth-globe.png";
 import Button from "@/components/Custom/Button/Button";
 import Dialog from "@/components/Custom/CustomDialog/Dialog";
-import SettingsOptions from "../../../Custom/CustomDialog/SettingsDialog/SettingsOptions.js";
-import { useState } from "react";
-import { useCountryContext } from "@/components/Contexts/CountryContext";
-import { useSettingsContext } from "@/components/Contexts/SettingsContext";
-import earthGlobe from "@/assets/earth-globe.png";
+import SettingsOptions from "@/components/Custom/CustomDialog/SettingsDialog/SettingsOptions";
 
 type Props = {
   title?: string;
@@ -13,14 +14,20 @@ type Props = {
   closeSidebar: () => void;
 };
 export default function Header({ closeSidebar, isSidebarOpen, title = "Geography App" }: Props) {
-  const { setSelectedCountry, countryList } = useCountryContext();
-  const { setDisplayMode, setSearchValue } = useSettingsContext();
+  const navigate = useNavigate();
+  const { countryList } = useCountryContext();
   const [dialogToggle, setDialogToggle] = useState(false);
 
   const mapIcon = <i className="fa-solid fa-map-location-dot"></i>;
   const introIcon = <i className="fa-solid fa-globe"></i>;
   const settingsIcon = <i className="fa-solid fa-gear"></i>;
   const compareIcon = <i className="fa-solid fa-chart-pie"></i>;
+  const starIcon = <i className="fa-solid fa-star"></i>;
+
+  const navToIntro = () => navigate(ROUTES.HOME);
+  const navToCompare = () => navigate(ROUTES.COMPARE);
+  const navToWorldMap = () => navigate(ROUTES.WORLDMAP);
+  const navToFavorites = () => navigate(ROUTES.FAVORITES);
 
   return (
     <div className={`header-container ${isSidebarOpen ? "closed" : ""}`}>
@@ -30,8 +37,7 @@ export default function Header({ closeSidebar, isSidebarOpen, title = "Geography
         <Button
           icon={introIcon}
           onClick={() => {
-            setDisplayMode("intro");
-            setSelectedCountry(null);
+            navToIntro();
           }}
         />
 
@@ -41,9 +47,7 @@ export default function Header({ closeSidebar, isSidebarOpen, title = "Geography
             onClick={() => {
               closeSidebar();
               setTimeout(() => {
-                setDisplayMode("worldMap");
-                setSelectedCountry(null);
-                setSearchValue(""); // time for the sidebar to close completely and avoid map colors to go missing
+                navToWorldMap();
               }, 0.6 * 1000);
             }}
           />
@@ -52,19 +56,15 @@ export default function Header({ closeSidebar, isSidebarOpen, title = "Geography
         <Button
           icon={compareIcon}
           onClick={() => {
-            setDisplayMode("compare");
-            setSelectedCountry(null);
+            navToCompare();
           }}
         />
-
         <Button
-          icon={<i className="fa-solid fa-star"></i>}
+          icon={starIcon}
           onClick={() => {
-            setDisplayMode("favorite");
-            setSelectedCountry(null);
+            navToFavorites();
           }}
         />
-
         <Button
           icon={settingsIcon}
           onClick={() => {

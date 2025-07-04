@@ -1,16 +1,5 @@
 import { DisplayKey, FilterKey, MapTileKey, SortKey, SortMode } from "./keys";
-import { Country, CountryList, SelectedCountry } from "./country";
-
-export interface CountryContextInterface {
-  countryList: CountryList;
-  setCountryList: (list: CountryList) => void;
-
-  selectedCountry: SelectedCountry;
-  setSelectedCountry: (country: SelectedCountry) => void;
-
-  favoriteList: CountryList;
-  setFavoriteCountry: (country: Country) => void;
-}
+import { CountryList } from "./country";
 
 export interface SettingsContextInterface {
   mapTile: MapTileKey;

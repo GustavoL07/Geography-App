@@ -1,8 +1,8 @@
+import "./Card.css";
 import { Country } from "@/types";
 import { getFormatOption } from "@/utils/Organizing/sorter";
 import { useCountryContext } from "@/components/Contexts/CountryContext";
 import { useSettingsContext } from "@/components/Contexts/SettingsContext";
-import "./Card.css";
 
 interface Card {
   isOpen: boolean;
@@ -10,16 +10,8 @@ interface Card {
 }
 
 export default function Card({ isOpen, country }: Card) {
-  if (!country) return null;
-  const { selectedCountry, setSelectedCountry, favoriteList, setFavoriteCountry } =
-    useCountryContext();
-  const { sortValue, setDisplayMode } = useSettingsContext();
-  const isSelected = country === selectedCountry;
-
-  const handleClick = () => {
-    setSelectedCountry(country);
-    setDisplayMode("full");
-  };
+  const { sortValue } = useSettingsContext();
+  const { favoriteList, setFavoriteCountry } = useCountryContext();
 
   const handleFavorite = (country: Country) => setFavoriteCountry(country);
 
@@ -33,10 +25,7 @@ export default function Card({ isOpen, country }: Card) {
   }
 
   return (
-    <div
-      className={`card-container ${!isOpen ? "closed" : ""} ${isSelected ? "selected" : ""}`}
-      onClick={handleClick}
-    >
+    <div className={`card-container ${!isOpen ? "closed" : ""}`}>
       <img
         className="flag"
         src={country.flag}

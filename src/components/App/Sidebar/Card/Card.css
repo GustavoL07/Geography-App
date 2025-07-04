@@ -8,12 +8,6 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.card-container.selected {
-  background-color: var(--hover-col);
-}
-.card-container.selected .flag {
-  transform: scale(1.1);
-}
 .card-container.closed.selected {
   background-color: transparent;
 }

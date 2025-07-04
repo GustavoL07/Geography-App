@@ -1,23 +1,23 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { CountryContextInterface, CountryList } from "@/types";
+import { CountryList } from "@/types";
 import getData from "@/utils/Fetch/getData";
 import useLocalStorage from "../Hooks/useLocalStorage";
 import backupInformation from "../../data/backupData.json";
 import Country from "@/utils/Country/Country";
 
-const CountryContext = createContext<CountryContextInterface>({
-  countryList: [],
-  setCountryList: () => {},
+type ContextType = {
+  countryList: CountryList;
+  setCountryList: React.Dispatch<React.SetStateAction<CountryList>>;
+  favoriteList: Country[];
+  setFavoriteCountry: (country: Country) => void;
+  getCountryFromId: (id: string) => Country | undefined;
+};
 
-  selectedCountry: null,
-  setSelectedCountry: () => {},
-
-  favoriteList: [],
-  setFavoriteCountry: () => {},
-});
+const CountryContext = createContext<ContextType | null>(null);
 
 export function CountryProvider({ children }: any) {
   const [countryList, setCountryList] = useLocalStorage<CountryList>("countryList", []);
+  const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
   const favoriteList = countryList
     .filter((c) => c.favorited)
     .sort((a, b) => a.name.informal.toLowerCase().localeCompare(b.name.informal.toLowerCase()));
@@ -27,8 +27,15 @@ export function CountryProvider({ children }: any) {
     setCountryList(countryList.map((c) => (c.name.symbol === country.name.symbol ? country : c)));
   }
 
-  const [selectedCountry, setSelectedCountry] =
-    useState<CountryContextInterface["selectedCountry"]>(null);
+  function getCountryFromId(id: string) {
+    const c = countryList.find((c) => id === c.name.symbol);
+    setSelectedCountry(c);
+    return c;
+  }
+
+  function cleanSelectedCountry() {
+    setSelectedCountry(undefined);
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -48,22 +55,19 @@ export function CountryProvider({ children }: any) {
     fetchData();
   }, []);
 
-  return (
-    <CountryContext.Provider
-      value={{
-        countryList,
-        setCountryList,
-        selectedCountry,
-        setSelectedCountry,
-        favoriteList,
-        setFavoriteCountry,
-      }}
-    >
-      {children}
-    </CountryContext.Provider>
-  );
+  const value = {
+    countryList,
+    setCountryList,
+    favoriteList,
+    setFavoriteCountry,
+    getCountryFromId,
+  };
+
+  return <CountryContext.Provider value={value}>{children}</CountryContext.Provider>;
 }
 
 export function useCountryContext() {
-  return useContext(CountryContext);
+  const context = useContext(CountryContext);
+  if (!context) throw new Error("Context Error");
+  return context;
 }

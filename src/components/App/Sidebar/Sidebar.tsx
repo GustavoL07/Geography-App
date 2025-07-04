@@ -3,6 +3,7 @@ import { useSettingsContext } from "../../Contexts/SettingsContext";
 import Top from "./Sidebar/Top/Top";
 import Card from "./Card/Card";
 import Bottom from "./Sidebar/Bottom/Bottom";
+import { useNavigate } from "react-router-dom";
 
 interface Sidebar {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface Sidebar {
 }
 export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
   const { filteredList } = useSettingsContext();
+  const navigate = useNavigate();
   const bottomText = filteredList.length > 0 ? `${filteredList.length} Results` : "No results";
 
   return (
@@ -20,7 +22,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: Sidebar) {
         <ul>
           {filteredList.map((country, index) => {
             return (
-              <li key={index}>
+              <li key={index} onClick={() => navigate(`/country/${country.name.symbol}`)}>
                 <Card isOpen={isOpen} country={country} />
               </li>
             );
