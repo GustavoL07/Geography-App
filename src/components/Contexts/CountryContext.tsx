@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { CountryList } from "@/types";
 import getData from "@/utils/Fetch/getData";
 import useLocalStorage from "../Hooks/useLocalStorage";
@@ -12,12 +12,10 @@ type ContextType = {
   setFavoriteCountry: (country: Country) => void;
   getCountryFromId: (id: string) => Country | undefined;
 };
-
 const CountryContext = createContext<ContextType | null>(null);
 
 export function CountryProvider({ children }: any) {
   const [countryList, setCountryList] = useLocalStorage<CountryList>("countryList", []);
-  const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(undefined);
   const favoriteList = countryList
     .filter((c) => c.favorited)
     .sort((a, b) => a.name.informal.toLowerCase().localeCompare(b.name.informal.toLowerCase()));
@@ -29,12 +27,7 @@ export function CountryProvider({ children }: any) {
 
   function getCountryFromId(id: string) {
     const c = countryList.find((c) => id === c.name.symbol);
-    setSelectedCountry(c);
     return c;
-  }
-
-  function cleanSelectedCountry() {
-    setSelectedCountry(undefined);
   }
 
   useEffect(() => {

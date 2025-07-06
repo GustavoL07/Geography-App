@@ -1,42 +1,28 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useSearchFilter from "@/components/Hooks/useSearchFilter";
 import useLocalStorage from "@/components/Hooks/useLocalStorage";
-import {
-  SettingsContextInterface,
-  MapTileKey,
-  SortKey,
-  FilterKey,
-  DisplayKey,
-  CountryList,
-  SortMode,
-} from "@/types";
+import { MapTileKey, SortKey, FilterKey, DisplayKey, CountryList, SortMode } from "@/types";
 
-const SettingsContext = createContext<SettingsContextInterface>({
-  mapTile: "light",
-  setMapTile: () => {},
-
-  searchValue: "",
-  setSearchValue: () => {},
-
-  sortValue: "none",
-  setSortValue: () => {},
-  sortMode: "asc",
-  setSortMode: () => {},
-
-  filterValue: "UNMember",
-  setFilterValue: () => {},
-
-  filteredList: [],
-
-  displayMode: "intro",
-  setDisplayMode: () => {},
-
-  theme: "light",
-  toggleTheme: () => {},
-
-  cityImageVisibility: false,
-  toggleCityVisibility: () => {},
-});
+type ContextType = {
+  mapTile: MapTileKey;
+  setMapTile: (newTile: MapTileKey) => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+  sortValue: SortKey;
+  setSortValue: (value: SortKey) => void;
+  sortMode: SortMode;
+  setSortMode: (value: SortMode) => void;
+  filterValue: FilterKey;
+  setFilterValue: (filters: FilterKey) => void;
+  filteredList: CountryList;
+  displayMode: DisplayKey;
+  setDisplayMode: (newMode: DisplayKey) => void;
+  theme: "light" | "dark";
+  toggleTheme: () => void;
+  cityImageVisibility: boolean;
+  toggleCityVisibility: () => void;
+};
+const SettingsContext = createContext<ContextType | null>(null);
 
 type Props = {
   list: CountryList;
@@ -67,42 +53,33 @@ export function SettingsProvider({ list, children }: Props) {
 
   const [searchValue, setSearchValue] = useState("");
   const [displayMode, setDisplayMode] = useState<DisplayKey>("intro");
-
   const filteredList = useSearchFilter(list, searchValue, sortValue, sortMode, filterValue);
 
-  return (
-    <SettingsContext.Provider
-      value={{
-        mapTile,
-        setMapTile,
+  const value = {
+    mapTile,
+    setMapTile,
+    searchValue,
+    setSearchValue,
+    sortValue,
+    setSortValue,
+    sortMode,
+    setSortMode,
+    filterValue,
+    setFilterValue,
+    filteredList,
+    displayMode,
+    setDisplayMode,
+    theme,
+    toggleTheme,
+    cityImageVisibility,
+    toggleCityVisibility,
+  };
 
-        searchValue,
-        setSearchValue,
-
-        sortValue,
-        setSortValue,
-        sortMode,
-        setSortMode,
-
-        filterValue,
-        setFilterValue,
-        filteredList,
-
-        displayMode,
-        setDisplayMode,
-
-        theme,
-        toggleTheme,
-
-        cityImageVisibility,
-        toggleCityVisibility,
-      }}
-    >
-      {children}
-    </SettingsContext.Provider>
-  );
+  return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 }
 
 export function useSettingsContext() {
-  return useContext(SettingsContext);
+  const context = useContext(SettingsContext);
+  if (!context) throw new Error("Context Error");
+  return context;
 }
